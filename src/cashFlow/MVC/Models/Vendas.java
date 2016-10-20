@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -58,6 +59,7 @@ public class Vendas implements Serializable {
 
     public Vendas(int cod) {
         this.cod = cod;
+        this.itemVenda = new ArrayList();
     }
 
     public Vendas(BigDecimal valorTotalVenda) {

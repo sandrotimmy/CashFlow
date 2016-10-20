@@ -1141,7 +1141,7 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="campoDataPrimParcela" alignment="0" max="32767" attributes="0"/>
+                              <Component id="campoDataEntrada" alignment="0" max="32767" attributes="0"/>
                               <Component id="campoDiasPrazo" alignment="0" pref="66" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -1154,7 +1154,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="campoDataPrimParcela" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="campoDataEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -1180,13 +1180,13 @@
                     <Property name="text" type="java.lang.String" value="Demais:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="campoDataPrimParcela">
+                <Component class="javax.swing.JTextField" name="campoDataEntrada">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoDataPrimParcelaActionPerformed"/>
-                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoDataPrimParcelaKeyPressed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoDataEntradaActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoDataEntradaKeyPressed"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{ &#xa;javax.swing.text.MaskFormatter data = new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;); &#xa;campoDataPrimParcela = new javax.swing.JFormattedTextField(data); &#xa;} &#xa;catch (Exception e){ &#xa;}"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{ &#xa;javax.swing.text.MaskFormatter data = new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;); &#xa;campoDataEntrada = new javax.swing.JFormattedTextField(data); &#xa;} &#xa;catch (Exception e){ &#xa;}"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="campoDiasPrazo">

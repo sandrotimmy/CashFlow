@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Sandro/Documents/RepositorioGIT/CashFlow2/src/cashFlow/MVC/Controllers/UsuariosCtrl.java</file>
+            <file>file:/C:/Users/Sandro/Documents/RepositorioGIT/CashFlow/src/cashFlow/MVC/DAO/ParcelamentoVendasDAO.java</file>
+            <file>file:/C:/Users/Sandro/Documents/RepositorioGIT/CashFlow/src/cashFlow/MVC/Controllers/VendasCtrl.java</file>
+            <file>file:/C:/Users/Sandro/Documents/RepositorioGIT/CashFlow/src/cashFlow/MVC/Views/CadastroVendas.java</file>
+            <file>file:/C:/Users/Sandro/Documents/RepositorioGIT/CashFlow/src/cashFlow/MVC/Controllers/ClientesCtrl.java</file>
+            <file>file:/C:/Users/Sandro/Documents/RepositorioGIT/CashFlow/src/cashFlow/MVC/Controllers/LancamentosCtrl.java</file>
+            <file>file:/C:/Users/Sandro/Documents/RepositorioGIT/CashFlow/src/cashFlow/MVC/Models/Vendas.java</file>
         </group>
     </open-files>
 </project-private>

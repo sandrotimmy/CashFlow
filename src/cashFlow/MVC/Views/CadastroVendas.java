@@ -1,13 +1,10 @@
 package cashFlow.MVC.Views;
 
+import cashFlow.MVC.Controllers.ClientesCtrl;
+import cashFlow.MVC.Controllers.LancamentosCtrl;
 import cashFlow.MVC.Controllers.MetodosGerais;
-import cashFlow.MVC.DAO.ClientesDAO;
+import cashFlow.MVC.Controllers.VendasCtrl;
 import cashFlow.MVC.DAO.HistoricosDAO;
-import cashFlow.MVC.DAO.ItemVendaDAO;
-import cashFlow.MVC.DAO.LancamentosDAO;
-import cashFlow.MVC.DAO.ParcelamentoVendasDAO;
-import cashFlow.MVC.DAO.ProdutosDAO;
-import cashFlow.MVC.DAO.VendasDAO;
 import cashFlow.MVC.Models.Clientes;
 import cashFlow.MVC.Models.Compras;
 import cashFlow.MVC.Models.HistoricoPadrao;
@@ -37,14 +34,17 @@ import javax.swing.table.DefaultTableModel;
 
 public class CadastroVendas extends javax.swing.JDialog implements InterfaceListener {
 
-    private Lancamentos lancamento;
-    private LancamentosDAO persist;
-    private final VendasDAO persistVenda;
-    private ClientesDAO persistCliente;
-    private ItemVendaDAO persistItemVenda;
-    private ProdutosDAO persistProdutos;
+//    private Lancamentos lancamento;
+//    private LancamentosDAO persist;
+//    private final VendasDAO persistVenda;
+//    private ClientesDAO persistCliente;
+//    private ItemVendaDAO persistItemVenda;
+//    private ProdutosDAO persistProdutos;
+    private final VendasCtrl vendasCtrl;
+    private final LancamentosCtrl lancamentosCtrl;
+    private final ClientesCtrl clientesCtrl;
     private final NumberFormat f;
-    private ArrayList<ItemVenda> ListaItens;
+//    private ArrayList<ItemVenda> ListaItens;
     private int codItemSequecial;
     private Vendas venda;
     private ConsultaCliente consultaCliente;
@@ -55,18 +55,18 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
     private final DefaultTableModel valParcelamento;
     private ItemVenda itemVenda;
     public PassaCamposComEnter pc;
-    private ParcelamentoVendas parcelamentoVendas;
-    private ParcelamentoVendasDAO persistParcelamentoVendas;
-    private ArrayList<ParcelasVenda> listaParcelas;
     private MetodosGerais mg;
+    private ParcelamentoVendas parcelamentoVendas;
 
     public CadastroVendas(Vendas consultaVenda) {
         initComponents();
         valVendas = (DefaultTableModel) tabelaVendas.getModel();
         f = NumberFormat.getCurrencyInstance();
-        this.persistVenda = new VendasDAO();
+//        this.persistVenda = new VendasDAO();
         this.mg = new MetodosGerais();
-        listaParcelas = new ArrayList();
+        this.vendasCtrl = new VendasCtrl();
+        this.lancamentosCtrl = new LancamentosCtrl();
+        this.clientesCtrl = new ClientesCtrl();
         exibeDados(consultaVenda);
         habilitaDesabilitaCampos(false);
         botaoCancelar.requestFocus();
@@ -78,23 +78,25 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         initComponents();
         valVendas = (DefaultTableModel) tabelaVendas.getModel();
         valParcelamento = (DefaultTableModel) tabelaParcelamento.getModel();
-        this.persist = new LancamentosDAO();
-        this.lancamento = new Lancamentos();
-        this.persistVenda = new VendasDAO();
-        this.persistCliente = new ClientesDAO();
-        this.persistProdutos = new ProdutosDAO();
-        this.persistItemVenda = new ItemVendaDAO();
-        codProxVenda = persistVenda.getProximaVenda();
+        this.mg = new MetodosGerais();
+//        this.persist = new LancamentosDAO();
+//        this.lancamento = new Lancamentos();
+//        this.persistVenda = new VendasDAO();
+//        this.persistCliente = new ClientesDAO();
+//        this.persistProdutos = new ProdutosDAO();
+//        this.persistItemVenda = new ItemVendaDAO();
+//        codProxVenda = persistVenda.getProximaVenda();
         this.venda = new Vendas(codProxVenda);
+        this.vendasCtrl = new VendasCtrl();
+        this.lancamentosCtrl = new LancamentosCtrl();
+        this.clientesCtrl = new ClientesCtrl();
         consultaCliente = new ConsultaCliente();
         consultaProduto = new ConsultaProdutos();
         carregaDados();
-        ListaItens = new ArrayList();
+//        ListaItens = new ArrayList();
         produto = new Produtos();
         codItemSequecial = 1;
         f = NumberFormat.getCurrencyInstance();
-        persistParcelamentoVendas = new ParcelamentoVendasDAO();
-        listaParcelas = new ArrayList();
 
     }
 
@@ -121,8 +123,6 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         tabelaVendas.getColumnModel().getColumn(3).setCellRenderer(direita);
         tabelaVendas.getColumnModel().getColumn(4).setCellRenderer(direita);
         tabelaVendas.getColumnModel().getColumn(5).setCellRenderer(direita);
-        persistParcelamentoVendas = new ParcelamentoVendasDAO();
-        listaParcelas = new ArrayList();
         insereCampoData();
     }
 
@@ -151,7 +151,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         campoMotivoAcrescimo.setLineWrap(true);
         campoMotivoAcrescimo.setWrapStyleWord(true);
         campoCod.setText(Integer.toString(v.getCod()));
-        campoData.setText(persistVenda.convDataSistema(v.getDataVenda()));
+        campoData.setText(mg.convDataSistema(v.getDataVenda()));
         campoCodCliente.setText(Integer.toString(v.getCliente().getCod()));
         campoNomeCliente.setText(v.getCliente().getNome());
         campoObservacoes.setText(v.getObservacoes());
@@ -174,7 +174,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         }
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("dd/MM/yyyy");
-        campoDataPrimParcela.setText(sdf.format(cal.getTime()));
+        campoDataEntrada.setText(sdf.format(cal.getTime()));
 
     }
 
@@ -294,7 +294,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        campoDataPrimParcela = new javax.swing.JTextField();
+        campoDataEntrada = new javax.swing.JTextField();
         campoDiasPrazo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         labelFormaPgto = new javax.swing.JLabel();
@@ -929,18 +929,18 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
 
         try{
             javax.swing.text.MaskFormatter data = new javax.swing.text.MaskFormatter("##/##/####");
-            campoDataPrimParcela = new javax.swing.JFormattedTextField(data);
+            campoDataEntrada = new javax.swing.JFormattedTextField(data);
         }
         catch (Exception e){
         }
-        campoDataPrimParcela.addActionListener(new java.awt.event.ActionListener() {
+        campoDataEntrada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoDataPrimParcelaActionPerformed(evt);
+                campoDataEntradaActionPerformed(evt);
             }
         });
-        campoDataPrimParcela.addKeyListener(new java.awt.event.KeyAdapter() {
+        campoDataEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                campoDataPrimParcelaKeyPressed(evt);
+                campoDataEntradaKeyPressed(evt);
             }
         });
 
@@ -964,7 +964,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(campoDataPrimParcela)
+                    .addComponent(campoDataEntrada)
                     .addComponent(campoDiasPrazo, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3))
@@ -974,7 +974,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(campoDataPrimParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -1091,7 +1091,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
     private void botaoIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoIncluirActionPerformed
 
         itemVenda = coletaDadosCampos();
-        ListaItens.add(itemVenda);
+        venda.getItemVenda().add(itemVenda);
         insereNaTabela(itemVenda);
         BigDecimal totalProduto = venda.convValorBanco(campoTotalProdutos.getText());
         BigDecimal totalItem = itemVenda.getValorTotal();
@@ -1113,14 +1113,14 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
         int posicao = Integer.parseInt((String) tabelaVendas.getValueAt(tabelaVendas.getSelectedRow(), 0));
         ((DefaultTableModel) tabelaVendas.getModel()).removeRow(tabelaVendas.getSelectedRow());
-        for (int i = 0; i < ListaItens.size(); i++) {
-            if (ListaItens.get(i).getSequenciaProduto() == posicao) {
+        for (int i = 0; i < venda.getItemVenda().size(); i++) {
+            if (venda.getItemVenda().get(i).getSequenciaProduto() == posicao) {
                 BigDecimal totalProduto = venda.convValorBanco(campoTotalProdutos.getText());
-                BigDecimal totalItem = ListaItens.get(i).getValorTotal();
+                BigDecimal totalItem = venda.getItemVenda().get(i).getValorTotal();
                 campoTotalProdutos.setText(f.format(totalProduto.subtract(totalItem)));
                 campoTotalVenda.setText(f.format(totalProduto.subtract(totalItem)));
                 campoTotalVendaParc.setText(f.format(totalProduto.subtract(totalItem)));
-                ListaItens.remove(i);
+                venda.getItemVenda().remove(i);
                 JOptionPane.showMessageDialog(campoCodCliente, "Item Removido com Sucesso!");
                 break;
             }
@@ -1135,17 +1135,19 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             int codItem = Integer.parseInt(campoCodProduto.getText());
             boolean existeProduto = false;
-            for (ItemVenda each : ListaItens) {
-                if (codItem == each.getCodProduto()) {
-                    existeProduto = true;
-                    break;
+            if (!venda.getItemVenda().isEmpty()) {
+                for (ItemVenda each : venda.getItemVenda()) {
+                    if (codItem == each.getCodProduto()) {
+                        existeProduto = true;
+                        break;
+                    }
                 }
             }
             if (existeProduto == true) {
                 JOptionPane.showMessageDialog(campoCodCliente, "Produto já incluído!");
                 campoCodProduto.requestFocus();
             } else {
-                produto = persistProdutos.pesquisaProdutos(Integer.parseInt(campoCodProduto.getText()));
+                produto = vendasCtrl.pesquisaProdutos(Integer.parseInt(campoCodProduto.getText()));
                 campoNomeProduto.setText(produto.getDescricao());
                 campoEstoqueQuantidade.setText(f.format(produto.getQuantidade()));
                 campoEstoqueValorVenda.setText(f.format(produto.getValorTotalVenda()));
@@ -1177,31 +1179,25 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
             Date dataVenda = sdf.parse(campoData.getText());
             venda.setDataVenda(dataVenda);
             venda.setObservacoes(campoObservacoes.getText());
-            venda.setItemVenda(ListaItens);
             campoDescontoFocusLost(null);
             campoAcrescimoFocusLost(null);
-            persistVenda.cadastraVenda(venda);
-            ListaItens.stream().forEach((each) -> {
-                Produtos atuProduto = persistProdutos.pesquisaProdutos(each.getCodProduto());
-                atuProduto.setQuantidade(atuProduto.getQuantidade().subtract(each.getQuantidade()));
-                atuProduto.setValorTotal(atuProduto.getQuantidade().multiply(atuProduto.getValorUnitario()));
-                atuProduto.setValorTotalVenda(atuProduto.getQuantidade().multiply(atuProduto.getValorUnitarioVenda()));
-                persistProdutos.atualizaProduto(atuProduto);
-                persistItemVenda.cadastraItemVenda(each);
-            });
+            vendasCtrl.cadastraVenda(venda);
+
             //Gera um lançamento no Caixa
             if (JOptionPane.showConfirmDialog(null, "Deseja Gerar Lançamento no Caixa?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 HistoricosDAO hd = new HistoricosDAO();
                 HistoricoPadrao hp = hd.getHistorico(1);
-                BigDecimal totalEntrada = persistParcelamentoVendas.convValorBanco(
-                campoEntrada.getText());
-                lancamento.setCod(persist.getProximoCodLancamento());
+                BigDecimal totalEntrada = mg.convValorBanco(campoEntrada.getText());
+
+                Lancamentos lancamento = new Lancamentos();
+
                 lancamento.setDataLancamento(venda.getDataVenda());
                 lancamento.setHistorico(hp);
                 lancamento.setObservacoes(hp.getNomeHistorico() + venda.getCod() + " do Cliente: " + venda.getCliente().getNome());
                 lancamento.setValorDebito(totalEntrada);
                 lancamento.setValorCredito(new BigDecimal("0.00"));
-                persist.cadastrarLancamento(lancamento);
+
+                lancamentosCtrl.cadastrarLancamento(lancamento);
             }
         } catch (ParseException ex) {
             Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
@@ -1216,7 +1212,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
 
     private void campoCodClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCodClienteKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Clientes cliente = persistCliente.pesquisaCliente(Integer.parseInt(campoCodCliente.getText()));
+            Clientes cliente = clientesCtrl.pesquisaCliente(Integer.parseInt(campoCodCliente.getText()));
             venda.setCliente(cliente);
             campoNomeCliente.setText(cliente.getNome());
             campoCodProduto.requestFocus();
@@ -1365,13 +1361,13 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
 
     private void campoNumParcelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoNumParcelasKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            campoDataPrimParcela.requestFocus();
+            campoDataEntrada.requestFocus();
         }
     }//GEN-LAST:event_campoNumParcelasKeyPressed
 
     private void campoEntradaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoEntradaFocusLost
-        BigDecimal valorTotal = persistParcelamentoVendas.convValorBanco(campoTotalVenda.getText());
-        BigDecimal valorEntrada = persistParcelamentoVendas.convValorBanco(campoEntrada.getText());
+        BigDecimal valorTotal = mg.convValorBanco(campoTotalVenda.getText());
+        BigDecimal valorEntrada = mg.convValorBanco(campoEntrada.getText());
         campoRestante.setText(valorTotal.subtract(valorEntrada).toString());
     }//GEN-LAST:event_campoEntradaFocusLost
 
@@ -1394,19 +1390,29 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
     }//GEN-LAST:event_campoRestanteActionPerformed
 
     private void botaoParcelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoParcelarActionPerformed
+        parcelamentoVendas = new ParcelamentoVendas();
+
         ((DefaultTableModel) tabelaParcelamento.getModel()).setRowCount(0);//zera as linhas da tabela pra receber o novo filtro
         Calendar cal = Calendar.getInstance();
-        String data = campoDataPrimParcela.getText();
-        Date date = persistParcelamentoVendas.convDataBanco(data);
-        cal.setTime(date);
+        Date dataEntrada = mg.convDataBanco(campoDataEntrada.getText());
+        cal.setTime(dataEntrada);
         int diasPrazo = Integer.parseInt(campoDiasPrazo.getText());
         BigDecimal valorParcela;
-        BigDecimal restante = persistParcelamentoVendas.convValorBanco(campoRestante.getText());
+        BigDecimal restante = mg.convValorBanco(campoRestante.getText());
         int parcelas = Integer.parseInt(campoNumParcelas.getText());
         valorParcela = restante.divide(new BigDecimal(parcelas));
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("dd/MM/yyyy");
 
+        parcelamentoVendas.setDataEntrada(dataEntrada);
+        parcelamentoVendas.setTotalVenda(mg.convValorBanco(campoTotalVendaParc.getText()));
+        parcelamentoVendas.setEntrada(mg.convValorBanco(campoEntrada.getText()));
+        parcelamentoVendas.setFormaDePgto(campoFormaPgto.getText());
+        parcelamentoVendas.setRestante(restante);
+        parcelamentoVendas.setNumParcelas(parcelas);
+        parcelamentoVendas.setDemaisParcelas(diasPrazo);
+
+        parcelamentoVendas.setParcelasVenda(new ArrayList());
         for (int i = 0; i < parcelas; i++) {
             cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) + diasPrazo);
             if (cal.get(Calendar.DAY_OF_WEEK) == 1) {
@@ -1415,20 +1421,22 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
             if (cal.get(Calendar.DAY_OF_WEEK) == 7) {
                 cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) + 2);
             }
-            listaParcelas.add(new ParcelasVenda(i + 1, cal.getTime(), valorParcela, parcelamentoVendas));
+            parcelamentoVendas.getParcelasVenda().add(new ParcelasVenda(i + 1, cal.getTime(), valorParcela, parcelamentoVendas));
             insereNaTabelaParc(i + 1, sdf.format(cal.getTime()), valorParcela);
         }
+
+
     }//GEN-LAST:event_botaoParcelarActionPerformed
 
-    private void campoDataPrimParcelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDataPrimParcelaActionPerformed
+    private void campoDataEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDataEntradaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoDataPrimParcelaActionPerformed
+    }//GEN-LAST:event_campoDataEntradaActionPerformed
 
-    private void campoDataPrimParcelaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDataPrimParcelaKeyPressed
+    private void campoDataEntradaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDataEntradaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             campoDiasPrazo.requestFocus();
         }
-    }//GEN-LAST:event_campoDataPrimParcelaKeyPressed
+    }//GEN-LAST:event_campoDataEntradaKeyPressed
 
     private void campoDiasPrazoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDiasPrazoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -1466,7 +1474,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
     private javax.swing.JTextField campoCodCliente;
     private javax.swing.JTextField campoCodProduto;
     private javax.swing.JTextField campoData;
-    private javax.swing.JTextField campoDataPrimParcela;
+    private javax.swing.JTextField campoDataEntrada;
     private javax.swing.JTextField campoDesconto;
     private javax.swing.JTextField campoDiasPrazo;
     private javax.swing.JTextField campoEntrada;

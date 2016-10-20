@@ -7,16 +7,22 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Lancamentos implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     @Id
+    @GeneratedValue(generator = "s_lancamentos")
+    @GenericGenerator(name = "s_lancamentos", strategy = "increment")
     private int cod;
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -33,8 +39,17 @@ public class Lancamentos implements Serializable {
     public Lancamentos() {
     }
 
-    public Lancamentos(int cod, Date dataLancamento, HistoricoPadrao historico, String observacoes, BigDecimal valorDebito, BigDecimal valorCredito) {
+    public Lancamentos(int cod, Date dataLancamento, String observacoes, BigDecimal valorDebito, BigDecimal valorCredito, HistoricoPadrao historico) {
         this.cod = cod;
+        this.dataLancamento = dataLancamento;
+        this.observacoes = observacoes;
+        this.valorDebito = valorDebito;
+        this.valorCredito = valorCredito;
+        this.historico = historico;
+    }
+
+    
+    public Lancamentos(Date dataLancamento, HistoricoPadrao historico, String observacoes, BigDecimal valorDebito, BigDecimal valorCredito) {
         this.dataLancamento = dataLancamento;
         this.historico = historico;
         this.observacoes = observacoes;
