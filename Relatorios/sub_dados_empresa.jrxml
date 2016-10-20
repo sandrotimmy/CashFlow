@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-10-11T16:23:59 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_dados_empresa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0d5a3a42-0b6c-4cdc-a98a-97377df98127">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BANCOCF"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select * from empresa]]>
+	</queryString>
+	<field name="idEmpresa" class="java.lang.Integer"/>
+	<field name="caixaPostal" class="java.lang.String"/>
+	<field name="cep" class="java.lang.String"/>
+	<field name="cnpj" class="java.lang.String"/>
+	<field name="complemento" class="java.lang.String"/>
+	<field name="ddd" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="endereco" class="java.lang.String"/>
+	<field name="cel" class="java.lang.String"/>
+	<field name="fone" class="java.lang.String"/>
+	<field name="municipio" class="java.lang.String"/>
+	<field name="nomeEmpresa" class="java.lang.String"/>
+	<field name="nomeFantasia" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="uf" class="java.lang.String"/>
+	<group name="IDEMPRESA">
+		<groupExpression><![CDATA[$F{idEmpresa}]]></groupExpression>
+	</group>
+	<group name="CAIXAPOSTAL">
+		<groupExpression><![CDATA[$F{caixaPostal}]]></groupExpression>
+	</group>
+	<group name="CEP">
+		<groupExpression><![CDATA[$F{cep}]]></groupExpression>
+	</group>
+	<group name="CNPJ">
+		<groupExpression><![CDATA[$F{cnpj}]]></groupExpression>
+	</group>
+	<group name="COMPLEMENTO">
+		<groupExpression><![CDATA[$F{complemento}]]></groupExpression>
+	</group>
+	<group name="DDD">
+		<groupExpression><![CDATA[$F{ddd}]]></groupExpression>
+	</group>
+	<group name="EMAIL">
+		<groupExpression><![CDATA[$F{email}]]></groupExpression>
+	</group>
+	<group name="ENDERECO">
+		<groupExpression><![CDATA[$F{endereco}]]></groupExpression>
+	</group>
+	<group name="FAX">
+		<groupExpression><![CDATA[$F{cel}]]></groupExpression>
+	</group>
+	<group name="FONE">
+		<groupExpression><![CDATA[$F{fone}]]></groupExpression>
+	</group>
+	<group name="MUNICIPIO">
+		<groupExpression><![CDATA[$F{municipio}]]></groupExpression>
+	</group>
+	<group name="NOMEEMPRESA">
+		<groupExpression><![CDATA[$F{nomeEmpresa}]]></groupExpression>
+	</group>
+	<group name="NOMEFANTASIA">
+		<groupExpression><![CDATA[$F{nomeFantasia}]]></groupExpression>
+	</group>
+	<group name="NUMERO">
+		<groupExpression><![CDATA[$F{numero}]]></groupExpression>
+	</group>
+	<group name="UF">
+		<groupExpression><![CDATA[$F{uf}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="76">
+			<textField pattern="">
+				<reportElement x="50" y="-7" width="220" height="13" forecolor="#000000" uuid="6dba1a10-5882-4303-923d-081020066957"/>
+				<textFieldExpression><![CDATA[($F{cnpj}.substring(0, 2) + "." + $F{cnpj}.substring(2, 5) + "." +$F{cnpj}.substring(5, 8) + "/" + $F{cnpj}.substring(8, 12) + "-" + $F{cnpj}.substring(12, 14))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="19" width="160" height="14" forecolor="#000000" uuid="2c3bc4e7-79a5-4f54-a359-9663a7a2b518"/>
+				<textFieldExpression><![CDATA[$F{municipio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="-20" width="322" height="13" forecolor="#000000" uuid="dd010746-f1c8-4bd9-8203-aa7c096d39ea"/>
+				<textFieldExpression><![CDATA[$F{nomeEmpresa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-18" y="-7" width="68" height="13" forecolor="#000000" uuid="70534ee8-8cae-4a4a-9ed6-ac9b110af287"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNPJ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-18" y="-20" width="68" height="13" forecolor="#000000" uuid="99fd8e2f-7a93-4979-9997-043f7b0efdcc"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAZÃO SOCIAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-18" y="6" width="68" height="13" forecolor="#000000" uuid="d04b40e5-8f65-4e18-b5be-dfd929ce0228"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ENDEREÇO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-18" y="19" width="68" height="13" forecolor="#000000" uuid="eb328e46-14c1-4f71-8480-e563ca7f542c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CIDADE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="6" width="212" height="13" forecolor="#000000" uuid="7cfa1b46-e98b-4ba9-a7ec-eab45f149110"/>
+				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="270" y="6" width="32" height="13" forecolor="#000000" uuid="bc83618d-9173-41bc-9b6f-027e1cbdebab"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="302" y="6" width="50" height="13" forecolor="#000000" uuid="ff2c968a-0173-4f51-9c1d-64ebbac45fb0"/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="352" y="6" width="50" height="13" forecolor="#000000" uuid="a1ee8c36-c6e7-48c9-afad-3a58fc19605e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="402" y="6" width="120" height="13" forecolor="#000000" uuid="e2dd3b68-342d-4ea4-ad76-4edff7fcd1f8"/>
+				<textFieldExpression><![CDATA[$F{complemento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="217" y="19" width="23" height="14" forecolor="#000000" uuid="105a7594-25af-4fd6-a095-a1f7ed99c6b4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="240" y="19" width="40" height="14" forecolor="#000000" uuid="7ae9141c-8a30-4924-9fb6-3d0ace1042dd"/>
+				<textFieldExpression><![CDATA[$F{uf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="20" width="30" height="13" forecolor="#000000" uuid="05127ffd-7a47-419e-938d-45446465e6dd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEP:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="20" width="120" height="13" forecolor="#000000" uuid="43ee1f38-b83f-4e7d-9def-dff58e12912c"/>
+				<textFieldExpression><![CDATA[$F{cep}.substring(0, 2) + "." + $F{cep}.substring(2, 5) + "-" + $F{cep}.substring(5, 8)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-18" y="33" width="68" height="13" forecolor="#000000" uuid="4e9a736e-df81-4814-bc94-fc8a1e66ba88"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FONE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="33" width="100" height="13" forecolor="#000000" uuid="58419354-0bb4-4576-ac14-371ee4c511ff"/>
+				<textFieldExpression><![CDATA["("+$F{ddd}+") " +$F{fone}.substring(0, 4) + "-" +$F{fone}.substring(4, 8)]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="186" y="33" width="34" height="13" uuid="31c27789-f889-4d43-b2cf-c503b48fc5b8"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CEL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="220" y="33" width="132" height="13" uuid="26c2bef6-ecaf-4cb3-b663-a30dddd26c04"/>
+				<textFieldExpression><![CDATA["("+$F{ddd}+") " +$F{cel}.substring(0, 4) + "-" +$F{cel}.substring(4, 8)]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band/>
+	</detail>
+</jasperReport>
