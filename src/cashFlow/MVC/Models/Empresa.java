@@ -185,41 +185,6 @@ public class Empresa implements Serializable {
         return numero;
     }
 
-    public String validaFone(String fone) {
-        fone = fone.replaceAll("-", "").replaceAll(" ", "");
-        if (fone.equals("")) {
-            return "";
-        } else {
-            return fone;
-        }
-    }
-
-    public String validaCep(String cep) {
-        cep = cep.replaceAll("\\.", "").replaceAll("-", "").replaceAll(" ", "");
-        if (cep.equals("")) {
-            return "";
-        } else {
-            return cep;
-        }
-    }
-
-    public String validaCnpj(String cnpj) {
-        cnpj = cnpj.replaceAll("\\.", "").replaceAll("/", "").replaceAll("-", "").replaceAll(" ", "");
-        if (cnpj.equals("")) {
-            return "";
-        } else {
-            return cnpj;
-        }
-    }
-
-    public String validaNumeros(String numero) {
-        if (numero.equals("")) {
-            return "";
-        } else {
-            return numero;
-        }
-    }
-
     @Override
     public String toString() {
         return super.toString();

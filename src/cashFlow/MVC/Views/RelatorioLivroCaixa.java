@@ -132,7 +132,7 @@ public class RelatorioLivroCaixa extends javax.swing.JDialog {
                 JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(lista);
                 java.sql.Date dataAnterior;
                 dataAnterior = mg.convDataBanco(campoDataInicial.getText());
-                dataAnterior.setDate(dataAnterior.getDate() - 1);//Pega o dia anterior ao periodo selecionado
+                dataAnterior.setTime(dataAnterior.getTime() - 1);//Pega o dia anterior ao periodo selecionado
                 BigDecimal totalSaldoAnterior = persistLancamento.getSaldoPeriodo(mg.convDataBanco("01/01/1900"), dataAnterior);
                 Map parametros = new HashMap();
                 parametros.put("empresa", empresa);

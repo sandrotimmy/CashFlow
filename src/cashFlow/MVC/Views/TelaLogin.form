@@ -122,6 +122,7 @@
     <Component class="javax.swing.JPasswordField" name="campoSenha">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoSenhaActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoSenhaKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelDesemvolvido">

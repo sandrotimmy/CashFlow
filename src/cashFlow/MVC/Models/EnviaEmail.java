@@ -1,10 +1,8 @@
 package cashFlow.MVC.Models;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.MultiPartEmail;
 import org.apache.commons.mail.SimpleEmail;
 
@@ -30,8 +28,8 @@ public final class EnviaEmail {
         email.setMsg("AQUI ESCREVO O TEXTO DO EMAIL"); //conteudo do e-mail
         email.setAuthentication("smachado.ti@gmail.com", "contec033238");
         email.setSmtpPort(587);
-        email.setSSL(true);
-        email.setTLS(true);
+        email.setSSLOnConnect(true);
+        email.setStartTLSEnabled(true);
         email.send();
     }
 
@@ -55,8 +53,8 @@ public final class EnviaEmail {
         email.setMsg("AQUI ESCREVO O TEXTO DO EMAIL"); //conteudo do e-mail
         email.setAuthentication("smachado.ti@gmail.com", "contec033238");
         email.setSmtpPort(465);
-        email.setSSL(true);
-        email.setTLS(true);
+        email.setSSLOnConnect(true);
+        email.setStartTLSEnabled(true);
         // adiciona arquivo(s) anexo(s)
         email.attach(anexo1);
         // envia o email

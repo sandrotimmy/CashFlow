@@ -1,6 +1,7 @@
 package cashFlow.MVC.Views;
 
 import cashFlow.MVC.Controllers.UsuariosCtrl;
+import cashFlow.MVC.Models.ConexaoEntityManager;
 import java.awt.AWTKeyStroke;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
@@ -8,7 +9,6 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public final class TelaLogin extends javax.swing.JFrame {
 
@@ -18,7 +18,7 @@ public final class TelaLogin extends javax.swing.JFrame {
         initComponents();
         carregaTela();
     }
-    
+
     public void carregaTela() {
         this.usuariosCtrl = new UsuariosCtrl();
         HashSet conj = new HashSet(this.getFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS));
@@ -28,6 +28,25 @@ public final class TelaLogin extends javax.swing.JFrame {
         botaoOk.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, backup);
         this.setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void autenticar() {
+        try {
+            //            try {
+//            if (!usuariosCtrl.autenticar(campoUsuario.getText(), campoSenha.getText())) {
+//                JOptionPane.showMessageDialog(null, "Login ou senha Inválidos!\n Tente Novamente!!");
+//            } else {
+            ConexaoEntityManager.getInstance();
+            new TelaPrincipal();
+                this.dispose();
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -74,6 +93,11 @@ public final class TelaLogin extends javax.swing.JFrame {
         campoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoSenhaActionPerformed(evt);
+            }
+        });
+        campoSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoSenhaKeyPressed(evt);
             }
         });
 
@@ -143,15 +167,7 @@ public final class TelaLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void botaoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOkActionPerformed
-        try {
-            if (!usuariosCtrl.autenticar(campoUsuario.getText(), campoSenha.getText())) {
-                JOptionPane.showMessageDialog(null, "Login ou senha Inválidos!\n Tente Novamente!!");
-            } else {
-                new TelaPrincipal();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        autenticar();
     }//GEN-LAST:event_botaoOkActionPerformed
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         System.exit(WIDTH);
@@ -163,6 +179,12 @@ public final class TelaLogin extends javax.swing.JFrame {
             TelaLogin.this.dispose();
         }
     }//GEN-LAST:event_formKeyPressed
+
+    private void campoSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoSenhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            autenticar();
+        }
+    }//GEN-LAST:event_campoSenhaKeyPressed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             new TelaLogin().setVisible(true);

@@ -10,8 +10,9 @@ public class Fornecedores implements Serializable {
 
     @Id
     private Integer cod;
+    int tipoInscricao;
     @Column(length = 14)
-    private String cnpj;
+    private String cpfCnpj;
     @Column(length = 50)
     private String razaosocial;
     @Column(length = 30)
@@ -41,9 +42,10 @@ public class Fornecedores implements Serializable {
     public Fornecedores() {
     }
 
-    public Fornecedores(Integer cod, String cnpj, String razaosocial, String nomefantasia, String endereco, String numero, String complemento, String municipio, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
+    public Fornecedores(Integer cod, int tipoInscricao, String cpfCnpj, String razaosocial, String nomefantasia, String endereco, String numero, String complemento, String municipio, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
         this.cod = cod;
-        this.cnpj = cnpj;
+        this.tipoInscricao = tipoInscricao;
+        this.cpfCnpj = cpfCnpj;
         this.razaosocial = razaosocial;
         this.nomefantasia = nomefantasia;
         this.endereco = endereco;
@@ -67,156 +69,130 @@ public class Fornecedores implements Serializable {
         return cod;
     }
 
-    public void setCod(Integer cod) {
-        this.cod = cod;
+    public int getTipoInscricao() {
+        return tipoInscricao;
     }
 
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public String getCpfCnpj() {
+        return cpfCnpj;
     }
 
     public String getRazaosocial() {
         return razaosocial;
     }
 
-    public void setRazaosocial(String razaosocial) {
-        this.razaosocial = razaosocial;
-    }
-
     public String getNomefantasia() {
         return nomefantasia;
-    }
-
-    public void setNomefantasia(String nomefantasia) {
-        this.nomefantasia = nomefantasia;
     }
 
     public String getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
     public String getNumero() {
         return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
     }
 
     public String getComplemento() {
         return complemento;
     }
 
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
     public String getMunicipio() {
         return municipio;
-    }
-
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
     }
 
     public String getUf() {
         return uf;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
-
     public String getCep() {
         return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
     }
 
     public String getCaixapostal() {
         return caixapostal;
     }
 
-    public void setCaixapostal(String caixapostal) {
-        this.caixapostal = caixapostal;
-    }
-
     public String getDdd() {
         return ddd;
-    }
-
-    public void setDdd(String ddd) {
-        this.ddd = ddd;
     }
 
     public String getFone() {
         return fone;
     }
 
-    public void setFone(String fone) {
-        this.fone = fone;
-    }
-
     public String getCel() {
         return cel;
-    }
-
-    public void setCel(String cel) {
-        this.cel = cel;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setCod(Integer cod) {
+        this.cod = cod;
+    }
+
+    public void setTipoInscricao(int tipoInscricao) {
+        this.tipoInscricao = tipoInscricao;
+    }
+
+    public void setCpfCnpj(String cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
+    }
+
+    public void setRazaosocial(String razaosocial) {
+        this.razaosocial = razaosocial;
+    }
+
+    public void setNomefantasia(String nomefantasia) {
+        this.nomefantasia = nomefantasia;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public void setCaixapostal(String caixapostal) {
+        this.caixapostal = caixapostal;
+    }
+
+    public void setDdd(String ddd) {
+        this.ddd = ddd;
+    }
+
+    public void setFone(String fone) {
+        this.fone = fone;
+    }
+
+    public void setCel(String cel) {
+        this.cel = cel;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String validaFone(String fone) {
-        fone = fone.replaceAll("-", "").replaceAll(" ", "");
-        if (fone.equals("")) {
-            return "";
-        } else {
-            return fone;
-        }
-    }
-
-    public String validaCep(String cep) {
-        cep = cep.replaceAll("\\.", "").replaceAll("-", "").replaceAll(" ", "");
-        if (cep.equals("")) {
-            return "";
-        } else {
-            return cep;
-        }
-    }
-
-    public String validaCnpj(String cnpj) {
-        cnpj = cnpj.replaceAll("\\.", "").replaceAll("/", "").replaceAll("-", "").replaceAll(" ", "");
-        if (cnpj.equals("")) {
-            return "";
-        } else {
-            return cnpj;
-        }
-    }
-
-    public String validaNumeros(String numero) {
-        if (numero.equals("")) {
-            return "";
-        } else {
-            return numero;
-        }
-    }
 
     @Override
     public String toString() {

@@ -64,8 +64,11 @@ public class FornecedoresDAO {
         em = ConexaoEntityManager.getInstance();
         TypedQuery<Fornecedores> q = em.createQuery("FROM Fornecedores f where cod = "+codFornecedor, Fornecedores.class);
         for (Fornecedores each : q.getResultList()) {
-            listaFornecedores.add(new Fornecedores(each.getCod(),
-                    each.getCnpj(), each.getRazaosocial(),
+            listaFornecedores.add(new Fornecedores(
+                    each.getCod(),
+                    each.getTipoInscricao(),
+                    each.getCpfCnpj(),
+                    each.getRazaosocial(),
                     each.getNomefantasia(),
                     each.getEndereco(),
                     each.getNumero(),
@@ -85,8 +88,11 @@ public class FornecedoresDAO {
         em = ConexaoEntityManager.getInstance();
         TypedQuery<Fornecedores> q = em.createQuery("FROM Fornecedores f ORDER BY f.cod", Fornecedores.class);
         for (Fornecedores each : q.getResultList()) {
-            listaFornecedores.add(new Fornecedores(each.getCod(),
-                    each.getCnpj(), each.getRazaosocial(),
+            listaFornecedores.add(new Fornecedores(
+                    each.getCod(),
+                    each.getTipoInscricao(),
+                    each.getCpfCnpj(),
+                    each.getRazaosocial(),
                     each.getNomefantasia(),
                     each.getEndereco(),
                     each.getNumero(),

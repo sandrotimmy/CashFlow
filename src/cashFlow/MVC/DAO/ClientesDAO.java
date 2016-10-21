@@ -73,12 +73,15 @@ public class ClientesDAO {
         Clientes cliente = em.find(Clientes.class, codCliente);
         return cliente;
     }
-public ArrayList getUmCliente(Integer codCliente) {
+
+    public ArrayList getUmCliente(Integer codCliente) {
         em = ConexaoEntityManager.getInstance();
-        TypedQuery<Clientes> q = em.createQuery("FROM Clientes where cod = "+codCliente, Clientes.class);
+        TypedQuery<Clientes> q = em.createQuery("FROM Clientes where cod = " + codCliente, Clientes.class);
         for (Clientes each : q.getResultList()) {
             listaClientes.add(new Clientes(
                     each.getCod(),
+                    each.getTipoInscricao(),
+                    each.getCpfCnpj(),
                     each.getNome(),
                     each.getEndereco(),
                     each.getNumero(),
@@ -94,12 +97,15 @@ public ArrayList getUmCliente(Integer codCliente) {
         }
         return listaClientes;
     }
+
     public ArrayList getListaClientes() {
         em = ConexaoEntityManager.getInstance();
         TypedQuery<Clientes> q = em.createQuery("FROM Clientes c ORDER BY c.cod", Clientes.class);
         for (Clientes each : q.getResultList()) {
             listaClientes.add(new Clientes(
                     each.getCod(),
+                    each.getTipoInscricao(),
+                    each.getCpfCnpj(),
                     each.getNome(),
                     each.getEndereco(),
                     each.getNumero(),

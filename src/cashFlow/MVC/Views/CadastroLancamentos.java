@@ -649,7 +649,7 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
         java.sql.Date dataAnterior;
         //variavel que vai receber a data para o banco
         dataAnterior = mg.convDataBanco(campoDataInicial.getText());
-        dataAnterior.setDate(dataAnterior.getDate() - 1);//Pega o dia anterior ao periodo selecionado
+        dataAnterior.setTime(dataAnterior.getTime() - 1);//Pega o dia anterior ao periodo selecionado
         BigDecimal totalSaldoAnterior = lancamentosCtrl.getSaldoPeriodo(mg.convDataBanco("01/01/1900"), dataAnterior);
         BigDecimal totalSaldoPeriodo = totalDebitoPeriodo.subtract(totalCreditoPeriodo).add(totalSaldoAnterior);
         BigDecimal totalEmCaixa = lancamentosCtrl.getSaldoPeriodo(mg.convDataBanco("01/01/1900"),

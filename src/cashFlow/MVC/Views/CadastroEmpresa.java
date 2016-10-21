@@ -1,10 +1,11 @@
 package cashFlow.MVC.Views;
 
+import cashFlow.MVC.Controllers.MetodosGerais;
+import cashFlow.MVC.DAO.EmpresasDAO;
 import cashFlow.MVC.Models.AlteraMinusculo;
 import cashFlow.MVC.Models.DocumentoLimitado;
 import cashFlow.MVC.Models.Empresa;
 import cashFlow.MVC.Models.IntegerDocument;
-import cashFlow.MVC.DAO.EmpresasDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -15,6 +16,7 @@ public class CadastroEmpresa extends javax.swing.JDialog {
 
     private final EmpresasDAO persist;
     private Empresa empresa;
+    private MetodosGerais mg;
 
     public CadastroEmpresa() throws SQLException {
         initComponents();
@@ -22,6 +24,7 @@ public class CadastroEmpresa extends javax.swing.JDialog {
         botaoCadastrar.requestFocus();
         setModal(true);
         this.persist = new EmpresasDAO();
+        this.mg = new MetodosGerais();
         limitaCampos();
         exibeDados();
     }
@@ -81,19 +84,19 @@ public class CadastroEmpresa extends javax.swing.JDialog {
     public Empresa coletaDadosCampos() {
         Empresa empresa = new Empresa();
         empresa = new Empresa(1,
-                empresa.validaCnpj(campoCnpj.getText()),
+                mg.limpaCnpj(campoCnpj.getText()),
                 campoRazaoSocial.getText(),
                 campoNomeFantasia.getText(),
                 campoEndereco.getText(),
                 campoComplemento.getText(),
-                empresa.validaNumeros(campoNumero.getText()),
+                mg.validaNumeros(campoNumero.getText()),
                 campoMunicipio.getText(),
                 comboBoxUF.getSelectedItem().toString(),
-                empresa.validaCep(campoCEP.getText()),
-                empresa.validaNumeros(campoCaixaPostal.getText()),
-                empresa.validaNumeros(campoDDD.getText()),
-                empresa.validaFone(campoFone.getText()),
-                empresa.validaFone(campoFax.getText()),
+                mg.validaCep(campoCEP.getText()),
+                mg.validaNumeros(campoCaixaPostal.getText()),
+                mg.validaNumeros(campoDDD.getText()),
+                mg.validaFone(campoFone.getText()),
+                mg.validaFone(campoFax.getText()),
                 campoEmail.getText()
         );
         return empresa;
@@ -173,6 +176,16 @@ public class CadastroEmpresa extends javax.swing.JDialog {
         }
         catch (Exception e){
         }
+        campoCnpj.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoCnpjFocusLost(evt);
+            }
+        });
+        campoCnpj.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoCnpjKeyPressed(evt);
+            }
+        });
 
         campoFax.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         campoFax.setOpaque(false);
@@ -441,9 +454,9 @@ public class CadastroEmpresa extends javax.swing.JDialog {
                 botaoCadastrar.setText("Gravar");
             } else {
                 botaoCadastrar.setText("Cadastrar");
-                
+
                 empresa = coletaDadosCampos();
-                
+
                 persist.cadastraEmpresa(empresa);
                 campoCnpj.setEnabled(false);
                 campoRazaoSocial.setEnabled(false);
@@ -501,7 +514,7 @@ public class CadastroEmpresa extends javax.swing.JDialog {
         } else {
 
             Empresa empresa = coletaDadosCampos();
-            
+
             persist.atualizaEmpresa(empresa);
             campoCnpj.setEnabled(false);
             campoRazaoSocial.setEnabled(false);
@@ -536,9 +549,20 @@ public class CadastroEmpresa extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void campoCnpjFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoCnpjFocusLost
+
+    }//GEN-LAST:event_campoCnpjFocusLost
+
+    private void campoCnpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCnpjKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (!mg.isCNPJ(mg.limpaCnpj(campoCnpj.getText()))) {
+                if (JOptionPane.showConfirmDialog(null, "CNPJ incorreto deseja manter?", null, JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+                    campoCnpj.requestFocus();
+                }
+            }
+        }
+    }//GEN-LAST:event_campoCnpjKeyPressed
+
     public static void main(String args[]) {
 
         try {

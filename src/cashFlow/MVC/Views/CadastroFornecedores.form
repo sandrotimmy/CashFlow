@@ -28,7 +28,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="labelRazaoSocial" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="labelCNPJ" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelInscricao" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="labelEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="labemMunicipio" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="labelDDD" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -110,15 +110,20 @@
                       </Group>
                   </Group>
                   <Component id="campoRazaoSocial" alignment="1" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="campoCnpj" min="-2" pref="123" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
                   <Component id="campoNomeFantasia" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="campoCodigo" min="-2" pref="75" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="botaoBuscar" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="comboCpfCnpj" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="campoCpfCnpj" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="campoCodigo" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="botaoBuscar" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="BotaListaPrimeiro" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -129,7 +134,7 @@
                       <Component id="BotaoListaUltimo" linkSize="2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -155,8 +160,11 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelCNPJ" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelInscricao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Component id="campoCpfCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="comboCpfCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -409,16 +417,6 @@
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try{ &#xa;javax.swing.text.MaskFormatter fone = new javax.swing.text.MaskFormatter(&quot;####-####&quot;); &#xa;campoFone = new javax.swing.JFormattedTextField(fone); &#xa;campoFone.setDisabledTextColor(new java.awt.Color(0, 0, 0));&#xa;} &#xa;catch (Exception e){ &#xa;}"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="campoCnpj">
-      <Properties>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Cursor de Texto"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try{ &#xa;javax.swing.text.MaskFormatter cnpj = new javax.swing.text.MaskFormatter(&quot;##.###.###/####-##&quot;); &#xa;campoCnpj = new javax.swing.JFormattedTextField(cnpj); &#xa;campoCnpj.setDisabledTextColor(new java.awt.Color(0, 0, 0));&#xa;} &#xa;catch (Exception e){ &#xa;}"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JFormattedTextField" name="campoFax">
       <Properties>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -430,9 +428,9 @@
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try{ &#xa;javax.swing.text.MaskFormatter fax = new javax.swing.text.MaskFormatter(&quot;####-####&quot;); &#xa;campoFax = new javax.swing.JFormattedTextField(fax); &#xa;campoFax.setDisabledTextColor(new java.awt.Color(0, 0, 0));&#xa;} &#xa;catch (Exception e){ &#xa;}"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="labelCNPJ">
+    <Component class="javax.swing.JLabel" name="labelInscricao">
       <Properties>
-        <Property name="text" type="java.lang.String" value="CNPJ: "/>
+        <Property name="text" type="java.lang.String" value="Inscri&#xe7;&#xe3;o:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="campoCEP">
@@ -509,6 +507,29 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoBuscarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboCpfCnpj">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="C.P.F."/>
+            <StringItem index="1" value="C.N.P.J."/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="campoCpfCnpj">
+      <Properties>
+        <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoCpfCnpjKeyPressed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -18,6 +18,8 @@
     <class>cashFlow.MVC.Models.Lancamentos</class>
     <class>cashFlow.MVC.Models.HistoricoPadrao</class>
     <class>cashFlow.MVC.Models.CancelamentoVendas</class>
+    <class>cashFlow.MVC.Models.ParcelamentoVendas</class>
+    <class>cashFlow.MVC.Models.ParcelasVenda</class>
     <properties>
       <property name="hibernate.max_fetch_depth" value="2"/>
       <property name="hibernate.show_sql" value="true"/>

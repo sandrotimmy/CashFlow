@@ -348,7 +348,7 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
                     Integer.parseInt(this.campoCodigo.getText()),
                     this.campoNomeUsuario.getText(),
                     this.campoNickUsuario.getText(),
-                    this.campoSenha.getText());
+                    this.campoSenha.getPassword().toString());
 
             listaUsuarios.remove(posicao);//remove da lista
             listaUsuarios.add(posicao, usuario);//adiciona na mesma posição

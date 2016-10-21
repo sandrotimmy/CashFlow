@@ -10,6 +10,9 @@ public class Clientes implements Serializable {
 
     @Id
     private Integer cod;
+    int tipoInscricao;
+    @Column(length = 14)
+    private String cpfCnpj;
     @Column(length = 100, nullable = false)
     private String nome;
     @Column(length = 100)
@@ -42,19 +45,81 @@ public class Clientes implements Serializable {
         this.cod = cod;
     }
 
-    public Clientes(Integer cod, String nome, String endereco, String numero, String complemento, String municipio, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
+    public Clientes(Integer cod, int tipoInscricao, String cpfCnpj, String nome, String endereco, String numero, String complemento, String municipio, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
         this.cod = cod;
+        this.tipoInscricao = tipoInscricao;
+        this.cpfCnpj = cpfCnpj;
         this.nome = nome;
         this.endereco = endereco;
         this.numero = numero;
         this.complemento = complemento;
         this.municipio = municipio;
         this.uf = uf;
-        this.cep = cep;
         this.caixapostal = caixapostal;
+        this.cep = cep;
         this.ddd = ddd;
         this.fone = fone;
         this.cel = cel;
+        this.email = email;
+    }
+
+    public void setCod(Integer cod) {
+        this.cod = cod;
+    }
+
+    public void setTipoInscricao(int tipoInscricao) {
+        this.tipoInscricao = tipoInscricao;
+    }
+
+    public void setCpfCnpj(String cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public void setCaixapostal(String caixapostal) {
+        this.caixapostal = caixapostal;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public void setDdd(String ddd) {
+        this.ddd = ddd;
+    }
+
+    public void setFone(String fone) {
+        this.fone = fone;
+    }
+
+    public void setCel(String cel) {
+        this.cel = cel;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -62,130 +127,60 @@ public class Clientes implements Serializable {
         return cod;
     }
 
-    public void setCod(Integer cod) {
-        this.cod = cod;
+    public int getTipoInscricao() {
+        return tipoInscricao;
+    }
+
+    public String getCpfCnpj() {
+        return cpfCnpj;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getEndereco() {
         return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public String getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
     public String getComplemento() {
         return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
     }
 
     public String getMunicipio() {
         return municipio;
     }
 
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }
-
     public String getUf() {
         return uf;
-    }
-
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
     }
 
     public String getCaixapostal() {
         return caixapostal;
     }
 
-    public void setCaixapostal(String caixapostal) {
-        this.caixapostal = caixapostal;
+    public String getCep() {
+        return cep;
     }
 
     public String getDdd() {
         return ddd;
     }
 
-    public void setDdd(String ddd) {
-        this.ddd = ddd;
-    }
-
     public String getFone() {
         return fone;
-    }
-
-    public void setFone(String fone) {
-        this.fone = fone;
     }
 
     public String getCel() {
         return cel;
     }
 
-    public void setCel(String cel) {
-        this.cel = cel;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String validaFone(String fone) {
-        fone = fone.replaceAll("-", "").replaceAll(" ", "");
-        if (fone.equals("")) {
-            return "";
-        } else {
-            return fone;
-        }
-    }
-
-    public String validaCep(String cep) {
-        cep = cep.replaceAll("\\.", "").replaceAll("-", "").replaceAll(" ", "");
-        if (cep.equals("")) {
-            return "";
-        } else {
-            return cep;
-        }
-    }
-
-    public String validaNumeros(String numero) {
-        if (numero.equals("")) {
-            return "";
-        } else {
-            return numero;
-        }
     }
 
     @Override

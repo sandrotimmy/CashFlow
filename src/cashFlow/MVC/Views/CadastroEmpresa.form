@@ -221,6 +221,10 @@
           <Color id="Cursor de Texto"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoCnpjFocusLost"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoCnpjKeyPressed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try{ &#xa;javax.swing.text.MaskFormatter cnpj = new javax.swing.text.MaskFormatter(&quot;##.###.###/####-##&quot;); &#xa;campoCnpj = new javax.swing.JFormattedTextField(cnpj); &#xa;campoCnpj.setDisabledTextColor(new java.awt.Color(0, 0, 0));&#xa;} &#xa;catch (Exception e){ &#xa;}"/>
       </AuxValues>
