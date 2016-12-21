@@ -1,31 +1,45 @@
 package cashFlow.MVC.Views;
 
+import cashFlow.MVC.Controllers.ParametrosCtrl;
 import cashFlow.MVC.Models.PassaCamposComEnter;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
     public Statement s;
     public PassaCamposComEnter pc;
 
-    public TelaPrincipal() throws SQLException {
+    public TelaPrincipal() throws SQLException, IOException {
+
         initComponents();
+        setIcon();
         pc = new PassaCamposComEnter();
-        setVisible(true);
-        setExtendedState(MAXIMIZED_BOTH);
+    }
+    
+        public void setIcon() throws IOException {
+        Properties parametros = ParametrosCtrl.getInstance();
+        String caminho = parametros.getProperty("caminhoLogoTela");
+        File imagem = new File(caminho);
+        BufferedImage img = ImageIO.read(imagem);
+        labelImagemLogo.setSize(img.getHeight(), img.getWidth());
+        labelImagemLogo.setIcon(new javax.swing.ImageIcon(caminho));
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        DFGDFGD = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        painelPrincipal = new javax.swing.JPanel();
+        labelImagemLogo = new javax.swing.JLabel();
+        menuPrincipal = new javax.swing.JMenuBar();
         menuCadastro = new javax.swing.JMenu();
         menuCadastroEmpresa = new javax.swing.JMenuItem();
         menuCadastroUsuarios = new javax.swing.JMenuItem();
@@ -35,6 +49,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         menuCadastroProdutos = new javax.swing.JMenuItem();
         menuCadastroHistoricos = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuProcessos = new javax.swing.JMenu();
         MenuProcessosLancamentos = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
@@ -70,26 +86,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setBackground(new java.awt.Color(39, 91, 182));
         setForeground(new java.awt.Color(39, 91, 182));
 
-        jPanel1.setBackground(new java.awt.Color(39, 91, 182));
-        jPanel1.setForeground(new java.awt.Color(39, 91, 182));
+        painelPrincipal.setBackground(new java.awt.Color(39, 91, 182));
+        painelPrincipal.setForeground(new java.awt.Color(39, 91, 182));
 
-        DFGDFGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logoAzul.png"))); // NOI18N
-        DFGDFGD.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        labelImagemLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logoAzul.png"))); // NOI18N
+        labelImagemLogo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout painelPrincipalLayout = new javax.swing.GroupLayout(painelPrincipal);
+        painelPrincipal.setLayout(painelPrincipalLayout);
+        painelPrincipalLayout.setHorizontalGroup(
+            painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelPrincipalLayout.createSequentialGroup()
                 .addContainerGap(309, Short.MAX_VALUE)
-                .addComponent(DFGDFGD)
+                .addComponent(labelImagemLogo)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(173, Short.MAX_VALUE)
-                .addComponent(DFGDFGD)
+        painelPrincipalLayout.setVerticalGroup(
+            painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalLayout.createSequentialGroup()
+                .addContainerGap(206, Short.MAX_VALUE)
+                .addComponent(labelImagemLogo)
                 .addContainerGap())
         );
 
@@ -149,8 +165,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastro.add(menuCadastroHistoricos);
+        menuCadastro.add(jSeparator5);
 
-        jMenuBar1.add(menuCadastro);
+        jMenuItem1.setText("Parametros");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(jMenuItem1);
+
+        menuPrincipal.add(menuCadastro);
 
         menuProcessos.setText("Processos");
 
@@ -213,7 +238,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuProcessos.add(menuProcessosReajusteProdutos);
 
-        jMenuBar1.add(menuProcessos);
+        menuPrincipal.add(menuProcessos);
 
         menuConsultas.setText("Consultas");
 
@@ -249,7 +274,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuConsultas.add(menuConsultasClientes);
 
-        jMenuBar1.add(menuConsultas);
+        menuPrincipal.add(menuConsultas);
 
         menuRelatorios.setText("Relatórios");
 
@@ -313,7 +338,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuRelatorios.add(jMenu1);
 
-        jMenuBar1.add(menuRelatorios);
+        menuPrincipal.add(menuRelatorios);
 
         menuUtilitarios.setText("Utilitários");
 
@@ -325,7 +350,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuUtilitarios.add(menuUtilitariosCalculadora);
 
-        jMenuBar1.add(menuUtilitarios);
+        menuPrincipal.add(menuUtilitarios);
 
         menuSair.setText("Sair");
         menuSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -338,19 +363,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuSairActionPerformed(evt);
             }
         });
-        jMenuBar1.add(menuSair);
+        menuPrincipal.add(menuSair);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -521,26 +546,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
         d.setLocationRelativeTo(null);
         d.setVisible(true);
     }//GEN-LAST:event_relCadastraisClientesActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Parametros parametros;
+        parametros = new Parametros();
+        parametros.setLocationRelativeTo(null);
+        parametros.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             try {
                 new TelaPrincipal().setVisible(true);
-            } catch (SQLException ex) {
+            } catch (SQLException | IOException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel DFGDFGD;
     private javax.swing.JMenuItem MenuProcessosLancamentos;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JLabel labelImagemLogo;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuItem menuCadastroClientes;
     private javax.swing.JMenuItem menuCadastroEmpresa;
@@ -553,6 +585,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuConsultasHistoricos;
     private javax.swing.JMenuItem menuConsultasLancamentos;
     private javax.swing.JMenuItem menuConsultasProdutos;
+    private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JMenu menuProcessos;
     private javax.swing.JMenuItem menuProcessosCompras;
     private javax.swing.JMenuItem menuProcessosReajusteProdutos;
@@ -565,6 +598,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuUtilitarios;
     private javax.swing.JMenuItem menuUtilitariosCalculadora;
     private javax.swing.JMenuItem menuVendasConsutar;
+    private javax.swing.JPanel painelPrincipal;
     private javax.swing.JMenu processosCompras;
     private javax.swing.JMenuItem processosComprasConsultar;
     private javax.swing.JMenuItem relCadastraisClientes;

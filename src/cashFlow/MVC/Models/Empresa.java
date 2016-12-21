@@ -10,8 +10,9 @@ public class Empresa implements Serializable {
 
     @Id
     private int idEmpresa;
+    int tipoInscricao;
     @Column(length = 14)
-    private String cnpj;
+    private String cpfCnpj;
     @Column(length = 50)
     private String nomeEmpresa;
     @Column(length = 30)
@@ -47,9 +48,10 @@ public class Empresa implements Serializable {
         this.nomeEmpresa = nomeEmpresa;
     }
 
-    public Empresa(int idEmpresa, String cnpj, String nomeEmpresa, String nomeFantasia, String endereco, String complemento, String numero, String municipio, String uf, String cep, String caixaPostal, String ddd, String fone, String cel, String email) {
+    public Empresa(int idEmpresa, int tipoInscricao, String cpfCnpj, String nomeEmpresa, String nomeFantasia, String endereco, String complemento, String numero, String municipio, String uf, String cep, String caixaPostal, String ddd, String fone, String cel, String email) {
         this.idEmpresa = idEmpresa;
-        this.cnpj = cnpj;
+        this.tipoInscricao = tipoInscricao;
+        this.cpfCnpj = cpfCnpj;
         this.nomeEmpresa = nomeEmpresa;
         this.nomeFantasia = nomeFantasia;
         this.endereco = endereco;
@@ -69,8 +71,13 @@ public class Empresa implements Serializable {
         return idEmpresa;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public int getTipoInscricao() {
+        return tipoInscricao;
+    }
+    
+
+    public String getCpfCnpj() {
+        return cpfCnpj;
     }
 
     public String getNomeEmpresa() {
@@ -91,6 +98,10 @@ public class Empresa implements Serializable {
 
     public String getCaixaPostal() {
         return caixaPostal;
+    }
+
+    public void setTipoInscricao(int tipoInscricao) {
+        this.tipoInscricao = tipoInscricao;
     }
 
     public void setNomeEmpresa(String nomeEmpresa) {
@@ -145,8 +156,8 @@ public class Empresa implements Serializable {
         this.nomeFantasia = nomeFantasia;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setCpfCnpj(String cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
     }
 
     public void setIdEmpresa(int idEmpresa) {

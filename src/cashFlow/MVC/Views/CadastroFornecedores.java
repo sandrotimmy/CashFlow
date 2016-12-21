@@ -70,6 +70,7 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
             posicao = listaFornecedores.size() - 1;//atualiza a posicao inicial
             exibeDados(listaFornecedores.get(posicao));
             campoCpfCnpj.setEnabled(false);
+            comboCpfCnpj.setEnabled(false);
             campoRazaoSocial.setEnabled(false);
             campoNomeFantasia.setEnabled(false);
             campoEndereco.setEnabled(false);
@@ -353,7 +354,7 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
         campoFax.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         campoFax.setOpaque(false);
         try{
-            javax.swing.text.MaskFormatter fax = new javax.swing.text.MaskFormatter("####-####");
+            javax.swing.text.MaskFormatter fax = new javax.swing.text.MaskFormatter("#####-####");
             campoFax = new javax.swing.JFormattedTextField(fax);
             campoFax.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         }
@@ -541,11 +542,11 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
                             .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botaoBuscar))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelInscricao)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(campoCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(comboCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelInscricao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -673,15 +674,18 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
 
     private void campoCpfCnpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCpfCnpjKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!mg.validaCpfCnpj(mg.limpaCnpj(campoCpfCnpj.getText()))) {
-                if (JOptionPane.showConfirmDialog(null, "CNPJ/CPF incorreto deseja continuar?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
-                    campoCpfCnpj.requestFocus();
-                } else {
-                    campoCpfCnpj.setText("");
+            String cnpjLimpo = mg.limpaCnpj(campoCpfCnpj.getText());
+            if (!mg.validaCpfCnpj(cnpjLimpo)) {
+                if (cnpjLimpo.equals("")) {
                     campoRazaoSocial.requestFocus();
+                    campoCpfCnpj.setValue(null);
+                } else {
+                    JOptionPane.showMessageDialog(this, "CPF/CNPJ Incorreto!");
+                    campoCpfCnpj.requestFocus();
                 }
-            }else 
+            } else {
                 campoRazaoSocial.requestFocus();
+            }
         }
     }//GEN-LAST:event_campoCpfCnpjKeyPressed
     public static void main(String args[]) {

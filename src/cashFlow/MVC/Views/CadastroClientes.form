@@ -445,7 +445,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="campoFax">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{ &#xa;javax.swing.text.MaskFormatter fax = new javax.swing.text.MaskFormatter(&quot;####-####&quot;); &#xa;campoFax = new javax.swing.JFormattedTextField(fax); &#xa;campoFax.setDisabledTextColor(new java.awt.Color(0, 0, 0));&#xa;} &#xa;catch (Exception e){ &#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try{ &#xa;javax.swing.text.MaskFormatter fax = new javax.swing.text.MaskFormatter(&quot;#####-####&quot;); &#xa;campoFax = new javax.swing.JFormattedTextField(fax); &#xa;campoFax.setDisabledTextColor(new java.awt.Color(0, 0, 0));&#xa;} &#xa;catch (Exception e){ &#xa;}"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="campoCEP">

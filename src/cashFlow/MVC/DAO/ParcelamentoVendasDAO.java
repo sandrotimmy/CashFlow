@@ -13,11 +13,13 @@ public class ParcelamentoVendasDAO {
     }
 
     public void cadastraParcelamentoVenda(ParcelamentoVendas venda) {
+       if (venda != null){
         em = ConexaoEntityManager.getInstance();
         em.getTransaction().begin();
         em.persist(venda);
         em.getTransaction().commit();
         em.close();
+       }
     }
 
     public void atualizaParcelamentoVenda(ParcelamentoVendas venda) {

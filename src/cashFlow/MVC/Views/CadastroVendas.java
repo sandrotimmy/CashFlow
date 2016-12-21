@@ -19,7 +19,6 @@ import cashFlow.MVC.Models.Vendas;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
     private final VendasCtrl vendasCtrl;
     private final LancamentosCtrl lancamentosCtrl;
     private final ClientesCtrl clientesCtrl;
-    private final NumberFormat f;
+//    private final NumberFormat f;
 //    private ArrayList<ItemVenda> ListaItens;
     private int codItemSequecial;
     private Vendas venda;
@@ -61,7 +60,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
     public CadastroVendas(Vendas consultaVenda) {
         initComponents();
         valVendas = (DefaultTableModel) tabelaVendas.getModel();
-        f = NumberFormat.getCurrencyInstance();
+//        f = NumberFormat.getCurrencyInstance();
 //        this.persistVenda = new VendasDAO();
         this.mg = new MetodosGerais();
         this.vendasCtrl = new VendasCtrl();
@@ -85,9 +84,9 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
 //        this.persistCliente = new ClientesDAO();
 //        this.persistProdutos = new ProdutosDAO();
 //        this.persistItemVenda = new ItemVendaDAO();
-//        codProxVenda = persistVenda.getProximaVenda();
-        this.venda = new Vendas(codProxVenda);
         this.vendasCtrl = new VendasCtrl();
+        codProxVenda = vendasCtrl.getProximaVenda();
+        this.venda = new Vendas(codProxVenda);
         this.lancamentosCtrl = new LancamentosCtrl();
         this.clientesCtrl = new ClientesCtrl();
         consultaCliente = new ConsultaCliente();
@@ -96,7 +95,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
 //        ListaItens = new ArrayList();
         produto = new Produtos();
         codItemSequecial = 1;
-        f = NumberFormat.getCurrencyInstance();
+//        f = NumberFormat.getCurrencyInstance();
 
     }
 
@@ -156,10 +155,10 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         campoNomeCliente.setText(v.getCliente().getNome());
         campoObservacoes.setText(v.getObservacoes());
         campoMotivoAcrescimo.setText(v.getMotivoAcrescimo());
-        campoTotalProdutos.setText(f.format(v.getValorTotalProdutos()));
-        campoDesconto.setText(f.format(v.getValorDesconto()));
-        campoAcrescimo.setText(f.format(v.getValorAcrescimo()));
-        campoTotalVenda.setText(f.format(v.getValorTotalVenda()));
+        campoTotalProdutos.setText(v.getValorTotalProdutos().toString());
+        campoDesconto.setText(v.getValorDesconto().toString());
+        campoAcrescimo.setText(v.getValorAcrescimo().toString());
+        campoTotalVenda.setText(v.getValorTotalVenda().toString());
         for (int i = 0; i < v.getItemVenda().size(); i++) {
             insereNaTabela(v.getItemVenda().get(i));
         }
@@ -202,30 +201,30 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
             Integer.toString(item.getCodProduto()),
             item.getProduto(),
             item.getQuantidade().toString(),
-            f.format(item.getValorUnitario()),
-            f.format(item.getValorTotal())});
+            item.getValorUnitario().toString(),
+            item.getValorTotal().toString()});
     }
 
     public void insereNaTabelaParc(int qtdParcela, String data, BigDecimal valor) {
         valParcelamento.addRow(new String[]{
             Integer.toString(qtdParcela),
             data,
-            f.format(valor)});
+            valor.toString()});
     }
 
     public ItemVenda coletaDadosCampos() {
+        String valorTotal = campoValorTotal.getText();
         itemVenda = new ItemVenda(
                 codItemSequecial,
                 Integer.parseInt(campoCodProduto.getText()),
                 campoNomeProduto.getText(),
                 venda.convValorBanco(campoQuantidade.getText()),
                 venda.convValorBanco(campoValorUnitario.getText()),
-                venda.convValorBanco(campoValorTotal.getText()),
+                venda.convValorBanco(valorTotal),
                 venda);
         return itemVenda;
     }
 
-    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -260,7 +259,6 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         tabelaVendas = new javax.swing.JTable();
         campoTotalProdutos = new JNumberFormatField();
         labelDesconto = new javax.swing.JLabel();
-        botaoGravarVenda = new javax.swing.JButton();
         campoDesconto = new JNumberFormatField();
         painelTipoDesconto = new javax.swing.JPanel();
         BotaoRadioNenhum = new javax.swing.JRadioButton();
@@ -269,7 +267,6 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         labelAcrescimo = new javax.swing.JLabel();
         labelTotal = new javax.swing.JLabel();
         campoAcrescimo = new JNumberFormatField();
-        botaoCancelar = new javax.swing.JButton();
         campoTotalVenda = new JNumberFormatField();
         labelObservacoes = new javax.swing.JLabel();
         painelMotivoCrescimo = new javax.swing.JPanel();
@@ -299,6 +296,8 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         jLabel3 = new javax.swing.JLabel();
         labelFormaPgto = new javax.swing.JLabel();
         labelTotalVenda = new javax.swing.JLabel();
+        botaoGravarVenda = new javax.swing.JButton();
+        botaoCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Vendas");
@@ -360,11 +359,6 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         labelValorTotal.setText("Valor Total:");
 
         campoValorTotal.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        campoValorTotal.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                campoValorTotalFocusGained(evt);
-            }
-        });
         campoValorTotal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 campoValorTotalKeyPressed(evt);
@@ -372,11 +366,6 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         });
 
         campoValorUnitario.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        campoValorUnitario.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                campoValorUnitarioFocusLost(evt);
-            }
-        });
         campoValorUnitario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 campoValorUnitarioKeyPressed(evt);
@@ -584,13 +573,6 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         labelDesconto.setFont(new java.awt.Font("Tahoma", 3, 11)); // NOI18N
         labelDesconto.setText("Desconto:");
 
-        botaoGravarVenda.setText("Gravar");
-        botaoGravarVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGravarVendaActionPerformed(evt);
-            }
-        });
-
         campoDesconto.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campoDesconto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -669,13 +651,6 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         campoAcrescimo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 campoAcrescimoKeyPressed(evt);
-            }
-        });
-
-        botaoCancelar.setText("Cancelar");
-        botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCancelarActionPerformed(evt);
             }
         });
 
@@ -776,21 +751,13 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(campoAcrescimo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(campoDesconto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(campoTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(botaoGravarVenda)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(botaoCancelar))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 59, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoCancelar, botaoGravarVenda});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -838,11 +805,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(campoTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(labelTotal)))
-                            .addComponent(painelMotivoCrescimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botaoCancelar)
-                            .addComponent(botaoGravarVenda))))
+                            .addComponent(painelMotivoCrescimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -899,7 +862,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
             }
         });
 
-        LabelEntrada.setText("Estrada:");
+        LabelEntrada.setText("Entrada:");
 
         campoRestante.setEnabled(false);
         campoRestante.addActionListener(new java.awt.event.ActionListener() {
@@ -1060,11 +1023,25 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoParcelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
                 .addGap(29, 29, 29))
         );
 
         abaParcelamento.addTab("Parcelamento", jPanel2);
+
+        botaoGravarVenda.setText("Gravar");
+        botaoGravarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoGravarVendaActionPerformed(evt);
+            }
+        });
+
+        botaoCancelar.setText("Cancelar");
+        botaoCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1074,12 +1051,26 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
                 .addContainerGap()
                 .addComponent(abaParcelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoGravarVenda)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoCancelar)
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoCancelar, botaoGravarVenda});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 22, Short.MAX_VALUE)
-                .addComponent(abaParcelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(abaParcelamento, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoGravarVenda)
+                    .addComponent(botaoCancelar))
+                .addGap(4, 4, 4))
         );
 
         pack();
@@ -1095,9 +1086,10 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         insereNaTabela(itemVenda);
         BigDecimal totalProduto = venda.convValorBanco(campoTotalProdutos.getText());
         BigDecimal totalItem = itemVenda.getValorTotal();
-        campoTotalProdutos.setText(f.format(totalProduto.add(totalItem)));
-        campoTotalVenda.setText(f.format(totalProduto.add(totalItem)));
-        campoTotalVendaParc.setText(f.format(totalProduto.add(totalItem)));
+        campoTotalProdutos.setText(totalProduto.add(totalItem).toString());
+        campoTotalVenda.setText(totalProduto.add(totalItem).toString());
+        campoTotalVendaParc.setText(totalProduto.add(totalItem).toString());
+        campoEntrada.setText(totalProduto.add(totalItem).toString());
         botaoIncluir.setEnabled(false);
         campoCodProduto.setText("");
         campoQuantidade.setText("");
@@ -1117,9 +1109,10 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
             if (venda.getItemVenda().get(i).getSequenciaProduto() == posicao) {
                 BigDecimal totalProduto = venda.convValorBanco(campoTotalProdutos.getText());
                 BigDecimal totalItem = venda.getItemVenda().get(i).getValorTotal();
-                campoTotalProdutos.setText(f.format(totalProduto.subtract(totalItem)));
-                campoTotalVenda.setText(f.format(totalProduto.subtract(totalItem)));
-                campoTotalVendaParc.setText(f.format(totalProduto.subtract(totalItem)));
+                campoTotalProdutos.setText(totalProduto.subtract(totalItem).toString());
+                campoTotalVenda.setText(totalProduto.subtract(totalItem).toString());
+                campoTotalVendaParc.setText(totalProduto.subtract(totalItem).toString());
+                campoEntrada.setText(totalProduto.subtract(totalItem).toString());
                 venda.getItemVenda().remove(i);
                 JOptionPane.showMessageDialog(campoCodCliente, "Item Removido com Sucesso!");
                 break;
@@ -1149,9 +1142,9 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
             } else {
                 produto = vendasCtrl.pesquisaProdutos(Integer.parseInt(campoCodProduto.getText()));
                 campoNomeProduto.setText(produto.getDescricao());
-                campoEstoqueQuantidade.setText(f.format(produto.getQuantidade()));
-                campoEstoqueValorVenda.setText(f.format(produto.getValorTotalVenda()));
-                campoValorUnitario.setText(f.format(produto.getValorUnitarioVenda()));
+                campoEstoqueQuantidade.setText(produto.getQuantidade().toString());
+                campoEstoqueValorVenda.setText(produto.getValorTotalVenda().toString());
+                campoValorUnitario.setText(produto.getValorUnitarioVenda().toString());
                 campoQuantidade.requestFocus();
                 botaoIncluir.setEnabled(true);
             }
@@ -1179,25 +1172,29 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
             Date dataVenda = sdf.parse(campoData.getText());
             venda.setDataVenda(dataVenda);
             venda.setObservacoes(campoObservacoes.getText());
-            campoDescontoFocusLost(null);
-            campoAcrescimoFocusLost(null);
+//            campoDescontoFocusLost(null);
+//            campoAcrescimoFocusLost(null);
             vendasCtrl.cadastraVenda(venda);
 
             //Gera um lançamento no Caixa
-            if (JOptionPane.showConfirmDialog(null, "Deseja Gerar Lançamento no Caixa?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                HistoricosDAO hd = new HistoricosDAO();
-                HistoricoPadrao hp = hd.getHistorico(1);
-                BigDecimal totalEntrada = mg.convValorBanco(campoEntrada.getText());
+            BigDecimal entrada = mg.convValorBanco(campoEntrada.getText());
+            BigDecimal zero = new BigDecimal("0");
+            if (entrada.compareTo(zero) > 0) {
+                if (JOptionPane.showConfirmDialog(null, "Deseja Gerar Lançamento no Caixa?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    HistoricosDAO hd = new HistoricosDAO();
+                    HistoricoPadrao hp = hd.getHistorico(1);
+                    BigDecimal totalEntrada = mg.convValorBanco(campoEntrada.getText());
 
-                Lancamentos lancamento = new Lancamentos();
+                    Lancamentos lancamento = new Lancamentos();
 
-                lancamento.setDataLancamento(venda.getDataVenda());
-                lancamento.setHistorico(hp);
-                lancamento.setObservacoes(hp.getNomeHistorico() + venda.getCod() + " do Cliente: " + venda.getCliente().getNome());
-                lancamento.setValorDebito(totalEntrada);
-                lancamento.setValorCredito(new BigDecimal("0.00"));
+                    lancamento.setDataLancamento(venda.getDataVenda());
+                    lancamento.setHistorico(hp);
+                    lancamento.setObservacoes(hp.getNomeHistorico() + venda.getCod() + " do Cliente: " + venda.getCliente().getNome());
+                    lancamento.setValorDebito(totalEntrada);
+                    lancamento.setValorCredito(new BigDecimal("0.00"));
 
-                lancamentosCtrl.cadastrarLancamento(lancamento);
+                    lancamentosCtrl.cadastrarLancamento(lancamento);
+                }
             }
         } catch (ParseException ex) {
             Logger.getLogger(CadastroVendas.class.getName()).log(Level.SEVERE, null, ex);
@@ -1205,10 +1202,6 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         JOptionPane.showMessageDialog(null, "Venda efetuada com Sucesso!");
         this.dispose();
     }//GEN-LAST:event_botaoGravarVendaActionPerformed
-
-    private void campoValorTotalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoValorTotalFocusGained
-
-    }//GEN-LAST:event_campoValorTotalFocusGained
 
     private void campoCodClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCodClienteKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -1229,25 +1222,25 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         }
     }//GEN-LAST:event_campoDataKeyPressed
 
-    private void campoValorUnitarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoValorUnitarioFocusLost
-
-    }//GEN-LAST:event_campoValorUnitarioFocusLost
-
     private void campoValorUnitarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoValorUnitarioKeyPressed
+        BigDecimal qtd = mg.convValorBanco(campoQuantidade.getText());
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            campoValorTotal.setText(f.format(new BigDecimal(campoQuantidade.getText().replaceAll("\\.", "").replaceAll(",", "\\.")).multiply(new BigDecimal(campoValorUnitario.getText().replaceAll("\\.", "").replaceAll(",", "\\.")))));
+            BigDecimal cem = new BigDecimal(100);
+            campoValorTotal.setText(qtd.multiply(produto.getValorUnitarioVenda()).divide(cem).toString());
             campoValorTotal.requestFocus();
         }
     }//GEN-LAST:event_campoValorUnitarioKeyPressed
 
     private void campoQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoQuantidadeFocusLost
-        BigDecimal qtd = new BigDecimal(campoQuantidade.getText().replaceAll("\\.", "").replaceAll(",", "\\."));
+
+        BigDecimal qtd = mg.convValorBanco(campoQuantidade.getText());
         if (qtd.compareTo(produto.getQuantidade()) > 0) {
             JOptionPane.showMessageDialog(campoCodCliente, "Quantidade Maior doque a Existente em Estoque!");
             campoQuantidade.requestFocus();
         } else {
             campoValorUnitario.requestFocus();
-            campoValorTotal.setText(f.format(qtd.multiply(produto.getValorUnitarioVenda())));
+            BigDecimal cem = new BigDecimal(100);
+            campoValorTotal.setText(qtd.multiply(produto.getValorUnitarioVenda()).divide(cem).toString());
         }
 
     }//GEN-LAST:event_campoQuantidadeFocusLost
@@ -1262,8 +1255,10 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         campoMotivoAcrescimo.setText("");
         campoAcrescimo.setText("");
         campoAcrescimo.setEnabled(false);
-        campoTotalVenda.setText(f.format(venda.convValorBanco(campoTotalProdutos.getText())));
-        campoTotalVendaParc.setText(f.format(venda.convValorBanco(campoTotalProdutos.getText())));
+        campoTotalVenda.setText(venda.convValorBanco(campoTotalProdutos.getText()).toString());
+        campoTotalVendaParc.setText(venda.convValorBanco(campoTotalProdutos.getText()).toString());
+        campoEntrada.setText(venda.convValorBanco(campoTotalProdutos.getText()).toString());
+
     }//GEN-LAST:event_BotaoRadioNenhumMouseClicked
     private void botaoRadioPorcentagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRadioPorcentagemMouseClicked
         campoDesconto.setEnabled(true);
@@ -1271,7 +1266,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         campoMotivoAcrescimo.setText("");
         campoAcrescimo.setText("");
         campoAcrescimo.setEnabled(false);
-        campoTotalVenda.setText(f.format(venda.convValorBanco(campoTotalProdutos.getText())));
+        campoTotalVenda.setText(venda.convValorBanco(campoTotalProdutos.getText()).toString());
         campoDesconto.requestFocus();
     }//GEN-LAST:event_botaoRadioPorcentagemMouseClicked
     private void botaoRadioValorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRadioValorMouseClicked
@@ -1280,7 +1275,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         campoMotivoAcrescimo.setText("");
         campoAcrescimo.setText("");
         campoAcrescimo.setEnabled(false);
-        campoTotalVenda.setText(f.format(venda.convValorBanco(campoTotalProdutos.getText())));
+        campoTotalVenda.setText(venda.convValorBanco(campoTotalProdutos.getText()).toString());
         campoDesconto.requestFocus();
     }//GEN-LAST:event_botaoRadioValorMouseClicked
     private void campoDescontoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDescontoKeyPressed
@@ -1295,13 +1290,15 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         if (botaoRadioPorcentagem.isSelected()) {
             BigDecimal divPorcent = desconto.divide(new BigDecimal("100"));
             BigDecimal totalDesconto = totalProdutos.multiply(divPorcent);
-            campoTotalVenda.setText(f.format(totalProdutos.subtract(totalDesconto)));
-            campoTotalVendaParc.setText(f.format(totalProdutos.subtract(totalDesconto)));
+            campoTotalVenda.setText(totalProdutos.subtract(totalDesconto).toString());
+            campoTotalVendaParc.setText(totalProdutos.subtract(totalDesconto).toString());
+            campoEntrada.setText(totalProdutos.subtract(totalDesconto).toString());
             totalVenda = totalProdutos.subtract(totalDesconto);
             venda.setTipoDesconto("Porcentagem");
         } else if (botaoRadioValor.isSelected()) {
-            campoTotalVenda.setText(f.format(totalProdutos.subtract(desconto)));
-            campoTotalVendaParc.setText(f.format(totalProdutos.subtract(desconto)));
+            campoTotalVenda.setText(totalProdutos.subtract(desconto).toString());
+            campoTotalVendaParc.setText(totalProdutos.subtract(desconto).toString());
+            campoEntrada.setText(totalProdutos.subtract(desconto).toString());
             totalVenda = totalProdutos.subtract(desconto);
             venda.setTipoDesconto("Valor");
         } else {
@@ -1317,8 +1314,9 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         BigDecimal acrescimo = venda.convValorBanco(campoAcrescimo.getText());
         BigDecimal totalProdutos = venda.convValorBanco(campoTotalProdutos.getText());
         BigDecimal totalVenda = totalProdutos.add(acrescimo);
-        campoTotalVenda.setText(f.format(totalVenda));
-        campoTotalVendaParc.setText(f.format(totalVenda));
+        campoTotalVenda.setText(totalVenda.toString());
+        campoTotalVendaParc.setText(totalVenda.toString());
+        campoEntrada.setText(totalVenda.toString());
         venda.setValorAcrescimo(acrescimo);
         venda.setMotivoAcrescimo(campoMotivoAcrescimo.getText());
         venda.setValorTotalVenda(totalVenda);
@@ -1331,7 +1329,8 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
             campoDesconto.setEnabled(false);
             BotaoRadioNenhum.setSelected(true);
             campoAcrescimo.requestFocus();
-            campoTotalVenda.setText(f.format(venda.convValorBanco(campoTotalProdutos.getText())));
+            campoTotalVenda.setText(venda.convValorBanco(campoTotalProdutos.getText()).toString());
+            campoTotalVenda.setText(venda.convValorBanco(campoTotalProdutos.getText()).toString());
         }
     }//GEN-LAST:event_campoMotivoAcrescimoKeyPressed
 
@@ -1372,7 +1371,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
     }//GEN-LAST:event_campoEntradaFocusLost
 
     private void campoEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEntradaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_campoEntradaActionPerformed
 
     private void campoEntradaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEntradaKeyPressed
@@ -1382,11 +1381,11 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
     }//GEN-LAST:event_campoEntradaKeyPressed
 
     private void campoTotalVendaParcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTotalVendaParcActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_campoTotalVendaParcActionPerformed
 
     private void campoRestanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoRestanteActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_campoRestanteActionPerformed
 
     private void botaoParcelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoParcelarActionPerformed
@@ -1400,7 +1399,7 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         BigDecimal valorParcela;
         BigDecimal restante = mg.convValorBanco(campoRestante.getText());
         int parcelas = Integer.parseInt(campoNumParcelas.getText());
-        valorParcela = restante.divide(new BigDecimal(parcelas));
+        valorParcela = restante.divide(new BigDecimal(parcelas), BigDecimal.ROUND_UP);
         SimpleDateFormat sdf;
         sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -1411,8 +1410,8 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
         parcelamentoVendas.setRestante(restante);
         parcelamentoVendas.setNumParcelas(parcelas);
         parcelamentoVendas.setDemaisParcelas(diasPrazo);
-
         parcelamentoVendas.setParcelasVenda(new ArrayList());
+
         for (int i = 0; i < parcelas; i++) {
             cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) + diasPrazo);
             if (cal.get(Calendar.DAY_OF_WEEK) == 1) {
@@ -1421,10 +1420,11 @@ public class CadastroVendas extends javax.swing.JDialog implements InterfaceList
             if (cal.get(Calendar.DAY_OF_WEEK) == 7) {
                 cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) + 2);
             }
-            parcelamentoVendas.getParcelasVenda().add(new ParcelasVenda(i + 1, cal.getTime(), valorParcela, parcelamentoVendas));
+            ParcelasVenda pv = new ParcelasVenda(i + 1, cal.getTime(), valorParcela, parcelamentoVendas);
+            parcelamentoVendas.getParcelasVenda().add(pv);
             insereNaTabelaParc(i + 1, sdf.format(cal.getTime()), valorParcela);
         }
-
+        venda.setParcelamentoVenda(parcelamentoVendas);
 
     }//GEN-LAST:event_botaoParcelarActionPerformed
 

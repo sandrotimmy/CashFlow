@@ -28,10 +28,16 @@ public class VendasCtrl {
         this.persistProduto = new ProdutosDAO();
     }
 
+    public int getProximaVenda() {
+        return persistVendas.getProximaVenda();
+    }
+
     public void cadastraVenda(Vendas venda) {
+        if (venda.getParcelamentoVenda()!= null){
+        cadastraParcelamento(venda.getParcelamentoVenda());
+        }
         persistVendas.cadastraVenda(venda);
         atualizaProdutos(venda.getItemVenda());
-        cadastraParcelamento(venda.getParcelamentoVenda());
     }
 
     public Produtos pesquisaProdutos(int idProduto) {

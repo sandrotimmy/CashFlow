@@ -148,7 +148,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
         consultaProduto.setListener(this);
         campoCod.setText(Integer.toString(codProxCompra));
         campoData.requestFocus();
-        campoData.setText(mg.getDataAtual());//pega a data do Computador
+//        campoData.setText(mg.getDataAtual());//pega a data do Computador
         campoData.setCaretPosition(0);
         DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
         direita.setHorizontalAlignment(SwingConstants.RIGHT);

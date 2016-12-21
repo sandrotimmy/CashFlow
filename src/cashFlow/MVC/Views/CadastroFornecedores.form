@@ -159,12 +159,12 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelInscricao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="campoCpfCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="comboCpfCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="labelInscricao" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -425,7 +425,7 @@
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try{ &#xa;javax.swing.text.MaskFormatter fax = new javax.swing.text.MaskFormatter(&quot;####-####&quot;); &#xa;campoFax = new javax.swing.JFormattedTextField(fax); &#xa;campoFax.setDisabledTextColor(new java.awt.Color(0, 0, 0));&#xa;} &#xa;catch (Exception e){ &#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try{ &#xa;javax.swing.text.MaskFormatter fax = new javax.swing.text.MaskFormatter(&quot;#####-####&quot;); &#xa;campoFax = new javax.swing.JFormattedTextField(fax); &#xa;campoFax.setDisabledTextColor(new java.awt.Color(0, 0, 0));&#xa;} &#xa;catch (Exception e){ &#xa;}"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="labelInscricao">

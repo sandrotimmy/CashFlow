@@ -38,7 +38,6 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
         listaClientes = persistCliente.getListaClientes();//busca do banco a lista de clientes
         carregaMascaraCpfCnpj();
         carregaPrimeiroCliente();//carrega primeiros dados e configurações na tela
-
         setCamposFocus();
     }
 
@@ -374,7 +373,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
         }
 
         try{
-            javax.swing.text.MaskFormatter fax = new javax.swing.text.MaskFormatter("####-####");
+            javax.swing.text.MaskFormatter fax = new javax.swing.text.MaskFormatter("#####-####");
             campoFax = new javax.swing.JFormattedTextField(fax);
             campoFax.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         }
@@ -652,12 +651,14 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
 
     private void campoCpfCnpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCpfCnpjKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (!mg.validaCpfCnpj(mg.limpaCnpj(campoCpfCnpj.getText()))) {
-                if (JOptionPane.showConfirmDialog(null, "CNPJ/CPF incorreto deseja continuar?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
-                    campoCpfCnpj.requestFocus();
-                } else {
-                    campoCpfCnpj.setText("");
+            String cnpjLimpo = mg.limpaCnpj(campoCpfCnpj.getText());
+            if (!mg.validaCpfCnpj(cnpjLimpo)) {
+                if (cnpjLimpo.equals("")) {
                     campoNome.requestFocus();
+                    campoCpfCnpj.setValue(null);
+                } else {
+                    JOptionPane.showMessageDialog(this, "CPF/CNPJ Incorreto!");
+                    campoCpfCnpj.requestFocus();
                 }
             } else {
                 campoNome.requestFocus();

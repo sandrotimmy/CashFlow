@@ -1,6 +1,7 @@
 
 package cashFlow.MVC.Models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
@@ -15,33 +16,33 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class ParcelasVenda {
+public class ParcelasVenda implements Serializable {
 
     @Id
     @GeneratedValue(generator = "s_parcelamentoVenda")
     @GenericGenerator(name = "s_parcelamentoVenda", strategy = "increment")
-    int id;
+    Integer id;
     int numParcela;
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date dataParcela;
     @Column(columnDefinition = "DECIMAL(9,2)")
-    private BigDecimal valorCredito;
-    @ManyToOne(optional = false)
+    private BigDecimal valorParcela;
+    @ManyToOne
     @JoinColumn(name = "parcelamentoVenda", foreignKey = @ForeignKey(name = "fk_parcelamentoVenda_parcela"))
     private ParcelamentoVendas parcelamentoVenda;
 
     public ParcelasVenda() {
     }
 
-    public ParcelasVenda(int numParcela, Date dataParcela, BigDecimal valorCredito, ParcelamentoVendas parcelamentoVenda) {
+    public ParcelasVenda(int numParcela, Date dataParcela, BigDecimal valorParcela, ParcelamentoVendas parcelamentoVenda) {
         this.numParcela = numParcela;
         this.dataParcela = dataParcela;
-        this.valorCredito = valorCredito;
+        this.valorParcela = valorParcela;
         this.parcelamentoVenda = parcelamentoVenda;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -49,8 +50,8 @@ public class ParcelasVenda {
         return dataParcela;
     }
 
-    public BigDecimal getValorCredito() {
-        return valorCredito;
+    public BigDecimal getValorParcela() {
+        return valorParcela;
     }
 
     public ParcelamentoVendas getProduto() {
@@ -65,7 +66,7 @@ public class ParcelasVenda {
         return parcelamentoVenda;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -73,8 +74,8 @@ public class ParcelasVenda {
         this.dataParcela = dataParcela;
     }
 
-    public void setValorCredito(BigDecimal valorCredito) {
-        this.valorCredito = valorCredito;
+    public void setValorParcela(BigDecimal valorParcela) {
+        this.valorParcela = valorParcela;
     }
 
     public void setProduto(ParcelamentoVendas parcelamentoVendas) {

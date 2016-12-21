@@ -1,23 +1,22 @@
 package cashFlow.MVC.Models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class ParcelamentoVendas {
+public class ParcelamentoVendas implements Serializable {
 
     @Id
     @GeneratedValue(generator = "s_parcelamentoVenda")
@@ -35,9 +34,7 @@ public class ParcelamentoVendas {
     @Temporal(TemporalType.DATE)
     private Date dataEntrada;
     private int demaisParcelas;
-    @OneToOne(mappedBy = "cancelamentoVenda")
-    private Vendas venda;
-    @OneToMany(mappedBy = "parcelamentoVenda", cascade = ALL)
+    @OneToMany(mappedBy = "parcelamentoVenda")
     private List<ParcelasVenda> parcelasVenda;
 
     public ParcelamentoVendas() {
@@ -82,10 +79,6 @@ public class ParcelamentoVendas {
         return demaisParcelas;
     }
 
-    public Vendas getVenda() {
-        return venda;
-    }
-
     public List<ParcelasVenda> getParcelasVenda() {
         return parcelasVenda;
     }
@@ -116,10 +109,6 @@ public class ParcelamentoVendas {
 
     public void setDemaisParcelas(int demaisParcelas) {
         this.demaisParcelas = demaisParcelas;
-    }
-
-    public void setVenda(Vendas venda) {
-        this.venda = venda;
     }
 
     public void setParcelasVenda(List<ParcelasVenda> parcelasVenda) {
