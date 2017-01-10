@@ -27,7 +27,7 @@
       <property name="hibernate.connection.useUnicode" value="true"/>
       <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
       <property name="hibernate.connection.driver_class" value="org.firebirdsql.jdbc.FBDriver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:firebirdsql:localhost/3050:C:/Users/Sandro/Documents/RepositorioGIT/CashFlow/banco/BANCOCF.FDB"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:firebirdsql:localhost/3050:C:/Arquivos de Programas/CashFlow/banco/BANCOCF.FDB"/>
       <property name="javax.persistence.jdbc.user" value="sysdba"/>
       <property name="javax.persistence.jdbc.password" value="masterkey"/>
     </properties>

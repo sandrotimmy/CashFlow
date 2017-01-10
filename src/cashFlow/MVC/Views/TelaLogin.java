@@ -16,6 +16,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 public final class TelaLogin extends javax.swing.JFrame {
 
@@ -28,12 +29,12 @@ public final class TelaLogin extends javax.swing.JFrame {
     }
 
     public void setIcon() throws IOException {
-        Properties parametros = ParametrosCtrl.getInstance();
-        String caminho = parametros.getProperty("caminhoLogoLogin");
-        File imagem = new File(caminho);
-        BufferedImage img = ImageIO.read(imagem);
-        labelImagemEmpresa.setSize(img.getHeight(), img.getWidth());
-        labelImagemEmpresa.setIcon(new javax.swing.ImageIcon(caminho));
+//        Properties parametros = ParametrosCtrl.getInstance();
+//        String caminho = parametros.getProperty("caminhoLogoLogin");
+//        File imagem = new File(caminho);
+//        BufferedImage img = ImageIO.read(imagem);
+//        labelImagemEmpresa.setSize(img.getHeight(), img.getWidth());
+//        labelImagemEmpresa.setIcon(new javax.swing.ImageIcon(caminho));
     }
 
     public void carregaTela() {
@@ -47,27 +48,33 @@ public final class TelaLogin extends javax.swing.JFrame {
         setVisible(true);
     }
 
-    public void autenticar() throws IOException {
-        try {
-            //            try {
-//            if (!usuariosCtrl.autenticar(campoUsuario.getText(), campoSenha.getText())) {
-//                JOptionPane.showMessageDialog(null, "Login ou senha Inválidos!\n Tente Novamente!!");
-//            } else {
-            ConexaoEntityManager.getInstance();
+    public void autenticar() throws IOException, SQLException {
+
+        if (!usuariosCtrl.autenticar(campoUsuario.getText(), campoSenha.getText())) {
+            JOptionPane.showMessageDialog(null, "Login ou senha Inválidos!\n Tente Novamente!!");
+        } else {
+
             TelaPrincipal telaPrincipal = new TelaPrincipal();
-            StatusBar statusBar = new StatusBar();
-            telaPrincipal.add(statusBar, BorderLayout.SOUTH);
+
             telaPrincipal.setVisible(true);
             telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
             this.dispose();
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+//            } catch (SQLException ex) {
+//                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+////            StatusBar statusBar = new StatusBar();
+////            telaPrincipal.add(statusBar, BorderLayout.SOUTH);
+//            telaPrincipal.setVisible(true);
+//            telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
+//            this.dispose();
+////            }
+////        } catch (SQLException ex) {
+////            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+////        }
+////    
+//
+//        }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -191,7 +198,7 @@ public final class TelaLogin extends javax.swing.JFrame {
     private void botaoOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoOkActionPerformed
         try {
             autenticar();
-        } catch (IOException ex) {
+        } catch (IOException | SQLException ex) {
             Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botaoOkActionPerformed
@@ -210,7 +217,7 @@ public final class TelaLogin extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             try {
                 autenticar();
-            } catch (IOException ex) {
+            } catch (IOException | SQLException ex) {
                 Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

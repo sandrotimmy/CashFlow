@@ -26,12 +26,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
     
         public void setIcon() throws IOException {
-        Properties parametros = ParametrosCtrl.getInstance();
-        String caminho = parametros.getProperty("caminhoLogoTela");
-        File imagem = new File(caminho);
-        BufferedImage img = ImageIO.read(imagem);
-        labelImagemLogo.setSize(img.getHeight(), img.getWidth());
-        labelImagemLogo.setIcon(new javax.swing.ImageIcon(caminho));
+//        Properties parametros = ParametrosCtrl.getInstance();
+//        String caminho = parametros.getProperty("caminhoLogoTela");
+//        File imagem = new File(caminho);
+//        BufferedImage img = ImageIO.read(imagem);
+//        labelImagemLogo.setSize(img.getHeight(), img.getWidth());
+//        labelImagemLogo.setIcon(new javax.swing.ImageIcon(caminho));
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
