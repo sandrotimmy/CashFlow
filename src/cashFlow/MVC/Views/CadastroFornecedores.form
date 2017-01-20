@@ -30,13 +30,25 @@
                   <Component id="labelRazaoSocial" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="labelInscricao" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="labelEndereco" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="labemMunicipio" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="labelDDD" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="labelNomeFantasia" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="labelCodigo" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="labemMunicipio" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelUF" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="campoMunicipio" min="-2" pref="144" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labelBairro" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="campoBairro" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="labelComplemento" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="campoComplemento" min="-2" pref="144" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="botaoCadastrar" linkSize="1" min="-2" max="-2" attributes="0"/>
@@ -49,67 +61,50 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="campoEndereco" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="labelNumero" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="campoEndereco" min="-2" pref="291" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="comboBoxUF" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                      <Component id="labelCEP" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="campoCEP" min="-2" pref="82" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
                                       <Component id="campoDDD" min="-2" pref="30" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="labelFone" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="campoFone" min="-2" pref="78" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="campoMunicipio" alignment="1" min="-2" pref="144" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="labelUF" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="comboBoxUF" min="-2" pref="77" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="labelCEP" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="labelFax" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="campoFax" min="-2" pref="78" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="labelEmail" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="labelEmail" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="campoEmail" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="campoNumero" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="campoCEP" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="labelCaixaPostal" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="labelCaixaPostal" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="campoCaixaPostal" min="-2" pref="77" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="labelComplemento" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="campoComplemento" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="campoCaixaPostal" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="labelNumero" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="campoNumero" pref="107" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <Component id="campoRazaoSocial" alignment="1" max="32767" attributes="0"/>
                   <Component id="campoNomeFantasia" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -124,15 +119,27 @@
                               <Component id="botaoBuscar" linkSize="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="BotaListaPrimeiro" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BotaoListaAnterior" linkSize="2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BotaoListaProximo" linkSize="2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BotaoListaUltimo" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="BotaListaPrimeiro" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="BotaoListaAnterior" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="BotaoListaProximo" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="BotaoListaUltimo" linkSize="2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="labelInscEstadual" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="campoInscEstadual" min="-2" pref="113" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
+                  <Component id="campoRazaoSocial" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -163,6 +170,8 @@
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="campoCpfCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="comboCpfCnpj" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelInscEstadual" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoInscEstadual" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="labelInscricao" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -182,15 +191,22 @@
                       <Component id="campoEndereco" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="campoNumero" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelComplemento" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoComplemento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="labelEndereco" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="campoMunicipio" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="labemMunicipio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelComplemento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoComplemento" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labemMunicipio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campoMunicipio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelUF" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelCEP" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelCaixaPostal" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -530,6 +546,36 @@
       </Properties>
       <Events>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoCpfCnpjKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelInscEstadual">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Insc. Estadual:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoInscEstadual">
+      <Properties>
+        <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoInscEstadualActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labelBairro">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Bairro:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="campoBairro">
+      <Properties>
+        <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoBairroActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -8,6 +8,7 @@ import cashFlow.MVC.DAO.ItemCompraDAO;
 import cashFlow.MVC.DAO.LancamentosDAO;
 import cashFlow.MVC.DAO.ProdutosDAO;
 import cashFlow.MVC.Models.Compras;
+import cashFlow.MVC.Models.DocumentoLimitado;
 import cashFlow.MVC.Models.Fornecedores;
 import cashFlow.MVC.Models.HistoricoPadrao;
 import cashFlow.MVC.Models.ItemCompra;
@@ -54,6 +55,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
 
     public CadastroCompras(Compras consultaCompra) {
         initComponents();
+        mg = new MetodosGerais();
         val = (DefaultTableModel) tabelaCompras.getModel();
         f = NumberFormat.getCurrencyInstance();
         this.persistCompra = new ComprasDAO();
@@ -65,6 +67,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
 
     public CadastroCompras() throws SQLException, ParseException {
         initComponents();
+        mg = new MetodosGerais();
         campoDesconto.setEnabled(false);
         this.lancamento = new Lancamentos();
         this.persist = new LancamentosDAO();
@@ -88,6 +91,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
         campoData.setEnabled(campos);
         campoCodFornecedor.setEnabled(campos);
         campoCodProduto.setEnabled(campos);
+        campoUnidade.setEnabled(campos);
         campoQuantidade.setEnabled(campos);
         campoValorUnitario.setEnabled(campos);
         campoValorTotal.setEnabled(campos);
@@ -134,6 +138,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
     }
 
     public void carregaDados() {
+        campoUnidade.setDocument(new DocumentoLimitado(3));
         campoObservacoes.setLineWrap(true);
         campoObservacoes.setWrapStyleWord(true);
         campoMotivoAcrescimo.setLineWrap(true);
@@ -148,7 +153,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
         consultaProduto.setListener(this);
         campoCod.setText(Integer.toString(codProxCompra));
         campoData.requestFocus();
-//        campoData.setText(mg.getDataAtual());//pega a data do Computador
+        campoData.setText(mg.getDataAtual());//pega a data do Computador
         campoData.setCaretPosition(0);
         DefaultTableCellRenderer direita = new DefaultTableCellRenderer();
         direita.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -174,6 +179,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
                 codItemSequecial,
                 Integer.parseInt(campoCodProduto.getText()),
                 campoNomeProduto.getText(),
+                campoUnidade.getText(),
                 compra.convValorBanco(campoQuantidade.getText()),
                 compra.convValorBanco(campoValorUnitario.getText()),
                 compra.convValorBanco(campoValorTotal.getText()),
@@ -216,6 +222,8 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
         labelEstoqueValorVenda = new javax.swing.JLabel();
         campoEstoqueQuantidade = new JNumberFormatField();
         campoEstoqueValorVenda = new JNumberFormatField();
+        labelUnidade = new javax.swing.JLabel();
+        campoUnidade = new javax.swing.JTextField();
         campoCod = new javax.swing.JTextField();
         campoData = new javax.swing.JTextField();
         campoCodFornecedor = new javax.swing.JTextField();
@@ -416,6 +424,19 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
                 .addContainerGap())
         );
 
+        labelUnidade.setText("Unidade:");
+
+        campoUnidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoUnidadeActionPerformed(evt);
+            }
+        });
+        campoUnidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoUnidadeKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout painelDadosDoProdutoLayout = new javax.swing.GroupLayout(painelDadosDoProduto);
         painelDadosDoProduto.setLayout(painelDadosDoProdutoLayout);
         painelDadosDoProdutoLayout.setHorizontalGroup(
@@ -439,7 +460,11 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
                             .addGroup(painelDadosDoProdutoLayout.createSequentialGroup()
                                 .addComponent(labelQuantidade)
                                 .addGap(11, 11, 11)
-                                .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelUnidade)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(painelDadosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelDadosDoProdutoLayout.createSequentialGroup()
                                     .addComponent(labelValor)
@@ -468,9 +493,13 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelDadosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelDadosDoProdutoLayout.createSequentialGroup()
-                        .addGroup(painelDadosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelQuantidade)
-                            .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(painelDadosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelDadosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(labelUnidade)
+                                .addComponent(campoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painelDadosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(labelQuantidade)
+                                .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(painelDadosDoProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campoValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -764,6 +793,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
         campoTotalCompra.setText(f.format(totalProduto.add(totalItem)));
         botaoIncluir.setEnabled(false);
         campoCodProduto.setText("");
+        campoUnidade.setText("");
         campoQuantidade.setText("");
         campoValorUnitario.setText("");
         campoValorTotal.setText("");
@@ -810,6 +840,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
                 campoEstoqueQuantidade.setText(f.format(produto.getQuantidade()));
                 campoEstoqueValorVenda.setText(f.format(produto.getValorTotalVenda()));
                 campoValorUnitario.setText(f.format(produto.getValorUnitario()));
+                campoUnidade.setText(produto.getUnidade());
                 campoQuantidade.requestFocus();
                 botaoIncluir.setEnabled(true);
             }
@@ -851,13 +882,13 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
             if (JOptionPane.showConfirmDialog(null, "Deseja Gerar Lançamento no Caixa?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 HistoricosDAO hd = new HistoricosDAO();
                 HistoricoPadrao hp = hd.getHistorico(2);
-                lancamento.setCod(persist.getProximoCodLancamento());
                 lancamento.setDataLancamento(compra.getDataCompra());
                 lancamento.setHistorico(hp);
                 lancamento.setObservacoes(hp.getNomeHistorico() + compra.getCod() + " do Fornecedor: " + compra.getFornecedor().getRazaosocial());
                 lancamento.setValorDebito(new BigDecimal("0.00"));
                 lancamento.setValorCredito(compra.getValorTotalCompra());
                 persist.cadastrarLancamento(lancamento);
+                JOptionPane.showMessageDialog(this, "Lançamento Efetuado com Sucesso!");
             }
 
         } catch (ParseException ex) {
@@ -887,13 +918,13 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             campoValorTotal.setText(f.format(compra.convValorBanco(
                     campoQuantidade.getText()).multiply(compra.convValorBanco(
-                            campoValorUnitario.getText()))));
+                    campoValorUnitario.getText()))));
             campoValorTotal.requestFocus();
         }
     }//GEN-LAST:event_campoValorUnitarioKeyPressed
     private void campoQuantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoQuantidadeFocusLost
         BigDecimal qtd = compra.convValorBanco(campoQuantidade.getText());
-        campoValorUnitario.requestFocus();
+        campoUnidade.requestFocus();
         campoValorTotal.setText(f.format(qtd.multiply(produto.getValorUnitario())));
     }//GEN-LAST:event_campoQuantidadeFocusLost
     private void BotaoRadioNenhumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoRadioNenhumMouseClicked
@@ -961,7 +992,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
     }//GEN-LAST:event_campoAcrescimoFocusLost
     private void campoQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoQuantidadeKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            campoValorUnitario.requestFocus();
+            campoUnidade.requestFocus();
         }
     }//GEN-LAST:event_campoQuantidadeKeyPressed
 
@@ -984,6 +1015,16 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
     private void campoDescontoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDescontoFocusGained
         campoMotivoAcrescimo.setText("");
     }//GEN-LAST:event_campoDescontoFocusGained
+
+    private void campoUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoUnidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoUnidadeActionPerformed
+
+    private void campoUnidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoUnidadeKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            campoValorUnitario.requestFocus();
+        }
+    }//GEN-LAST:event_campoUnidadeKeyPressed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -1021,6 +1062,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
     private javax.swing.JTextField campoQuantidade;
     private javax.swing.JTextField campoTotalCompra;
     private javax.swing.JTextField campoTotalProdutos;
+    private javax.swing.JTextField campoUnidade;
     private javax.swing.JTextField campoValorTotal;
     private javax.swing.JTextField campoValorUnitario;
     private javax.swing.ButtonGroup grupoBotaoDesconto;
@@ -1038,6 +1080,7 @@ public class CadastroCompras extends javax.swing.JDialog implements InterfaceLis
     private javax.swing.JLabel labelQuantidade;
     private javax.swing.JLabel labelTotal;
     private javax.swing.JLabel labelTotalEmCaixa;
+    private javax.swing.JLabel labelUnidade;
     private javax.swing.JLabel labelValor;
     private javax.swing.JLabel labelValorTotal;
     private javax.swing.JPanel painelDadosDoProduto;

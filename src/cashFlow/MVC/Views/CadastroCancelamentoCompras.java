@@ -338,16 +338,16 @@ public class CadastroCancelamentoCompras extends javax.swing.JDialog implements 
             persistProdutos.atualizaProduto(altProduto);
         });
         //Gera um lançamento no Caixa
-        if (JOptionPane.showConfirmDialog(null, "Deseja extornar o Lançamento no Caixa?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, "Deseja estornar o Lançamento no Caixa?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             HistoricosDAO hd = new HistoricosDAO();
             HistoricoPadrao hp = hd.getHistorico(4);
-            lancamento.setCod(persistLancamento.getProximoCodLancamento());
             lancamento.setDataLancamento(compra.getDataCompra());
             lancamento.setHistorico(hp);
             lancamento.setObservacoes(hp.getNomeHistorico() + compra.getCod() + " do Fornecedor: " + compra.getFornecedor().getRazaosocial());
-            lancamento.setValorDebito(new BigDecimal("0.00"));
-            lancamento.setValorCredito(compra.getValorTotalCompra());
+            lancamento.setValorDebito(compra.getValorTotalCompra());
+            lancamento.setValorCredito(new BigDecimal("0.00"));
             persistLancamento.cadastrarLancamento(lancamento);
+            JOptionPane.showMessageDialog(rootPane, "Lançamento Estornado com Sucesso!");
         }
         this.dispose();
     }//GEN-LAST:event_botaoCancelarCompraActionPerformed

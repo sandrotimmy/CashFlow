@@ -10,13 +10,10 @@ import cashFlow.MVC.Models.Fornecedores;
 import cashFlow.MVC.DAO.EmpresasDAO;
 import cashFlow.MVC.DAO.FornecedoresDAO;
 import java.io.File;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -164,11 +161,11 @@ public class RelatorioFornecedores extends javax.swing.JDialog {
                 JasperViewer viwer = new JasperViewer(print, false);
                 viwer.setVisible(true);
             }
-        } catch (JRException ex) {
+        }catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "O relatório não pode ser impresso!" + ex.getCause().toString());
-        } catch (SQLException ex) {
-            Logger.getLogger(RelatorioLivroCaixa.class.getName()).log(Level.SEVERE, null, ex);
-        }        // TODO add your handling code here:
+        }
+        // TODO add your handling code here:
+                // TODO add your handling code here:
     }//GEN-LAST:event_botaoEmitirActionPerformed
 
     private void radioTodosFornecedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_radioTodosFornecedoresMouseClicked

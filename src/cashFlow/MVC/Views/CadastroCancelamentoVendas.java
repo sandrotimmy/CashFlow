@@ -330,27 +330,31 @@ public class CadastroCancelamentoVendas extends javax.swing.JDialog implements I
         persistCancelamento.cadastrarCancelamento(cancelamentoVenda);
         venda.setCancelamentoVenda(cancelamentoVenda);
         persistVenda.atualizaVenda(venda);
-            List <ItemVenda> itens = venda.getItemVenda();
-            itens.stream().forEach((each) -> {
-                Produtos altProduto = persistProdutos.pesquisaProdutos(each.getCodProduto());
-                altProduto.setQuantidade(altProduto.getQuantidade().add(each.getQuantidade()));
-                altProduto.setValorUnitario(each.getValorUnitario());
-                altProduto.setValorTotal(altProduto.getQuantidade().multiply(each.getValorUnitario()));
-                altProduto.setValorTotalVenda(altProduto.getQuantidade().multiply(altProduto.getValorUnitarioVenda()));
-                persistProdutos.atualizaProduto(altProduto);
-            });
-            //Gera um lançamento no Caixa
-            if (JOptionPane.showConfirmDialog(null, "Deseja extornar o Lançamento no Caixa?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                HistoricosDAO hd = new HistoricosDAO();
-                HistoricoPadrao hp = hd.getHistorico(3);
-                lancamento.setCod(persistLancamento.getProximoCodLancamento());
-                lancamento.setDataLancamento(venda.getDataVenda());
-                lancamento.setHistorico(hp);
-                lancamento.setObservacoes(hp.getNomeHistorico() + venda.getCod() + " do Cliente: " + venda.getCliente().getNome());
-                lancamento.setValorDebito(new BigDecimal("0.00"));
+        List<ItemVenda> itens = venda.getItemVenda();
+        itens.stream().forEach((each) -> {
+            Produtos altProduto = persistProdutos.pesquisaProdutos(each.getCodProduto());
+            altProduto.setQuantidade(altProduto.getQuantidade().add(each.getQuantidade()));
+            altProduto.setValorUnitario(altProduto.getValorUnitario());
+            altProduto.setValorTotal(altProduto.getQuantidade().multiply(altProduto.getValorUnitario()));
+            altProduto.setValorTotalVenda(altProduto.getQuantidade().multiply(altProduto.getValorUnitarioVenda()));
+            persistProdutos.atualizaProduto(altProduto);
+        });
+        //Gera um lançamento no Caixa
+        if (JOptionPane.showConfirmDialog(null, "Deseja estornar o Lançamento no Caixa?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            HistoricosDAO hd = new HistoricosDAO();
+            HistoricoPadrao hp = hd.getHistorico(3);
+            lancamento.setDataLancamento(venda.getDataVenda());
+            lancamento.setHistorico(hp);
+            lancamento.setObservacoes(hp.getNomeHistorico() + venda.getCod() + " do Cliente: " + venda.getCliente().getNome());
+            lancamento.setValorDebito(new BigDecimal("0.00"));
+            if (venda.getParcelamentoVenda() != null) {
+                lancamento.setValorCredito(venda.getParcelamentoVenda().getEntrada());
+            } else {
                 lancamento.setValorCredito(venda.getValorTotalVenda());
-                persistLancamento.cadastrarLancamento(lancamento);
             }
+            persistLancamento.cadastrarLancamento(lancamento);
+            JOptionPane.showMessageDialog(rootPane, "Valor Estornado com Sucesso!");
+        }
         this.dispose();
     }//GEN-LAST:event_botaoCancelarVendaActionPerformed
 
@@ -467,6 +471,5 @@ public class CadastroCancelamentoVendas extends javax.swing.JDialog implements I
     public void parcelamentoVendas(ParcelamentoVendas parcelamentoVendas) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 
 }

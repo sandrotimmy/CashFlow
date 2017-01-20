@@ -51,6 +51,10 @@ public class ParcelamentoVendas implements Serializable {
         this.demaisParcelas = demaisParcelas;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
     public String getFormaDePgto() {
         return formaDePgto;
     }
@@ -81,6 +85,10 @@ public class ParcelamentoVendas implements Serializable {
 
     public List<ParcelasVenda> getParcelasVenda() {
         return parcelasVenda;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setFormaDePgto(String formaDePgto) {

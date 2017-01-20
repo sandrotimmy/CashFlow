@@ -1,9 +1,13 @@
 package cashFlow.MVC.Views;
 
-import cashFlow.MVC.Models.Clientes;
 import cashFlow.MVC.DAO.ClientesDAO;
+import cashFlow.MVC.Models.Clientes;
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public final class ConsultaCliente extends javax.swing.JDialog {
@@ -177,6 +181,12 @@ public final class ConsultaCliente extends javax.swing.JDialog {
                 listner.mensagemCodClienteConsultVenda(codBusca);
             }
             ConsultaCliente.this.dispose();
+            try {
+                Robot robo = new Robot();
+                robo.keyPress(KeyEvent.VK_ENTER);
+            } catch (AWTException ex) {
+                Logger.getLogger(ConsultaProdutos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_tabelaCosultaClientesMouseClicked
 

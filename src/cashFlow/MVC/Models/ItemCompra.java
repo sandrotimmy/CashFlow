@@ -1,4 +1,3 @@
-
 package cashFlow.MVC.Models;
 
 import java.io.Serializable;
@@ -24,6 +23,8 @@ public class ItemCompra implements Serializable {
     private int codProduto;
     @Column(length = 100, nullable = false)
     private String produto;
+    @Column(length = 3)
+    private String unidade;
     @Column(columnDefinition = "DECIMAL(9,2)", nullable = false)
     private BigDecimal quantidade;
     @Column(columnDefinition = "DECIMAL(9,2)", nullable = false)
@@ -37,10 +38,11 @@ public class ItemCompra implements Serializable {
     public ItemCompra() {
     }
 
-    public ItemCompra(int sequenciaProduto, int codProduto, String produto, BigDecimal quantidade, BigDecimal valorUnitario, BigDecimal valorTotal, Compras compra) {
+    public ItemCompra(int sequenciaProduto, int codProduto, String produto, String unidade, BigDecimal quantidade, BigDecimal valorUnitario, BigDecimal valorTotal, Compras compra) {
         this.sequenciaProduto = sequenciaProduto;
         this.codProduto = codProduto;
         this.produto = produto;
+        this.unidade = unidade;
         this.quantidade = quantidade;
         this.valorUnitario = valorUnitario;
         this.valorTotal = valorTotal;
@@ -57,6 +59,10 @@ public class ItemCompra implements Serializable {
 
     public String getProduto() {
         return produto;
+    }
+
+    public String getUnidade() {
+        return unidade;
     }
 
     public BigDecimal getQuantidade() {
@@ -91,6 +97,10 @@ public class ItemCompra implements Serializable {
         this.produto = produto;
     }
 
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
+    }
+
     public void setQuantidade(BigDecimal quantidade) {
         this.quantidade = quantidade;
     }
@@ -115,7 +125,7 @@ public class ItemCompra implements Serializable {
     public int hashCode() {
         return super.hashCode();
     }
- 
+
     @Override
     public String toString() {
         return super.toString();

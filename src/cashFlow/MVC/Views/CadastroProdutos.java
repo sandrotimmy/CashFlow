@@ -1,12 +1,12 @@
 package cashFlow.MVC.Views;
 
+import cashFlow.MVC.DAO.ProdutosDAO;
 import cashFlow.MVC.Models.Compras;
 import cashFlow.MVC.Models.DocumentoLimitado;
 import cashFlow.MVC.Models.JNumberFormatField;
 import cashFlow.MVC.Models.ParcelamentoVendas;
 import cashFlow.MVC.Models.Produtos;
 import cashFlow.MVC.Models.Vendas;
-import cashFlow.MVC.DAO.ProdutosDAO;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -121,6 +121,10 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
         campoIdentificador.setEnabled(campos);
         campoDescricao.setEnabled(campos);
         campoUnidade.setEnabled(campos);
+        BotaoListaPrimeiro.setEnabled(botoes);
+        BotaoListaAnterior.setEnabled(botoes);
+        BotaoListaProximo.setEnabled(botoes);
+        BotaoListaUltimo.setEnabled(botoes);
         botaoExcluir.setEnabled(botoes);
         if (tipo == 1) {//Cadastrar
             campoQuantidade.setEnabled(campos);
@@ -139,6 +143,10 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
                 campoValorUnitarioVenda.setText("");
                 campoValorTotalVenda.setText("");
             }
+            BotaoListaPrimeiro.setEnabled(botoes);
+            BotaoListaAnterior.setEnabled(botoes);
+            BotaoListaProximo.setEnabled(botoes);
+            BotaoListaUltimo.setEnabled(botoes);
             botaoAtualizar.setEnabled(botoes);
         } else if (tipo == 2) {
             botaoExcluir.setEnabled(botoes);
@@ -172,10 +180,10 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
         botaoExcluir = new javax.swing.JButton();
         botaoAtualizar = new javax.swing.JButton();
         botaoCadastrar = new javax.swing.JButton();
-        botaoUltimo = new javax.swing.JButton();
-        botaoPosterior = new javax.swing.JButton();
-        botaoAnterior = new javax.swing.JButton();
-        botaoPrimeiro = new javax.swing.JButton();
+        BotaoListaUltimo = new javax.swing.JButton();
+        BotaoListaProximo = new javax.swing.JButton();
+        BotaoListaAnterior = new javax.swing.JButton();
+        BotaoListaPrimeiro = new javax.swing.JButton();
         botaoBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -340,31 +348,31 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
             }
         });
 
-        botaoUltimo.setText(">|");
-        botaoUltimo.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaUltimo.setText(">|");
+        BotaoListaUltimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoUltimoActionPerformed(evt);
+                BotaoListaUltimoActionPerformed(evt);
             }
         });
 
-        botaoPosterior.setText(">");
-        botaoPosterior.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaProximo.setText(">");
+        BotaoListaProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoPosteriorActionPerformed(evt);
+                BotaoListaProximoActionPerformed(evt);
             }
         });
 
-        botaoAnterior.setText("<");
-        botaoAnterior.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaAnterior.setText("<");
+        BotaoListaAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoAnteriorActionPerformed(evt);
+                BotaoListaAnteriorActionPerformed(evt);
             }
         });
 
-        botaoPrimeiro.setText("|<");
-        botaoPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaPrimeiro.setText("|<");
+        BotaoListaPrimeiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoPrimeiroActionPerformed(evt);
+                BotaoListaPrimeiroActionPerformed(evt);
             }
         });
 
@@ -403,13 +411,13 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botaoBuscar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                                .addComponent(botaoPrimeiro)
+                                .addComponent(BotaoListaPrimeiro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botaoAnterior)
+                                .addComponent(BotaoListaAnterior)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botaoPosterior)
+                                .addComponent(BotaoListaProximo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botaoUltimo))
+                                .addComponent(BotaoListaUltimo))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -445,7 +453,7 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoAtualizar, botaoBuscar, botaoCadastrar, botaoCancelar, botaoExcluir});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoAnterior, botaoPosterior, botaoPrimeiro, botaoUltimo});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BotaoListaAnterior, BotaoListaPrimeiro, BotaoListaProximo, BotaoListaUltimo});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,10 +462,10 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelCodigo)
                     .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoUltimo)
-                    .addComponent(botaoPosterior)
-                    .addComponent(botaoAnterior)
-                    .addComponent(botaoPrimeiro)
+                    .addComponent(BotaoListaUltimo)
+                    .addComponent(BotaoListaProximo)
+                    .addComponent(BotaoListaAnterior)
+                    .addComponent(BotaoListaPrimeiro)
                     .addComponent(botaoBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -597,33 +605,33 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
         }
     }//GEN-LAST:event_campoValorTotalVendaKeyPressed
 
-    private void botaoUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoUltimoActionPerformed
+    private void BotaoListaUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaUltimoActionPerformed
 
         exibeDados(listaProdutos.get(listaProdutos.size() - 1));
         posicao = listaProdutos.size() - 1;
-    }//GEN-LAST:event_botaoUltimoActionPerformed
+    }//GEN-LAST:event_BotaoListaUltimoActionPerformed
 
-    private void botaoPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPrimeiroActionPerformed
+    private void BotaoListaPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaPrimeiroActionPerformed
 
         exibeDados(listaProdutos.get(0));
         posicao = 0;
 
-    }//GEN-LAST:event_botaoPrimeiroActionPerformed
+    }//GEN-LAST:event_BotaoListaPrimeiroActionPerformed
 
-    private void botaoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAnteriorActionPerformed
+    private void BotaoListaAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaAnteriorActionPerformed
         if (posicao > 0) {
             exibeDados(listaProdutos.get(posicao - 1));
             posicao--;
         }
-    }//GEN-LAST:event_botaoAnteriorActionPerformed
+    }//GEN-LAST:event_BotaoListaAnteriorActionPerformed
 
-    private void botaoPosteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPosteriorActionPerformed
+    private void BotaoListaProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaProximoActionPerformed
 
         if (posicao < listaProdutos.size() - 1) {
             exibeDados(listaProdutos.get(posicao + 1));
             posicao++;
         }
-    }//GEN-LAST:event_botaoPosteriorActionPerformed
+    }//GEN-LAST:event_BotaoListaProximoActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -666,15 +674,15 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoAnterior;
+    private javax.swing.JButton BotaoListaAnterior;
+    private javax.swing.JButton BotaoListaPrimeiro;
+    private javax.swing.JButton BotaoListaProximo;
+    private javax.swing.JButton BotaoListaUltimo;
     private javax.swing.JButton botaoAtualizar;
     private javax.swing.JButton botaoBuscar;
     private javax.swing.JButton botaoCadastrar;
     private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoExcluir;
-    private javax.swing.JButton botaoPosterior;
-    private javax.swing.JButton botaoPrimeiro;
-    private javax.swing.JButton botaoUltimo;
     private javax.swing.JTextField campoCodigo;
     private javax.swing.JTextField campoDescricao;
     private javax.swing.JTextField campoIdentificador;

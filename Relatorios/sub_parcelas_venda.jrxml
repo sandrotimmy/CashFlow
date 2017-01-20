@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-01-20T11:49:42 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_parcelas_venda" columnCount="6" printOrder="Horizontal" pageWidth="555" pageHeight="802" whenNoDataType="NoPages" columnWidth="75" columnSpacing="13" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="0" uuid="ff5f680f-f659-461b-bd94-51e3782250a7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BANCOCF"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="codParcelamento" class="java.lang.String" isForPrompting="false" evaluationTime="Early">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from parcelasVenda]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="dataParcela" class="java.sql.Date"/>
+	<field name="numParcela" class="java.lang.Integer"/>
+	<field name="valorParcela" class="java.math.BigDecimal"/>
+	<variable name="contParcelas" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{id}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="20" y="8" width="30" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="599e350b-7208-4f2e-8720-9e87efeaad16"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{contParcelas} > 12 ? null : $F{dataParcela}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="50" y="8" width="30" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="5cd19d57-cda4-4ab4-ba11-715693375329"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{contParcelas} > 12 ? null : $F{valorParcela}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="8" width="20" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="ba88534f-c6da-46f1-a697-619ce210c64d"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{contParcelas} > 12 ? null : $F{numParcela}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="20" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="8609a389-40ed-483b-96ba-8ded208a5492">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{contParcelas} > 12 ? null : "Nº"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="20" y="0" width="30" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="22717bc3-ba5b-4f3f-aee7-c9acabb7bf00"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{contParcelas} > 12 ? null : "VENC:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="50" y="0" width="30" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="79c86283-e865-4e91-907f-665f4cc9aaca"/>
+				<textElement textAlignment="Right">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{contParcelas} > 12 ? null : "VALOR"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

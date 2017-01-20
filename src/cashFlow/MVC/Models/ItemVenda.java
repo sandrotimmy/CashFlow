@@ -24,6 +24,8 @@ public class ItemVenda implements Serializable {
     private int codProduto;
     @Column(length = 100, nullable = false)
     private String produto;
+    @Column(length = 3)
+    private String unidade;
     @Column(columnDefinition = "DECIMAL(9,2)", nullable = false)
     private BigDecimal quantidade;
     @Column(columnDefinition = "DECIMAL(9,2)", nullable = false)
@@ -37,10 +39,11 @@ public class ItemVenda implements Serializable {
     public ItemVenda() {
     }
 
-    public ItemVenda(int sequenciaProduto, int codProduto, String produto, BigDecimal quantidade, BigDecimal valorUnitario, BigDecimal valorTotal, Vendas venda) {
+    public ItemVenda(int sequenciaProduto, int codProduto, String produto, String unidade, BigDecimal quantidade, BigDecimal valorUnitario, BigDecimal valorTotal, Vendas venda) {
         this.sequenciaProduto = sequenciaProduto;
         this.codProduto = codProduto;
         this.produto = produto;
+        this.unidade = unidade;
         this.quantidade = quantidade;
         this.valorUnitario = valorUnitario;
         this.valorTotal = valorTotal;
@@ -57,6 +60,10 @@ public class ItemVenda implements Serializable {
 
     public String getProduto() {
         return produto;
+    }
+
+    public String getUnidade() {
+        return unidade;
     }
 
     public BigDecimal getQuantidade() {
@@ -89,6 +96,10 @@ public class ItemVenda implements Serializable {
 
     public void setProduto(String produto) {
         this.produto = produto;
+    }
+
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
     }
 
     public void setQuantidade(BigDecimal quantidade) {

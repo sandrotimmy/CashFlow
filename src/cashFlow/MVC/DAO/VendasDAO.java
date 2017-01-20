@@ -66,17 +66,25 @@ public class VendasDAO {
         List listaVendas = em.createQuery("FROM Vendas WHERE DATAVENDA BETWEEN '" + dataInicial + "' and '" + dataFinal + "' ORDER BY DATAVENDA, COD").getResultList();
         return listaVendas;
     }
-        public List getListaVendasCliente(int codCliente) {
+
+    public List getListaVendasCliente(int codCliente) {
         em = ConexaoEntityManager.getInstance();
         List listaVendas = em.createQuery("FROM Vendas WHERE CLIENTE = '" + codCliente + "' ORDER BY DATAVENDA, COD").getResultList();
         return listaVendas;
     }
-        
+
+    public List getVenda(int codVenda) {
+        em = ConexaoEntityManager.getInstance();
+        List listaVendas = em.createQuery("FROM Vendas WHERE COD = " + codVenda).getResultList();
+        return listaVendas;
+    }
+
     public Vendas pesquisaProdutos(Integer codVenda) {
         em = ConexaoEntityManager.getInstance();
         Vendas venda = em.find(Vendas.class, codVenda);
         return venda;
     }
+
     public java.sql.Date convDataBanco(String dataSistema) {
         //Conversão da data do sistema para formato da data do Banco
         java.sql.Date dataBanco = new java.sql.Date(1);

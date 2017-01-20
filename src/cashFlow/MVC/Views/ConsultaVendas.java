@@ -1,10 +1,10 @@
 package cashFlow.MVC.Views;
 
+import cashFlow.MVC.DAO.VendasDAO;
 import cashFlow.MVC.Models.Compras;
 import cashFlow.MVC.Models.IntegerDocument;
 import cashFlow.MVC.Models.ParcelamentoVendas;
 import cashFlow.MVC.Models.Vendas;
-import cashFlow.MVC.DAO.VendasDAO;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -53,7 +53,7 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
         campoDataInicial.setText(venda.getDataInicial());//pega primeiro dia do mes para o filtro
         campoDataFinal.setText(venda.getDataFinal());//pega primeiro dia do mes para o filtro
         botaoImprimir.setEnabled(false);
-        botaoExcluir.setEnabled(false);
+        botaoCancelarVenda.setEnabled(false);
         //configura os campos
         botaoImprimir.setFocusTraversalKeysEnabled(false);
         botaoFiltrar.setFocusTraversalKeysEnabled(false);
@@ -85,7 +85,7 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaVendas = new javax.swing.JTable();
         botaoImprimir = new javax.swing.JButton();
-        botaoExcluir = new javax.swing.JButton();
+        botaoCancelarVenda = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
         painelFiltroData = new javax.swing.JPanel();
         campoDataInicial = new javax.swing.JTextField();
@@ -166,10 +166,10 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
 
         botaoImprimir.setText("Imprimir");
 
-        botaoExcluir.setText("Cancelar Venda");
-        botaoExcluir.addActionListener(new java.awt.event.ActionListener() {
+        botaoCancelarVenda.setText("Cancelar Venda");
+        botaoCancelarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoExcluirActionPerformed(evt);
+                botaoCancelarVendaActionPerformed(evt);
             }
         });
 
@@ -371,7 +371,7 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
                         .addContainerGap()
                         .addComponent(painelCancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoExcluir)))
+                        .addComponent(botaoCancelarVenda)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -390,7 +390,7 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(painelCancelamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoExcluir))
+                    .addComponent(botaoCancelarVenda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoCancelar)
@@ -400,7 +400,7 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
+    private void botaoCancelarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarVendaActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja cancelar esta venda?", null, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             int posicao = Integer.parseInt((String) tabelaVendas.getValueAt(tabelaVendas.getSelectedRow(), 1));
             cancelamentoVenda = new CadastroCancelamentoVendas();
@@ -413,8 +413,8 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
                 val.setValueAt("Cancelada", tabelaVendas.getSelectedRow(), 4);
             }
         }
-        botaoExcluir.setEnabled(false);
-    }//GEN-LAST:event_botaoExcluirActionPerformed
+        botaoCancelarVenda.setEnabled(false);
+    }//GEN-LAST:event_botaoCancelarVendaActionPerformed
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         ConsultaVendas.this.dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed
@@ -447,7 +447,8 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
             CadastroVendas exibir = new CadastroVendas(temp);
             exibir.setLocationRelativeTo(this);
             exibir.setVisible(true);
-        } else if (evt.getClickCount() == 1) {
+        }
+        if (evt.getClickCount() == 1) {
             if (temp.getCancelamentoVenda() != null) {
                 campoDataCancelamento.setText(persistVenda.convDataSistema(
                         temp.getCancelamentoVenda().getDataCancelamento()));
@@ -457,7 +458,7 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
                 campoMotivoCancelamento.setText("");
             }
         }
-        botaoExcluir.setEnabled(true);
+        botaoCancelarVenda.setEnabled(true);
     }//GEN-LAST:event_tabelaVendasMouseClicked
     private void campoDataInicialKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDataInicialKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
@@ -499,7 +500,7 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
         if (evt.getKeyCode() == KeyEvent.VK_F2) {
             consultaCliente.setVisible(true);
             consultaCliente.setLocationRelativeTo(null);
-        }else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             botaoBuscar.requestFocus();
         }
     }//GEN-LAST:event_campoCodigoKeyPressed
@@ -515,7 +516,7 @@ public class ConsultaVendas extends javax.swing.JDialog implements InterfaceList
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoBuscar;
     private javax.swing.JButton botaoCancelar;
-    private javax.swing.JButton botaoExcluir;
+    private javax.swing.JButton botaoCancelarVenda;
     private javax.swing.JButton botaoFiltrar;
     private javax.swing.JButton botaoImprimir;
     private javax.swing.JTextField campoCodigo;

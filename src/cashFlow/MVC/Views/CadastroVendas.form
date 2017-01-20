@@ -49,12 +49,12 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="22" max="32767" attributes="0"/>
-              <Component id="abaParcelamento" min="-2" pref="494" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="abaParcelamento" min="-2" pref="525" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="botaoGravarVenda" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botaoCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="botaoCancelar" min="-2" max="-2" attributes="0"/>
+                  <Component id="botaoGravarVenda" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
           </Group>
@@ -115,33 +115,39 @@
                                   <Component id="painelTipoDesconto" max="32767" attributes="0"/>
                                   <Component id="painelMotivoCrescimo" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="labelTotalEmCaixa" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="campoTotalProdutos" min="-2" pref="114" max="-2" attributes="0"/>
+                              <EmptySpace pref="63" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="labelTotalEmCaixa" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="campoTotalProdutos" min="-2" pref="114" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="labelAcrescimo" min="-2" pref="86" max="-2" attributes="0"/>
+                                                  <Component id="labelDesconto" min="-2" pref="86" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="campoAcrescimo" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                                                  <Component id="campoDesconto" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                       </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="labelAcrescimo" min="-2" pref="86" max="-2" attributes="0"/>
-                                              <Component id="labelDesconto" min="-2" pref="86" max="-2" attributes="0"/>
-                                          </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="labelTotal" min="-2" pref="86" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="campoAcrescimo" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                                              <Component id="campoDesconto" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="campoTotalVenda" min="-2" pref="114" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="labelTotal" min="-2" pref="86" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="campoTotalVenda" min="-2" pref="114" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="LabelEntrada" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="campoEntrada" min="-2" pref="114" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="59" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -172,13 +178,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="112" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="labelObservacoes" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="campoObservacao" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -195,22 +202,30 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="labelAcrescimo" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="campoAcrescimo" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="campoTotalVenda" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
-                                          <Component id="labelTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="labelTotal" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="campoTotalVenda" pref="21" max="32767" attributes="0"/>
                                       </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="campoEntrada" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                          <Component id="LabelEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="painelMotivoCrescimo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="painelMotivoCrescimo" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -316,6 +331,10 @@
                                           <Component id="labelQuantidade" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                                           <Component id="campoQuantidade" min="-2" pref="85" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="labelUnidade" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="campoUnidade" min="-2" pref="46" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="labelValor" min="-2" max="-2" attributes="0"/>
@@ -328,7 +347,7 @@
                                           <Component id="campoValorTotal" min="-2" pref="114" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="135" max="32767" attributes="0"/>
                                   <Component id="painelEstoque" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -353,6 +372,8 @@
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="labelQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="campoQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labelUnidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="campoUnidade" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -414,6 +435,7 @@
                     <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="0" red="0" type="rgb"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoValorUnitarioKeyPressed"/>
@@ -563,6 +585,17 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JLabel" name="labelUnidade">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Unidade:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="campoUnidade">
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoUnidadeActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoUnidadeKeyPressed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -575,10 +608,11 @@
                 <Component class="javax.swing.JTable" name="tabelaVendas">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="0">
+                      <Table columnCount="7" rowCount="0">
                         <Column editable="false" title="Item:" type="java.lang.Object"/>
                         <Column editable="false" title="Cod. Produto:" type="java.lang.Object"/>
                         <Column editable="false" title="Produto:" type="java.lang.Object"/>
+                        <Column editable="false" title="Und:" type="java.lang.Object"/>
                         <Column editable="false" title="Quantidade:" type="java.lang.Object"/>
                         <Column editable="false" title="Valor Unit.:" type="java.lang.Object"/>
                         <Column editable="false" title="ValorTotal:" type="java.lang.Object"/>
@@ -597,6 +631,11 @@
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="40" minWidth="40" prefWidth="40" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -833,8 +872,11 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="labelMotivoAcrescimo" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoObservacao1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="labelMotivoAcrescimo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="10" pref="48" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="campoObservacao1" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -895,6 +937,24 @@
                 <Property name="text" type="java.lang.String" value="Total Produtos:"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JTextField" name="campoEntrada">
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoEntradaFocusLost"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoEntradaActionPerformed"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoEntradaKeyPressed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JNumberFormatField()"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="LabelEntrada">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Entrada:"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel2">
@@ -941,20 +1001,14 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="LabelEntrada" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="labelFormaPgto" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="labelTotalVenda" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="labelFormaPgto" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="labelTotalVenda" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="campoEntrada" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="campoTotalVendaParc" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="campoTotalVendaParc" min="-2" pref="86" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="538" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="campoFormaPgto" alignment="0" max="32767" attributes="0"/>
@@ -978,12 +1032,7 @@
                           <Component id="labelTotalVenda" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="campoTotalVendaParc" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="campoEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="LabelEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="labelRestante" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="campoRestante" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -998,15 +1047,20 @@
                           <Component id="jPanel3" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="botaoParcelar" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="219" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" pref="294" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="campoFormaPgto">
+              <Properties>
+                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoFormaPgtoActionPerformed"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoFormaPgtoKeyPressed"/>
@@ -1036,19 +1090,14 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JTextField" name="campoNumParcelas">
+              <Properties>
+                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoNumParcelasKeyPressed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JTextField" name="campoEntrada">
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoEntradaFocusLost"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoEntradaActionPerformed"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoEntradaKeyPressed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JNumberFormatField()"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="campoTotalVendaParc">
               <Properties>
@@ -1064,13 +1113,11 @@
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JNumberFormatField()"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JLabel" name="LabelEntrada">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Entrada:"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="campoRestante">
               <Properties>
+                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="0" red="0" type="rgb"/>
+                </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
@@ -1164,6 +1211,11 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="campoDataEntrada">
+                  <Properties>
+                    <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoDataEntradaActionPerformed"/>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoDataEntradaKeyPressed"/>
@@ -1173,6 +1225,11 @@
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="campoDiasPrazo">
+                  <Properties>
+                    <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="0" green="0" red="0" type="rgb"/>
+                    </Property>
+                  </Properties>
                   <Events>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoDiasPrazoKeyPressed"/>
                   </Events>

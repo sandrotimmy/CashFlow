@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-01-19T14:53:07 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_dados_empresa" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0d5a3a42-0b6c-4cdc-a98a-97377df98127">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BANCOCF"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select * from empresa]]>
+	</queryString>
+	<field name="idEmpresa" class="java.lang.Integer"/>
+	<field name="caixaPostal" class="java.lang.String"/>
+	<field name="cep" class="java.lang.String"/>
+	<field name="cpfCnpj" class="java.lang.String"/>
+	<field name="complemento" class="java.lang.String"/>
+	<field name="ddd" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="endereco" class="java.lang.String"/>
+	<field name="cel" class="java.lang.String"/>
+	<field name="fone" class="java.lang.String"/>
+	<field name="municipio" class="java.lang.String"/>
+	<field name="nomeEmpresa" class="java.lang.String"/>
+	<field name="nomeFantasia" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="uf" class="java.lang.String"/>
+	<field name="bairro" class="java.lang.String"/>
+	<field name="inscEstadual" class="java.lang.String"/>
+	<group name="IDEMPRESA">
+		<groupExpression><![CDATA[$F{idEmpresa}]]></groupExpression>
+	</group>
+	<group name="CAIXAPOSTAL">
+		<groupExpression><![CDATA[$F{caixaPostal}]]></groupExpression>
+	</group>
+	<group name="CEP">
+		<groupExpression><![CDATA[$F{cep}]]></groupExpression>
+	</group>
+	<group name="CNPJ">
+		<groupExpression><![CDATA[$F{cpfCnpj}]]></groupExpression>
+	</group>
+	<group name="COMPLEMENTO">
+		<groupExpression><![CDATA[$F{complemento}]]></groupExpression>
+	</group>
+	<group name="DDD">
+		<groupExpression><![CDATA[$F{ddd}]]></groupExpression>
+	</group>
+	<group name="EMAIL">
+		<groupExpression><![CDATA[$F{email}]]></groupExpression>
+	</group>
+	<group name="ENDERECO">
+		<groupExpression><![CDATA[$F{endereco}]]></groupExpression>
+	</group>
+	<group name="FAX">
+		<groupExpression><![CDATA[$F{cel}]]></groupExpression>
+	</group>
+	<group name="FONE">
+		<groupExpression><![CDATA[$F{fone}]]></groupExpression>
+	</group>
+	<group name="MUNICIPIO">
+		<groupExpression><![CDATA[$F{municipio}]]></groupExpression>
+	</group>
+	<group name="NOMEEMPRESA">
+		<groupExpression><![CDATA[$F{nomeEmpresa}]]></groupExpression>
+	</group>
+	<group name="NOMEFANTASIA">
+		<groupExpression><![CDATA[$F{nomeFantasia}]]></groupExpression>
+	</group>
+	<group name="NUMERO">
+		<groupExpression><![CDATA[$F{numero}]]></groupExpression>
+	</group>
+	<group name="UF">
+		<groupExpression><![CDATA[$F{uf}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="13">
+			<textField>
+				<reportElement x="0" y="0" width="322" height="13" forecolor="#000000" uuid="dd010746-f1c8-4bd9-8203-aa7c096d39ea"/>
+				<textFieldExpression><![CDATA[$F{nomeEmpresa}+"     CPF/CNPJ nº "+( $F{cpfCnpj}.length() == 14 ? ($F{cpfCnpj}.substring(0, 2) + "." + $F{cpfCnpj}.substring(2, 5) + "." + $F{cpfCnpj}.substring(5, 8) + "/" + $F{cpfCnpj}.substring(8, 12) + "-" + $F{cpfCnpj}.substring(12, 14)) : ($F{cpfCnpj}.substring(0, 3) + "." + $F{cpfCnpj}.substring(3, 6) + "." + $F{cpfCnpj}.substring(6, 9) + "-" + $F{cpfCnpj}.substring(9, 11)))]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band/>
+	</detail>
+</jasperReport>

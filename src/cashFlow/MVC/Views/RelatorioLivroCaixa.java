@@ -7,13 +7,10 @@ import cashFlow.MVC.Models.Empresa;
 import cashFlow.MVC.Models.Lancamentos;
 import java.io.File;
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -147,8 +144,6 @@ public class RelatorioLivroCaixa extends javax.swing.JDialog {
             }
         } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "O relatório não pode ser impresso!" + ex.getCause().toString());
-        } catch (SQLException ex) {
-            Logger.getLogger(RelatorioLivroCaixa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botaoOKActionPerformed
     private void campoDataFinalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDataFinalFocusGained

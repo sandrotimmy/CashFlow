@@ -11,13 +11,10 @@ import cashFlow.MVC.Models.Produtos;
 import cashFlow.MVC.DAO.EmpresasDAO;
 import cashFlow.MVC.DAO.ProdutosDAO;
 import java.io.File;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -173,8 +170,6 @@ public class RelatorioEstoque extends javax.swing.JDialog {
             }
         } catch (JRException ex) {
             JOptionPane.showMessageDialog(null, "O relatório não pode ser impresso!" + ex.getCause().toString());
-        } catch (SQLException ex) {
-            Logger.getLogger(RelatorioLivroCaixa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botaoEmitirActionPerformed
 

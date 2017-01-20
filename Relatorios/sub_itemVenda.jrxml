@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-01-18T10:05:38 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_itemVenda" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="df52e2c4-f1dd-4738-afa3-3afb26439569">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BANCOCF"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString language="SQL">
+		<![CDATA[select * from itemVenda]]>
+	</queryString>
+	<field name="cod" class="java.lang.Integer"/>
+	<field name="codProduto" class="java.lang.Integer"/>
+	<field name="produto" class="java.lang.String"/>
+	<field name="quantidade" class="java.math.BigDecimal"/>
+	<field name="sequenciaProduto" class="java.lang.Integer"/>
+	<field name="valorTotal" class="java.math.BigDecimal"/>
+	<field name="valorUnitario" class="java.math.BigDecimal"/>
+	<field name="unidade" class="java.lang.String"/>
+	<group name="COD">
+		<groupExpression><![CDATA[$F{cod}]]></groupExpression>
+	</group>
+	<group name="CODPRODUTO">
+		<groupExpression><![CDATA[$F{codProduto}]]></groupExpression>
+	</group>
+	<group name="PRODUTO">
+		<groupExpression><![CDATA[$F{produto}]]></groupExpression>
+	</group>
+	<group name="QUANTIDADE">
+		<groupExpression><![CDATA[$F{quantidade}]]></groupExpression>
+	</group>
+	<group name="SEQUENCIAPRODUTO">
+		<groupExpression><![CDATA[$F{sequenciaProduto}]]></groupExpression>
+	</group>
+	<group name="VALORTOTAL">
+		<groupExpression><![CDATA[$F{valorTotal}]]></groupExpression>
+	</group>
+	<group name="VALORUNITARIO">
+		<groupExpression><![CDATA[$F{valorUnitario}]]></groupExpression>
+	</group>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<rectangle radius="1">
+				<reportElement key="rectangle-48" isPrintRepeatedValues="false" mode="Opaque" x="44" y="0" width="243" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="a24bd523-4336-4a16-b443-120cd281155d"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-79" isPrintRepeatedValues="false" x="50" y="5" width="141" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="b6956550-8a5d-4788-9189-b60f26b126ff"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESC. PRODUTO / SERVIÇO]]></text>
+			</staticText>
+			<rectangle radius="1">
+				<reportElement key="rectangle-47" isPrintRepeatedValues="false" mode="Opaque" x="0" y="0" width="44" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="d2bda4ab-2dfe-4f1e-82b5-b4e86f51832d"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-77" isPrintRepeatedValues="false" x="6" y="5" width="29" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="3397eaaf-6e0b-40e4-84a0-51013a3900d7"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="44" y="15" width="243" height="8" uuid="f9bebba0-e765-4f9d-b528-72618e1ebbfb"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["  " + $F{produto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement key="" stretchType="RelativeToBandHeight" x="0" y="15" width="44" height="8" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true" printWhenGroupChanges="CODPRODUTO" uuid="4a47198f-6101-47d0-b916-f25820b4d418">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codProduto}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="1">
+				<reportElement key="rectangle-49" isPrintRepeatedValues="false" mode="Opaque" x="287" y="0" width="41" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="eae113c1-bb5c-4c68-9b82-70e38cff0c21"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-80" isPrintRepeatedValues="false" x="292" y="6" width="31" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="ae7cfcdc-0689-4508-b3a3-f632d251ea24"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEQUENCIA]]></text>
+			</staticText>
+			<rectangle radius="1">
+				<reportElement key="rectangle-52" isPrintRepeatedValues="false" mode="Opaque" x="328" y="0" width="27" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="e96d2c38-f70a-4204-900e-3a24d348cba4"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-83" isPrintRepeatedValues="false" x="330" y="5" width="15" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="d5645112-c7c4-4485-9029-974d970b85eb"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNID]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="328" y="15" width="27" height="8" uuid="097b8e61-6585-4369-b129-07c56a404e5d">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidade}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="1">
+				<reportElement key="rectangle-53" isPrintRepeatedValues="false" mode="Opaque" x="355" y="0" width="30" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="fcd9355b-2576-4fdc-9096-83bbbab38b10"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-84" isPrintRepeatedValues="false" x="358" y="5" width="23" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="38f9dd05-8ed1-4590-aa63-00d754f28e2c"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTD]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="355" y="15" width="30" height="8" uuid="01420bbe-7173-4956-a965-2cfc06882cac"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="1">
+				<reportElement key="rectangle-54" isPrintRepeatedValues="false" mode="Opaque" x="385" y="0" width="75" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="c17a20b0-e7ea-4e2d-9b0d-3d53189156e6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-85" isPrintRepeatedValues="false" x="406" y="5" width="32" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="5886857c-c258-4de2-9cc2-f8b7fc5c781d"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLR. UNIT]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.##;(#,##0.##) " isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="385" y="15" width="75" height="8" uuid="ac7ff4c3-8b6a-4938-8e24-28a10f376a17">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorUnitario} +"  "]]></textFieldExpression>
+			</textField>
+			<rectangle radius="1">
+				<reportElement key="rectangle-55" isPrintRepeatedValues="false" mode="Opaque" x="460" y="0" width="75" height="15" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="2cbe20fb-9753-413f-b2e3-d452423fbcf6"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-86" isPrintRepeatedValues="false" x="479" y="5" width="37" height="8" isRemoveLineWhenBlank="true" isPrintInFirstWholeBand="true" uuid="257dfc7a-d895-497e-905c-ded58f9a3684"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VLR.TOTAL]]></text>
+			</staticText>
+			<textField pattern="#,###.00" isBlankWhenNull="true">
+				<reportElement x="460" y="15" width="75" height="8" uuid="3e31ae09-b1f9-4ff0-9159-88b48e9e2b05">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorTotal} +"  "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="287" y="15" width="41" height="8" uuid="4decb633-7972-4fb2-b486-09b93657309d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sequenciaProduto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2">
+			<textField>
+				<reportElement x="0" y="0" width="535" height="2" uuid="60cb6bb7-5e9a-443d-a672-de14c7c6db8e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

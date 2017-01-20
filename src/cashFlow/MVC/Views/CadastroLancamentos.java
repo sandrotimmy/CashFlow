@@ -3,6 +3,7 @@ package cashFlow.MVC.Views;
 import cashFlow.MVC.Controllers.LancamentosCtrl;
 import cashFlow.MVC.Controllers.MetodosGerais;
 import cashFlow.MVC.Models.Compras;
+import cashFlow.MVC.Models.HistoricoPadrao;
 import cashFlow.MVC.Models.JNumberFormatField;
 import cashFlow.MVC.Models.Lancamentos;
 import cashFlow.MVC.Models.ParcelamentoVendas;
@@ -96,7 +97,6 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
     }
 
     public Lancamentos coletaDadosCampos() throws ParseException {
-        lancamento.setCod(Integer.parseInt(campoCod.getText()));
         lancamento.setDataLancamento(sdf.parse(campoData.getText()));
         lancamento.setObservacoes(campoObservacoes.getText());
         lancamento.setValorDebito(mg.convValorBanco(campoValorDebito.getText()));
@@ -610,17 +610,23 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
     }//GEN-LAST:event_botaoCancelarActionPerformed
     private void campoCodHistoricoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoCodHistoricoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
-            lancamento.setHistorico(lancamentosCtrl.pesquisaHistorico(Integer.parseInt(campoCodHistorico.getText())));
-            campoHistorico.setText(lancamento.getHistorico().getNomeHistorico());
-            campoTipo.setText(lancamento.getHistorico().getTipo());
-            campoObservacoes.setText(lancamento.getHistorico().getNomeHistorico());
-            if (lancamento.getHistorico().getTipo().equalsIgnoreCase("Entrada")) {
-                setDebitoCredito(true, false);
+            HistoricoPadrao historicoPadrao = lancamentosCtrl.pesquisaHistorico(Integer.parseInt(campoCodHistorico.getText()));
+            lancamento = new Lancamentos();
+            if (historicoPadrao != null) {
+                lancamento.setHistorico(historicoPadrao);
+                campoHistorico.setText(lancamento.getHistorico().getNomeHistorico());
+                campoTipo.setText(lancamento.getHistorico().getTipo());
+                campoObservacoes.setText(lancamento.getHistorico().getNomeHistorico());
+                if (lancamento.getHistorico().getTipo().equalsIgnoreCase("Entrada")) {
+                    setDebitoCredito(true, false);
+                } else {
+                    setDebitoCredito(false, true);
+                }
+                botaoIncluir.setEnabled(true);
+                campoObservacoes.requestFocus();
             } else {
-                setDebitoCredito(false, true);
+            JOptionPane.showMessageDialog(rootPane, "Histórico Inexistente!");
             }
-            botaoIncluir.setEnabled(true);
-            campoObservacoes.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
             consultaHistorico.setVisible(true);
             consultaHistorico.setLocationRelativeTo(null);

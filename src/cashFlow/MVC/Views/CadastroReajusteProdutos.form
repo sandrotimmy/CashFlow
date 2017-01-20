@@ -45,13 +45,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="botaoBuscar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="botaoPrimeiro" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="BotaoListaPrimeiro" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="botaoAnterior" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="BotaoListaAnterior" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="botaoPosterior" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="BotaoListaProximo" linkSize="1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="botaoUltimo" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="BotaoListaUltimo" linkSize="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -94,10 +94,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="campoCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botaoUltimo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botaoPosterior" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botaoAnterior" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botaoPrimeiro" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotaoListaUltimo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotaoListaProximo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotaoListaAnterior" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotaoListaPrimeiro" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="botaoBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labelCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -189,36 +189,36 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoBuscarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botaoPrimeiro">
+    <Component class="javax.swing.JButton" name="BotaoListaPrimeiro">
       <Properties>
         <Property name="text" type="java.lang.String" value="|&lt;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoPrimeiroActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoListaPrimeiroActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botaoAnterior">
+    <Component class="javax.swing.JButton" name="BotaoListaAnterior">
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoAnteriorActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoListaAnteriorActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botaoPosterior">
+    <Component class="javax.swing.JButton" name="BotaoListaProximo">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoPosteriorActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoListaProximoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botaoUltimo">
+    <Component class="javax.swing.JButton" name="BotaoListaUltimo">
       <Properties>
         <Property name="text" type="java.lang.String" value="&gt;|"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoUltimoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoListaUltimoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelCodigo">

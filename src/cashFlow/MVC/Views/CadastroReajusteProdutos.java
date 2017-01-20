@@ -1,13 +1,13 @@
 package cashFlow.MVC.Views;
 
+import cashFlow.MVC.DAO.ProdutosDAO;
+import cashFlow.MVC.DAO.ReajusteProdutosDAO;
 import cashFlow.MVC.Models.Compras;
 import cashFlow.MVC.Models.JNumberFormatField;
 import cashFlow.MVC.Models.ParcelamentoVendas;
 import cashFlow.MVC.Models.Produtos;
 import cashFlow.MVC.Models.ReajusteProdutos;
 import cashFlow.MVC.Models.Vendas;
-import cashFlow.MVC.DAO.ProdutosDAO;
-import cashFlow.MVC.DAO.ReajusteProdutosDAO;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -143,10 +143,10 @@ public class CadastroReajusteProdutos extends javax.swing.JDialog implements Int
         botaoCancelar = new javax.swing.JButton();
         campoCodigo = new javax.swing.JTextField();
         botaoBuscar = new javax.swing.JButton();
-        botaoPrimeiro = new javax.swing.JButton();
-        botaoAnterior = new javax.swing.JButton();
-        botaoPosterior = new javax.swing.JButton();
-        botaoUltimo = new javax.swing.JButton();
+        BotaoListaPrimeiro = new javax.swing.JButton();
+        BotaoListaAnterior = new javax.swing.JButton();
+        BotaoListaProximo = new javax.swing.JButton();
+        BotaoListaUltimo = new javax.swing.JButton();
         labelCodigo = new javax.swing.JLabel();
         labelProduto = new javax.swing.JLabel();
         campoDescricao = new javax.swing.JTextField();
@@ -208,31 +208,31 @@ public class CadastroReajusteProdutos extends javax.swing.JDialog implements Int
             }
         });
 
-        botaoPrimeiro.setText("|<");
-        botaoPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaPrimeiro.setText("|<");
+        BotaoListaPrimeiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoPrimeiroActionPerformed(evt);
+                BotaoListaPrimeiroActionPerformed(evt);
             }
         });
 
-        botaoAnterior.setText("<");
-        botaoAnterior.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaAnterior.setText("<");
+        BotaoListaAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoAnteriorActionPerformed(evt);
+                BotaoListaAnteriorActionPerformed(evt);
             }
         });
 
-        botaoPosterior.setText(">");
-        botaoPosterior.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaProximo.setText(">");
+        BotaoListaProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoPosteriorActionPerformed(evt);
+                BotaoListaProximoActionPerformed(evt);
             }
         });
 
-        botaoUltimo.setText(">|");
-        botaoUltimo.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaUltimo.setText(">|");
+        BotaoListaUltimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoUltimoActionPerformed(evt);
+                BotaoListaUltimoActionPerformed(evt);
             }
         });
 
@@ -441,13 +441,13 @@ public class CadastroReajusteProdutos extends javax.swing.JDialog implements Int
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botaoBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoPrimeiro)
+                        .addComponent(BotaoListaPrimeiro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoAnterior)
+                        .addComponent(BotaoListaAnterior)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoPosterior)
+                        .addComponent(BotaoListaProximo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoUltimo))
+                        .addComponent(BotaoListaUltimo))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoCadastrar)
@@ -475,7 +475,7 @@ public class CadastroReajusteProdutos extends javax.swing.JDialog implements Int
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoAnterior, botaoPosterior, botaoPrimeiro, botaoUltimo});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BotaoListaAnterior, BotaoListaPrimeiro, BotaoListaProximo, BotaoListaUltimo});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,10 +483,10 @@ public class CadastroReajusteProdutos extends javax.swing.JDialog implements Int
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoUltimo)
-                    .addComponent(botaoPosterior)
-                    .addComponent(botaoAnterior)
-                    .addComponent(botaoPrimeiro)
+                    .addComponent(BotaoListaUltimo)
+                    .addComponent(BotaoListaProximo)
+                    .addComponent(BotaoListaAnterior)
+                    .addComponent(BotaoListaPrimeiro)
                     .addComponent(botaoBuscar)
                     .addComponent(labelCodigo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -537,7 +537,7 @@ public void cadastraReajuste() {
         } else if (botaoRadioAdicionar.isSelected()) {
             tipoReajuste = "adicionar";
         }
-        
+
         reajusteProdutos = coletaDadosCampos(produto, tipoReajuste);
         persistReajuste.cadastrarReajuste(reajusteProdutos);
         produto.atualizaValorDeVenda(reajusteProdutos.convValorBanco(campoValorReajustado.getText()));
@@ -561,6 +561,11 @@ public void cadastraReajuste() {
             campoMotivo.setText("");
             campoReajuste.setText("");
             botaoCadastrar.setText("Gravar");
+            BotaoListaPrimeiro.setEnabled(false);
+            BotaoListaAnterior.setEnabled(false);
+            BotaoListaProximo.setEnabled(false);
+            BotaoListaUltimo.setEnabled(false);
+            botaoExcluir.setEnabled(false);
             botaoCadastrar.setEnabled(false);
 
         } else if (listaReajustes.isEmpty() || persistReajuste.convDataBanco(campoData.getText()).after(listaReajustes.get(listaReajustes.size() - 1).getDataReajuste())) {
@@ -579,6 +584,10 @@ public void cadastraReajuste() {
             botaoRadioPorcentagem.setSelected(false);
             botaoRadioAdicionar.setSelected(false);
             botaoRadioValor.setSelected(false);
+            BotaoListaPrimeiro.setEnabled(true);
+            BotaoListaAnterior.setEnabled(true);
+            BotaoListaProximo.setEnabled(true);
+            BotaoListaUltimo.setEnabled(true);
             botaoExcluir.setEnabled(true);
             botaoCadastrar.setText("Cadastrar");
 
@@ -609,29 +618,29 @@ public void cadastraReajuste() {
         botaoExcluir.setEnabled(false);
     }//GEN-LAST:event_botaoExcluirActionPerformed
 
-    private void botaoPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPrimeiroActionPerformed
+    private void BotaoListaPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaPrimeiroActionPerformed
         exibeDados(listaProdutos.get(0));
         posicao = 0;
-    }//GEN-LAST:event_botaoPrimeiroActionPerformed
+    }//GEN-LAST:event_BotaoListaPrimeiroActionPerformed
 
-    private void botaoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAnteriorActionPerformed
+    private void BotaoListaAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaAnteriorActionPerformed
         if (posicao > 0) {
             exibeDados(listaProdutos.get(posicao - 1));
             posicao--;
         }
-    }//GEN-LAST:event_botaoAnteriorActionPerformed
+    }//GEN-LAST:event_BotaoListaAnteriorActionPerformed
 
-    private void botaoPosteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPosteriorActionPerformed
+    private void BotaoListaProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaProximoActionPerformed
         if (posicao < listaProdutos.size() - 1) {
             exibeDados(listaProdutos.get(posicao + 1));
             posicao++;
         }
-    }//GEN-LAST:event_botaoPosteriorActionPerformed
+    }//GEN-LAST:event_BotaoListaProximoActionPerformed
 
-    private void botaoUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoUltimoActionPerformed
+    private void BotaoListaUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaUltimoActionPerformed
         exibeDados(listaProdutos.get(listaProdutos.size() - 1));
         posicao = listaProdutos.size() - 1;
-    }//GEN-LAST:event_botaoUltimoActionPerformed
+    }//GEN-LAST:event_BotaoListaUltimoActionPerformed
 
     private void botaoRadioPorcentagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRadioPorcentagemMouseClicked
         labelPorcentagem.setText("%");
@@ -751,17 +760,17 @@ public void cadastraReajuste() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoAnterior;
+    private javax.swing.JButton BotaoListaAnterior;
+    private javax.swing.JButton BotaoListaPrimeiro;
+    private javax.swing.JButton BotaoListaProximo;
+    private javax.swing.JButton BotaoListaUltimo;
     private javax.swing.JButton botaoBuscar;
     private javax.swing.JButton botaoCadastrar;
     private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoExcluir;
-    private javax.swing.JButton botaoPosterior;
-    private javax.swing.JButton botaoPrimeiro;
     private javax.swing.JRadioButton botaoRadioAdicionar;
     private javax.swing.JRadioButton botaoRadioPorcentagem;
     private javax.swing.JRadioButton botaoRadioValor;
-    private javax.swing.JButton botaoUltimo;
     private javax.swing.JTextField campoCodigo;
     private javax.swing.JTextField campoData;
     private javax.swing.JTextField campoDescricao;

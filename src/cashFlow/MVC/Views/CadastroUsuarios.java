@@ -1,4 +1,3 @@
-
 package cashFlow.MVC.Views;
 
 import cashFlow.MVC.DAO.UsuariosDAO;
@@ -49,13 +48,14 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
         campoNickUsuario.setEnabled(false);
         campoSenha.setEnabled(false);
     }
-  
+
     public void exibeDados(Usuarios usuario) {
         campoCodigo.setText(Integer.toString(usuario.getIdUsuario()));
         campoNomeUsuario.setText(usuario.getNomeUsuario());
         campoNickUsuario.setText(usuario.getNickUsuario());
         campoSenha.setText(usuario.getSenhaUsuario());
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,7 +72,7 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
         botaoExcluir = new javax.swing.JButton();
         botaoAtualizar = new javax.swing.JToggleButton();
         botaoCancelar = new javax.swing.JToggleButton();
-        BotaListaPrimeiro = new javax.swing.JButton();
+        BotaoListaPrimeiro = new javax.swing.JButton();
         BotaoListaAnterior = new javax.swing.JButton();
         BotaoListaProximo = new javax.swing.JButton();
         BotaoListaUltimo = new javax.swing.JButton();
@@ -135,10 +135,10 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
             }
         });
 
-        BotaListaPrimeiro.setText("|<");
-        BotaListaPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaPrimeiro.setText("|<");
+        BotaoListaPrimeiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotaListaPrimeiroActionPerformed(evt);
+                BotaoListaPrimeiroActionPerformed(evt);
             }
         });
 
@@ -187,7 +187,7 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(labelCodigo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BotaListaPrimeiro))
+                                .addComponent(BotaoListaPrimeiro))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -213,7 +213,7 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoAtualizar, botaoCadastrar, botaoCancelar, botaoExcluir});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BotaListaPrimeiro, BotaoListaAnterior, BotaoListaProximo, BotaoListaUltimo});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BotaoListaAnterior, BotaoListaPrimeiro, BotaoListaProximo, BotaoListaUltimo});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +222,7 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(labelCodigo)
-                        .addComponent(BotaListaPrimeiro))
+                        .addComponent(BotaoListaPrimeiro))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BotaoListaAnterior)
                         .addComponent(BotaoListaProximo)
@@ -255,10 +255,10 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BotaListaPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaListaPrimeiroActionPerformed
+    private void BotaoListaPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaPrimeiroActionPerformed
         exibeDados(listaUsuarios.get(0));
         posicao = 0;
-    }//GEN-LAST:event_BotaListaPrimeiroActionPerformed
+    }//GEN-LAST:event_BotaoListaPrimeiroActionPerformed
 
     private void BotaoListaAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaAnteriorActionPerformed
 
@@ -301,6 +301,11 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
             campoSenha.setEnabled(true);
             campoCodigo.setText(Integer.toString(persist.getProximoCodUsuario()));
             campoNomeUsuario.requestFocus();
+            BotaoListaPrimeiro.setEnabled(false);
+            BotaoListaAnterior.setEnabled(false);
+            BotaoListaProximo.setEnabled(false);
+            BotaoListaUltimo.setEnabled(false);
+            botaoExcluir.setEnabled(false);
             botaoCadastrar.setText("Gravar");
         } else {
             Usuarios usuario = new Usuarios(
@@ -314,6 +319,11 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
             campoCodigo.setEnabled(false);
             campoNomeUsuario.setEnabled(false);
             campoNickUsuario.setEnabled(false);
+            BotaoListaPrimeiro.setEnabled(true);
+            BotaoListaAnterior.setEnabled(true);
+            BotaoListaProximo.setEnabled(true);
+            BotaoListaUltimo.setEnabled(true);
+            botaoExcluir.setEnabled(true);
             campoSenha.setEnabled(false);
             posicao = listaUsuarios.size() - 1;
         }
@@ -340,6 +350,11 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
             campoNomeUsuario.setEnabled(true);
             campoNickUsuario.setEnabled(true);
             campoSenha.setEnabled(true);
+            BotaoListaPrimeiro.setEnabled(false);
+            BotaoListaAnterior.setEnabled(false);
+            BotaoListaProximo.setEnabled(false);
+            BotaoListaUltimo.setEnabled(false);
+            botaoExcluir.setEnabled(false);
             botaoCadastrar.setEnabled(false);
             botaoAtualizar.setText("Gravar");
         } else {
@@ -357,6 +372,11 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
             campoNomeUsuario.setEnabled(false);
             campoNickUsuario.setEnabled(false);
             campoSenha.setEnabled(false);
+            BotaoListaPrimeiro.setEnabled(true);
+            BotaoListaAnterior.setEnabled(true);
+            BotaoListaProximo.setEnabled(true);
+            BotaoListaUltimo.setEnabled(true);
+            botaoExcluir.setEnabled(true);
             botaoAtualizar.setText("Atualizar");
             botaoCadastrar.setEnabled(true);
         }
@@ -381,8 +401,8 @@ public final class CadastroUsuarios extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotaListaPrimeiro;
     private javax.swing.JButton BotaoListaAnterior;
+    private javax.swing.JButton BotaoListaPrimeiro;
     private javax.swing.JButton BotaoListaProximo;
     private javax.swing.JButton BotaoListaUltimo;
     private javax.swing.JToggleButton botaoAtualizar;

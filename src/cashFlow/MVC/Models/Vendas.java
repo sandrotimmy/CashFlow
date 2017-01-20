@@ -227,10 +227,6 @@ public class Vendas implements Serializable {
         return dataAtual.withDayOfMonth(dataAtual.lengthOfMonth()).format(formatter);
     }
 
-    public BigDecimal convValorBanco(String valorSistema) {
-        return new BigDecimal(valorSistema.replaceAll("\\.", "").replaceAll(",", "."));
-    }
-
     @Override
     public String toString() {
         return super.toString();

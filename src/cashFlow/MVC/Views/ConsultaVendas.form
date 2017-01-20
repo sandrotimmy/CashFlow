@@ -73,7 +73,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="painelCancelamento" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="botaoExcluir" min="-2" max="-2" attributes="0"/>
+                      <Component id="botaoCancelarVenda" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -98,7 +98,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="painelCancelamento" min="-2" max="-2" attributes="0"/>
-                  <Component id="botaoExcluir" min="-2" max="-2" attributes="0"/>
+                  <Component id="botaoCancelarVenda" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -178,12 +178,12 @@
         <Property name="text" type="java.lang.String" value="Imprimir"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="botaoExcluir">
+    <Component class="javax.swing.JButton" name="botaoCancelarVenda">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar Venda"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoExcluirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCancelarVendaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botaoCancelar">

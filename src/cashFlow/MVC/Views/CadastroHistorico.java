@@ -33,10 +33,10 @@ public class CadastroHistorico extends javax.swing.JDialog implements InterfaceL
         labelHistorico = new javax.swing.JLabel();
         campoCodigo = new javax.swing.JTextField();
         campoHistorico = new javax.swing.JTextField();
-        botaoPrimeiro = new javax.swing.JButton();
-        botaoAnterior = new javax.swing.JButton();
-        botaoProximo = new javax.swing.JButton();
-        botaoUltimo = new javax.swing.JButton();
+        BotaoListaPrimeiro = new javax.swing.JButton();
+        BotaoListaAnterior = new javax.swing.JButton();
+        BotaoListaProximo = new javax.swing.JButton();
+        BotaoListaUltimo = new javax.swing.JButton();
         botaoCancelar = new javax.swing.JButton();
         botaoAtualizar = new javax.swing.JButton();
         botaoCadastrar = new javax.swing.JButton();
@@ -66,31 +66,31 @@ public class CadastroHistorico extends javax.swing.JDialog implements InterfaceL
 
         campoHistorico.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
-        botaoPrimeiro.setText("|<");
-        botaoPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaPrimeiro.setText("|<");
+        BotaoListaPrimeiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoPrimeiroActionPerformed(evt);
+                BotaoListaPrimeiroActionPerformed(evt);
             }
         });
 
-        botaoAnterior.setText("<");
-        botaoAnterior.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaAnterior.setText("<");
+        BotaoListaAnterior.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoAnteriorActionPerformed(evt);
+                BotaoListaAnteriorActionPerformed(evt);
             }
         });
 
-        botaoProximo.setText(">");
-        botaoProximo.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaProximo.setText(">");
+        BotaoListaProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoProximoActionPerformed(evt);
+                BotaoListaProximoActionPerformed(evt);
             }
         });
 
-        botaoUltimo.setText(">|");
-        botaoUltimo.addActionListener(new java.awt.event.ActionListener() {
+        BotaoListaUltimo.setText(">|");
+        BotaoListaUltimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoUltimoActionPerformed(evt);
+                BotaoListaUltimoActionPerformed(evt);
             }
         });
 
@@ -171,29 +171,29 @@ public class CadastroHistorico extends javax.swing.JDialog implements InterfaceL
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botaoBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoPrimeiro)
+                        .addComponent(BotaoListaPrimeiro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoAnterior)
+                        .addComponent(BotaoListaAnterior)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoProximo)
+                        .addComponent(BotaoListaProximo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoUltimo)))
+                        .addComponent(BotaoListaUltimo)))
                 .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoAtualizar, botaoBuscar, botaoCadastrar, botaoCancelar, botaoExcluir});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {botaoAnterior, botaoPrimeiro, botaoProximo, botaoUltimo});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BotaoListaAnterior, BotaoListaPrimeiro, BotaoListaProximo, BotaoListaUltimo});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoAnterior)
-                    .addComponent(botaoProximo)
-                    .addComponent(botaoUltimo)
-                    .addComponent(botaoPrimeiro)
+                    .addComponent(BotaoListaAnterior)
+                    .addComponent(BotaoListaProximo)
+                    .addComponent(BotaoListaUltimo)
+                    .addComponent(BotaoListaPrimeiro)
                     .addComponent(labelCodigo)
                     .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botaoBuscar))
@@ -277,20 +277,31 @@ public class CadastroHistorico extends javax.swing.JDialog implements InterfaceL
     }
 
     public void habilitaDesabilitaCampos(int tipo, boolean limpaCampos, boolean campos, boolean botoes) {
-        campoHistorico.setEnabled(campos);
-        comboEntradaSaida.setEnabled(campos);
-//        comboUsuarioSistema.setEnabled(campos);
+        campoHistorico.setEnabled(botoes);
+        comboEntradaSaida.setEnabled(botoes);
+        BotaoListaPrimeiro.setEnabled(botoes);
+        BotaoListaAnterior.setEnabled(botoes);
+        BotaoListaProximo.setEnabled(botoes);
+        BotaoListaUltimo.setEnabled(botoes);
         botaoExcluir.setEnabled(botoes);
         if (tipo == 1) {//Cadastrar
             if (limpaCampos == true) {
                 campoHistorico.setText("");
+                comboEntradaSaida.setEnabled(campos);
+                campoHistorico.setEnabled(campos);
                 comboUsuarioSistema.setEnabled(campos);
                 comboUsuarioSistema.setSelectedIndex(0);
             } else {
                 comboUsuarioSistema.setEnabled(campos);
             }
+            BotaoListaPrimeiro.setEnabled(botoes);
+            BotaoListaAnterior.setEnabled(botoes);
+            BotaoListaProximo.setEnabled(botoes);
+            BotaoListaUltimo.setEnabled(botoes);
             botaoAtualizar.setEnabled(botoes);
         } else if (tipo == 2) {
+            campoHistorico.setEnabled(campos);
+            comboEntradaSaida.setEnabled(campos);
             botaoExcluir.setEnabled(botoes);
             botaoCadastrar.setEnabled(botoes);
         }
@@ -314,26 +325,26 @@ public class CadastroHistorico extends javax.swing.JDialog implements InterfaceL
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         CadastroHistorico.this.dispose();
     }//GEN-LAST:event_botaoCancelarActionPerformed
-    private void botaoPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPrimeiroActionPerformed
+    private void BotaoListaPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaPrimeiroActionPerformed
         exibeDados(listaHistorico.get(0));
         posicao = 0;
-    }//GEN-LAST:event_botaoPrimeiroActionPerformed
-    private void botaoAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAnteriorActionPerformed
+    }//GEN-LAST:event_BotaoListaPrimeiroActionPerformed
+    private void BotaoListaAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaAnteriorActionPerformed
         if (posicao > 0) {
             exibeDados(listaHistorico.get(posicao - 1));
             posicao--;
         }
-    }//GEN-LAST:event_botaoAnteriorActionPerformed
-    private void botaoProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProximoActionPerformed
+    }//GEN-LAST:event_BotaoListaAnteriorActionPerformed
+    private void BotaoListaProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaProximoActionPerformed
         if (posicao < listaHistorico.size() - 1) {
             exibeDados(listaHistorico.get(posicao + 1));
             posicao++;
         }
-    }//GEN-LAST:event_botaoProximoActionPerformed
-    private void botaoUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoUltimoActionPerformed
+    }//GEN-LAST:event_BotaoListaProximoActionPerformed
+    private void BotaoListaUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoListaUltimoActionPerformed
         exibeDados(listaHistorico.get(listaHistorico.size() - 1));
         posicao = listaHistorico.size() - 1;
-    }//GEN-LAST:event_botaoUltimoActionPerformed
+    }//GEN-LAST:event_BotaoListaUltimoActionPerformed
     private void botaoAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAtualizarActionPerformed
         if (!botaoAtualizar.getText().equals("Gravar")) {
             habilitaDesabilitaCampos(2, false, true, false);
@@ -394,15 +405,15 @@ public class CadastroHistorico extends javax.swing.JDialog implements InterfaceL
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoAnterior;
+    private javax.swing.JButton BotaoListaAnterior;
+    private javax.swing.JButton BotaoListaPrimeiro;
+    private javax.swing.JButton BotaoListaProximo;
+    private javax.swing.JButton BotaoListaUltimo;
     private javax.swing.JButton botaoAtualizar;
     private javax.swing.JButton botaoBuscar;
     private javax.swing.JButton botaoCadastrar;
     private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoExcluir;
-    private javax.swing.JButton botaoPrimeiro;
-    private javax.swing.JButton botaoProximo;
-    private javax.swing.JButton botaoUltimo;
     private javax.swing.JTextField campoCodigo;
     private javax.swing.JTextField campoHistorico;
     private javax.swing.JComboBox comboEntradaSaida;

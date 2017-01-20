@@ -1,17 +1,12 @@
 package cashFlow.MVC.Views;
 
-import cashFlow.MVC.Controllers.ParametrosCtrl;
 import cashFlow.MVC.Models.PassaCamposComEnter;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
@@ -24,8 +19,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setIcon();
         pc = new PassaCamposComEnter();
     }
-    
-        public void setIcon() throws IOException {
+
+    public void setIcon() throws IOException {
 //        Properties parametros = ParametrosCtrl.getInstance();
 //        String caminho = parametros.getProperty("caminhoLogoTela");
 //        File imagem = new File(caminho);
@@ -77,6 +72,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         relatoriosControleLivroCaixa = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        relatoriosMovimentosVenda = new javax.swing.JMenuItem();
+        relatoriosMovimentosCarne = new javax.swing.JMenuItem();
         menuUtilitarios = new javax.swing.JMenu();
         menuUtilitariosCalculadora = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
@@ -335,6 +333,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
+        jMenu1.add(jSeparator6);
+
+        relatoriosMovimentosVenda.setText("Vendas");
+        relatoriosMovimentosVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relatoriosMovimentosVendaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(relatoriosMovimentosVenda);
+
+        relatoriosMovimentosCarne.setText("Carne de Vendas");
+        relatoriosMovimentosCarne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relatoriosMovimentosCarneActionPerformed(evt);
+            }
+        });
+        jMenu1.add(relatoriosMovimentosCarne);
 
         menuRelatorios.add(jMenu1);
 
@@ -553,6 +568,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         parametros.setLocationRelativeTo(null);
         parametros.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void relatoriosMovimentosVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosMovimentosVendaActionPerformed
+        RelatorioVendas relatorioVendas;
+        relatorioVendas = new RelatorioVendas();
+        pc.passaCamposComEnter(relatorioVendas);
+        relatorioVendas.setLocationRelativeTo(null);
+        relatorioVendas.setVisible(true);
+    }//GEN-LAST:event_relatoriosMovimentosVendaActionPerformed
+
+    private void relatoriosMovimentosCarneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosMovimentosCarneActionPerformed
+        RelatorioVendasCarne relatorioVendasCarne;
+        relatorioVendasCarne = new RelatorioVendasCarne();
+        pc.passaCamposComEnter(relatorioVendasCarne);
+        relatorioVendasCarne.setLocationRelativeTo(null);
+        relatorioVendasCarne.setVisible(true);
+    }//GEN-LAST:event_relatoriosMovimentosCarneActionPerformed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             try {
@@ -572,6 +603,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JLabel labelImagemLogo;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuItem menuCadastroClientes;
@@ -605,6 +637,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem relCadastraisFornecedores;
     private javax.swing.JMenu relatoriosControle;
     private javax.swing.JMenuItem relatoriosControleLivroCaixa;
+    private javax.swing.JMenuItem relatoriosMovimentosCarne;
+    private javax.swing.JMenuItem relatoriosMovimentosVenda;
     private javax.swing.JMenu vendas;
     // End of variables declaration//GEN-END:variables
 }

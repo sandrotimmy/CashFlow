@@ -13,6 +13,8 @@ public class Clientes implements Serializable {
     int tipoInscricao;
     @Column(length = 14)
     private String cpfCnpj;
+    @Column(length = 20)
+    private String inscEstadual;
     @Column(length = 100, nullable = false)
     private String nome;
     @Column(length = 100)
@@ -23,6 +25,8 @@ public class Clientes implements Serializable {
     private String complemento;
     @Column(length = 100)
     private String municipio;
+    @Column(length = 30)
+    private String bairro;
     @Column(length = 2)
     private String uf;
     @Column(length = 7)
@@ -45,15 +49,17 @@ public class Clientes implements Serializable {
         this.cod = cod;
     }
 
-    public Clientes(Integer cod, int tipoInscricao, String cpfCnpj, String nome, String endereco, String numero, String complemento, String municipio, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
+    public Clientes(Integer cod, int tipoInscricao, String cpfCnpj, String inscEstadual, String nome, String endereco, String numero, String complemento, String municipio, String bairro, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
         this.cod = cod;
         this.tipoInscricao = tipoInscricao;
         this.cpfCnpj = cpfCnpj;
+        this.inscEstadual = inscEstadual;
         this.nome = nome;
         this.endereco = endereco;
         this.numero = numero;
         this.complemento = complemento;
         this.municipio = municipio;
+        this.bairro = bairro;
         this.uf = uf;
         this.caixapostal = caixapostal;
         this.cep = cep;
@@ -75,6 +81,10 @@ public class Clientes implements Serializable {
         this.cpfCnpj = cpfCnpj;
     }
 
+    public void setInscEstadual(String inscEstadual) {
+        this.inscEstadual = inscEstadual;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -93,6 +103,10 @@ public class Clientes implements Serializable {
 
     public void setMunicipio(String municipio) {
         this.municipio = municipio;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public void setUf(String uf) {
@@ -135,6 +149,10 @@ public class Clientes implements Serializable {
         return cpfCnpj;
     }
 
+    public String getInscEstadual() {
+        return inscEstadual;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -153,6 +171,10 @@ public class Clientes implements Serializable {
 
     public String getMunicipio() {
         return municipio;
+    }
+
+    public String getBairro() {
+        return bairro;
     }
 
     public String getUf() {

@@ -71,12 +71,14 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
             exibeDados(listaFornecedores.get(posicao));
             campoCpfCnpj.setEnabled(false);
             comboCpfCnpj.setEnabled(false);
+            campoInscEstadual.setEnabled(false);
             campoRazaoSocial.setEnabled(false);
             campoNomeFantasia.setEnabled(false);
             campoEndereco.setEnabled(false);
             campoComplemento.setEnabled(false);
             campoNumero.setEnabled(false);
             campoMunicipio.setEnabled(false);
+            campoBairro.setEnabled(false);
             comboBoxUF.setEnabled(false);
             campoCEP.setEnabled(false);
             campoCaixaPostal.setEnabled(false);
@@ -103,12 +105,14 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
     }
 
     private void limitaCampos() {//limita os campos de texto
+        campoInscEstadual.setDocument(new DocumentoLimitado(14));
         campoRazaoSocial.setDocument(new DocumentoLimitado(50));
         campoNomeFantasia.setDocument(new DocumentoLimitado(30));
         campoEndereco.setDocument(new DocumentoLimitado(30));
         campoComplemento.setDocument(new DocumentoLimitado(10));
         campoNumero.setDocument(new IntegerDocument(5));
         campoMunicipio.setDocument(new DocumentoLimitado(20));
+        campoBairro.setDocument(new DocumentoLimitado(30));
         campoCaixaPostal.setDocument(new IntegerDocument(5));
         campoDDD.setDocument(new IntegerDocument(3));
         campoEmail.setDocument(new AlteraMinusculo(40));
@@ -146,12 +150,14 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
             campoCodigo.setText(Integer.toString(fornecedor.getCod()));
             comboCpfCnpj.setSelectedIndex(fornecedor.getTipoInscricao());
             campoCpfCnpj.setText(fornecedor.getCpfCnpj());
+            campoInscEstadual.setText(fornecedor.getInscEstadual());
             campoRazaoSocial.setText(fornecedor.getRazaosocial());
             campoNomeFantasia.setText(fornecedor.getNomefantasia());
             campoEndereco.setText(fornecedor.getEndereco());
             campoNumero.setText(fornecedor.getNumero());
             campoComplemento.setText(fornecedor.getComplemento());
             campoMunicipio.setText(fornecedor.getMunicipio());
+            campoBairro.setText(fornecedor.getBairro());
             comboBoxUF.setSelectedItem(fornecedor.getUf());
             campoCEP.setText(fornecedor.getCep());
             campoCaixaPostal.setText(fornecedor.getCaixapostal());
@@ -164,12 +170,15 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
 
     public void habilitaDesabilitaCampos(int tipo, boolean limpaCampos, boolean campos, boolean botoes) {
         campoCpfCnpj.setEnabled(campos);
+        comboCpfCnpj.setEnabled(campos);
+        campoInscEstadual.setEnabled(campos);
         campoRazaoSocial.setEnabled(campos);
         campoNomeFantasia.setEnabled(campos);
         campoEndereco.setEnabled(campos);
         campoComplemento.setEnabled(campos);
         campoNumero.setEnabled(campos);
         campoMunicipio.setEnabled(campos);
+        campoBairro.setEnabled(campos);
         comboBoxUF.setEnabled(campos);
         campoCEP.setEnabled(campos);
         campoCaixaPostal.setEnabled(campos);
@@ -177,16 +186,22 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
         campoFone.setEnabled(campos);
         campoFax.setEnabled(campos);
         campoEmail.setEnabled(campos);
+        BotaListaPrimeiro.setEnabled(campos);
+        BotaoListaAnterior.setEnabled(campos);
+        BotaoListaProximo.setEnabled(campos);
+        BotaoListaUltimo.setEnabled(campos);
         botaoExcluir.setEnabled(botoes);
         if (tipo == 1) {//Cadastrar
             if (limpaCampos == true) {
                 campoCpfCnpj.setText("");
+                campoInscEstadual.setText("");
                 campoRazaoSocial.setText("");
                 campoNomeFantasia.setText("");
                 campoEndereco.setText("");
                 campoComplemento.setText("");
                 campoNumero.setText("");
                 campoMunicipio.setText("");
+                campoBairro.setText("");
                 comboBoxUF.setSelectedItem("");
                 campoCEP.setText("");
                 campoCaixaPostal.setText("");
@@ -195,6 +210,10 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
                 campoFax.setText("");
                 campoEmail.setText("");
             }
+            BotaListaPrimeiro.setEnabled(botoes);
+            BotaoListaAnterior.setEnabled(botoes);
+            BotaoListaProximo.setEnabled(botoes);
+            BotaoListaUltimo.setEnabled(botoes);
             botaoAtualizar.setEnabled(botoes);
         } else if (tipo == 2) {
             botaoExcluir.setEnabled(botoes);
@@ -208,12 +227,14 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
                 campoCodigo.getText()),
                 comboCpfCnpj.getSelectedIndex(),
                 mg.limpaCnpj(campoCpfCnpj.getText()),
+                campoInscEstadual.getText(),
                 campoRazaoSocial.getText(),
                 campoNomeFantasia.getText(),
                 campoEndereco.getText(),
                 mg.validaNumeros(campoNumero.getText()),
                 campoComplemento.getText(),
                 campoMunicipio.getText(),
+                campoBairro.getText(),
                 comboBoxUF.getSelectedItem().toString(),
                 mg.validaCep(campoCEP.getText()),
                 mg.validaNumeros(campoCaixaPostal.getText()),
@@ -267,6 +288,10 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
         botaoBuscar = new javax.swing.JButton();
         comboCpfCnpj = new javax.swing.JComboBox<>();
         campoCpfCnpj = new javax.swing.JFormattedTextField();
+        labelInscEstadual = new javax.swing.JLabel();
+        campoInscEstadual = new javax.swing.JTextField();
+        labelBairro = new javax.swing.JLabel();
+        campoBairro = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Fornecedores");
@@ -426,6 +451,24 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
             }
         });
 
+        labelInscEstadual.setText("Insc. Estadual:");
+
+        campoInscEstadual.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoInscEstadual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoInscEstadualActionPerformed(evt);
+            }
+        });
+
+        labelBairro.setText("Bairro:");
+
+        campoBairro.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoBairro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoBairroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -436,12 +479,23 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
                     .addComponent(labelRazaoSocial)
                     .addComponent(labelInscricao)
                     .addComponent(labelEndereco)
-                    .addComponent(labemMunicipio)
                     .addComponent(labelDDD)
                     .addComponent(labelNomeFantasia)
-                    .addComponent(labelCodigo))
+                    .addComponent(labelCodigo)
+                    .addComponent(labemMunicipio)
+                    .addComponent(labelUF))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(campoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelBairro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoBairro)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelComplemento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(campoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(botaoCadastrar)
@@ -454,51 +508,39 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(campoEndereco)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelNumero))
+                                .addComponent(campoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(comboBoxUF, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(49, 49, 49)
+                                        .addComponent(labelCEP)
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(campoCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(campoDDD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(labelFone)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(campoFone, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(campoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(labelUF)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(comboBoxUF, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(campoFone, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(labelCEP))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(labelFax)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(campoFax, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(labelEmail)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(campoFax, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelEmail)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoEmail)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(campoNumero, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoCEP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(labelCaixaPostal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(labelCaixaPostal)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(campoCaixaPostal, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(labelComplemento)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(campoComplemento))))))
-                    .addComponent(campoRazaoSocial, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(campoCaixaPostal))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(labelNumero)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))))
                     .addComponent(campoNomeFantasia)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -510,14 +552,23 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
                                 .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botaoBuscar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BotaListaPrimeiro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BotaoListaAnterior)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BotaoListaProximo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BotaoListaUltimo)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(BotaListaPrimeiro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BotaoListaAnterior)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BotaoListaProximo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BotaoListaUltimo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labelInscEstadual)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoInscEstadual, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(campoRazaoSocial))
                 .addContainerGap())
         );
 
@@ -545,7 +596,9 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(campoCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelInscEstadual)
+                        .addComponent(campoInscEstadual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(labelInscricao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -560,14 +613,19 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(campoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(labelNumero)
-                        .addComponent(campoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labelComplemento)
-                        .addComponent(campoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(campoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(labelEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labemMunicipio)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campoMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labemMunicipio)
+                        .addComponent(labelBairro)
+                        .addComponent(campoBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelComplemento)
+                        .addComponent(campoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelUF)
                     .addComponent(labelCEP)
                     .addComponent(labelCaixaPostal)
@@ -677,17 +735,25 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
             String cnpjLimpo = mg.limpaCnpj(campoCpfCnpj.getText());
             if (!mg.validaCpfCnpj(cnpjLimpo)) {
                 if (cnpjLimpo.equals("")) {
-                    campoRazaoSocial.requestFocus();
+                    campoInscEstadual.requestFocus();
                     campoCpfCnpj.setValue(null);
                 } else {
                     JOptionPane.showMessageDialog(this, "CPF/CNPJ Incorreto!");
                     campoCpfCnpj.requestFocus();
                 }
             } else {
-                campoRazaoSocial.requestFocus();
+                campoInscEstadual.requestFocus();
             }
         }
     }//GEN-LAST:event_campoCpfCnpjKeyPressed
+
+    private void campoInscEstadualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoInscEstadualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoInscEstadualActionPerformed
+
+    private void campoBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoBairroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoBairroActionPerformed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             CadastroFornecedores dialog = new CadastroFornecedores();
@@ -710,6 +776,7 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
     private javax.swing.JButton botaoCadastrar;
     private javax.swing.JButton botaoCancelar;
     private javax.swing.JButton botaoExcluir;
+    private javax.swing.JTextField campoBairro;
     private javax.swing.JFormattedTextField campoCEP;
     private javax.swing.JTextField campoCaixaPostal;
     private javax.swing.JTextField campoCodigo;
@@ -720,12 +787,14 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
     private javax.swing.JTextField campoEndereco;
     private javax.swing.JFormattedTextField campoFax;
     private javax.swing.JFormattedTextField campoFone;
+    private javax.swing.JTextField campoInscEstadual;
     private javax.swing.JTextField campoMunicipio;
     private javax.swing.JTextField campoNomeFantasia;
     private javax.swing.JTextField campoNumero;
     private javax.swing.JTextField campoRazaoSocial;
     private javax.swing.JComboBox comboBoxUF;
     private javax.swing.JComboBox<String> comboCpfCnpj;
+    private javax.swing.JLabel labelBairro;
     private javax.swing.JLabel labelCEP;
     private javax.swing.JLabel labelCaixaPostal;
     private javax.swing.JLabel labelCodigo;
@@ -735,6 +804,7 @@ public final class CadastroFornecedores extends javax.swing.JDialog implements I
     private javax.swing.JLabel labelEndereco;
     private javax.swing.JLabel labelFax;
     private javax.swing.JLabel labelFone;
+    private javax.swing.JLabel labelInscEstadual;
     private javax.swing.JLabel labelInscricao;
     private javax.swing.JLabel labelNomeFantasia;
     private javax.swing.JLabel labelNumero;

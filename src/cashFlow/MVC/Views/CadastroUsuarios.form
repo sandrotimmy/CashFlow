@@ -46,7 +46,7 @@
                           <Group type="102" attributes="0">
                               <Component id="labelCodigo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="BotaListaPrimeiro" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <Component id="BotaoListaPrimeiro" linkSize="2" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="campoCodigo" min="-2" pref="65" max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="BotaListaPrimeiro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BotaoListaPrimeiro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="BotaoListaAnterior" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -207,12 +207,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCancelarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="BotaListaPrimeiro">
+    <Component class="javax.swing.JButton" name="BotaoListaPrimeiro">
       <Properties>
         <Property name="text" type="java.lang.String" value="|&lt;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaListaPrimeiroActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotaoListaPrimeiroActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BotaoListaAnterior">

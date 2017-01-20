@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-01-18T17:09:24 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Vendas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c15f76e-d83e-482c-b11f-7790e5fd13e5">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BANCOCF"/>
+	<parameter name="empresa" class="java.util.List" nestedType="cashFlow.MVC.Models.Empresa"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="cliente" class="java.util.List"/>
+	<parameter name="itemVenda" class="java.util.List"/>
+	<parameter name="parcelasVenda" class="java.util.List"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="cod" class="java.lang.Integer"/>
+	<field name="motivoAcrescimo" class="java.lang.String"/>
+	<field name="tipoDesconto" class="java.lang.String"/>
+	<field name="dataVenda" class="java.sql.Date"/>
+	<field name="observacoes" class="java.lang.String"/>
+	<field name="valorAcrescimo" class="java.math.BigDecimal"/>
+	<field name="valorDesconto" class="java.math.BigDecimal"/>
+	<field name="valorTotalProdutos" class="java.math.BigDecimal"/>
+	<field name="valorTotalVenda" class="java.math.BigDecimal"/>
+	<variable name="contParcelas" class="java.lang.String" calculation="Count">
+		<variableExpression><![CDATA[$F{cod}]]></variableExpression>
+	</variable>
+	<group name="COD">
+		<groupExpression><![CDATA[$F{cod}]]></groupExpression>
+	</group>
+	<group name="MOTIVOACRESCIMO">
+		<groupExpression><![CDATA[$F{motivoAcrescimo}]]></groupExpression>
+	</group>
+	<group name="TIPODESCONTO">
+		<groupExpression><![CDATA[$F{tipoDesconto}]]></groupExpression>
+	</group>
+	<group name="DATAVENDA">
+		<groupExpression><![CDATA[$F{dataVenda}]]></groupExpression>
+	</group>
+	<group name="OBSERVACOES">
+		<groupExpression><![CDATA[$F{observacoes}]]></groupExpression>
+	</group>
+	<group name="VALORACRESCIMO">
+		<groupExpression><![CDATA[$F{valorAcrescimo}]]></groupExpression>
+	</group>
+	<group name="VALORDESCONTO">
+		<groupExpression><![CDATA[$F{valorDesconto}]]></groupExpression>
+	</group>
+	<group name="VALORTOTALPRODUTOS">
+		<groupExpression><![CDATA[$F{valorTotalProdutos}]]></groupExpression>
+	</group>
+	<group name="VALORTOTALVENDA">
+		<groupExpression><![CDATA[$F{valorTotalVenda}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="260">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<subreport>
+				<reportElement x="0" y="0" width="120" height="260" uuid="7732c6be-2f0a-427c-b743-44843291d390"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{parcelasVenda})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"sub_parcelas_venda_carne.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

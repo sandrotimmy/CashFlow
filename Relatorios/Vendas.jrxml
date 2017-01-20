@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-01-20T16:20:46 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Vendas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c15f76e-d83e-482c-b11f-7790e5fd13e5">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BANCOCF"/>
+	<parameter name="empresa" class="java.util.List" nestedType="cashFlow.MVC.Models.Empresa"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="cliente" class="java.util.List"/>
+	<parameter name="itemVenda" class="java.util.List"/>
+	<parameter name="parcelasVenda" class="java.util.List"/>
+	<parameter name="codParcelamento" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="cod" class="java.lang.Integer"/>
+	<field name="motivoAcrescimo" class="java.lang.String"/>
+	<field name="tipoDesconto" class="java.lang.String"/>
+	<field name="dataVenda" class="java.sql.Date"/>
+	<field name="observacoes" class="java.lang.String"/>
+	<field name="valorAcrescimo" class="java.math.BigDecimal"/>
+	<field name="valorDesconto" class="java.math.BigDecimal"/>
+	<field name="valorTotalProdutos" class="java.math.BigDecimal"/>
+	<field name="valorTotalVenda" class="java.math.BigDecimal"/>
+	<variable name="contParcelas" class="java.lang.String" calculation="Count">
+		<variableExpression><![CDATA[$F{cod}]]></variableExpression>
+	</variable>
+	<group name="COD">
+		<groupExpression><![CDATA[$F{cod}]]></groupExpression>
+	</group>
+	<group name="MOTIVOACRESCIMO">
+		<groupExpression><![CDATA[$F{motivoAcrescimo}]]></groupExpression>
+	</group>
+	<group name="TIPODESCONTO">
+		<groupExpression><![CDATA[$F{tipoDesconto}]]></groupExpression>
+	</group>
+	<group name="DATAVENDA">
+		<groupExpression><![CDATA[$F{dataVenda}]]></groupExpression>
+	</group>
+	<group name="OBSERVACOES">
+		<groupExpression><![CDATA[$F{observacoes}]]></groupExpression>
+	</group>
+	<group name="VALORACRESCIMO">
+		<groupExpression><![CDATA[$F{valorAcrescimo}]]></groupExpression>
+	</group>
+	<group name="VALORDESCONTO">
+		<groupExpression><![CDATA[$F{valorDesconto}]]></groupExpression>
+	</group>
+	<group name="VALORTOTALPRODUTOS">
+		<groupExpression><![CDATA[$F{valorTotalProdutos}]]></groupExpression>
+	</group>
+	<group name="VALORTOTALVENDA">
+		<groupExpression><![CDATA[$F{valorTotalVenda}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="582" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<rectangle radius="3">
+				<reportElement key="rectangle-15" mode="Opaque" x="0" y="242" width="535" height="43" uuid="ebfc5ed5-6808-4a1d-ac9a-598cf5be5925">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement key="rectangle-3" x="401" y="0" width="134" height="50" uuid="22e5d21c-3bf7-4ee1-864a-45a2eb9aac3c"/>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement key="rectangle-1" mode="Opaque" x="0" y="0" width="400" height="25" uuid="4a23793e-5cab-477f-b67e-9df5ce3362b1"/>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement key="rectangle-2" x="0" y="25" width="125" height="25" uuid="cb888527-8be7-4abc-ad84-bf21fc9a014b"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-3" x="10" y="1" width="379" height="8" uuid="d763d64f-d30d-499d-9539-1fdd0aa3a4d8"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[RECEBEMOS DA EMPRESA QUALIFICADA OS PRODUTOS CONSTANTES NA VENDA INDICADA AO LADO]]></text>
+			</staticText>
+			<rectangle radius="3">
+				<reportElement key="rectangle-4" x="125" y="25" width="276" height="25" uuid="3ca5781f-73f4-4d37-9a70-26151d436011"/>
+			</rectangle>
+			<line>
+				<reportElement key="line-1" x="0" y="55" width="535" height="1" uuid="884a3ddc-6a5f-45a7-81d9-3aea39958e0e"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement key="staticText-4" x="10" y="26" width="109" height="8" uuid="d6b4a236-e252-4ab3-9901-56c231bba24f"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[DATA DE RECEBIMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-5" x="130" y="26" width="259" height="8" uuid="f49c1913-e183-446f-b5c7-013ff6f41de2"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-116" x="443" y="2" width="50" height="10" uuid="4c1a8a6f-3df3-40b2-922d-c17a0ac05ee5"/>
+				<box leftPadding="7"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Venda]]></text>
+			</staticText>
+			<rectangle radius="3">
+				<reportElement key="rectangle-5" x="0" y="61" width="535" height="94" uuid="f3a069bb-1f12-404e-b900-cc102f115da6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="418" y="21" width="21" height="15" uuid="c5bda764-d07a-4b1c-8e90-3cb0a4c52a75"/>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<subreport>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="171" width="446" height="59" uuid="30f44582-b868-453f-b45d-b7a2c601b080"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{cliente})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"sub_dados_clientes.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="10" y="70" width="520" height="80" uuid="7f4f5f58-d539-4bd0-aaba-7e05aed790f0"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{empresa})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"sub_dados_empresa.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement key="staticText-29" stretchType="RelativeToBandHeight" x="0" y="232" width="175" height="10" uuid="b95a95b8-a4c0-4d7d-b768-42f73d342104"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[FATURA / DUPLICATA]]></text>
+			</staticText>
+			<rectangle radius="3">
+				<reportElement key="rectangle-36" mode="Opaque" x="427" y="314" width="107" height="20" uuid="88ee4546-8c84-491d-bb85-6cd5c1a405dc"/>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement key="rectangle-34" mode="Opaque" x="257" y="314" width="86" height="20" uuid="8b8b0817-0586-4998-b050-6928117f4ebc"/>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement key="rectangle-33" mode="Opaque" x="171" y="314" width="86" height="20" uuid="2d13fae4-c092-4a29-b931-ad07b982ae3f"/>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement key="rectangle-32" mode="Opaque" x="86" y="314" width="86" height="20" uuid="cce12ac8-7342-4e0a-8806-7685d8d1ad23"/>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement key="rectangle-31" mode="Opaque" x="0" y="314" width="86" height="20" uuid="6c04bded-48a8-4871-8d36-daead3a520be"/>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement key="rectangle-26" mode="Opaque" x="0" y="294" width="108" height="20" uuid="6641923f-1668-4a13-8349-82f4082e8d98">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-51" x="0" y="285" width="175" height="10" uuid="46519094-a9d6-4696-a15c-bcb976d89742"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[CÁLCULO DO TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-52" x="8" y="295" width="93" height="8" uuid="d382d6dc-a995-4d03-a5c5-172921da8a72"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[ACRESCIMO]]></text>
+			</staticText>
+			<rectangle radius="3">
+				<reportElement key="rectangle-27" mode="Opaque" x="108" y="294" width="105" height="20" uuid="d49b7920-d44c-4595-a679-dd65b7278dc1"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-53" x="121" y="295" width="96" height="8" uuid="733257c8-5768-4f15-8741-ed995eaa6b81"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[DESCONTO]]></text>
+			</staticText>
+			<rectangle radius="3">
+				<reportElement key="rectangle-28" mode="Opaque" x="213" y="294" width="107" height="20" uuid="4a095be4-4be3-44a9-896a-0ed2cdc0871d"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-54" x="227" y="295" width="89" height="8" uuid="2d07f89a-ea48-4e3f-bf01-3b40c03a1ead"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[OUTRAS DEDUÇÕES]]></text>
+			</staticText>
+			<rectangle radius="3">
+				<reportElement key="rectangle-29" mode="Opaque" x="320" y="294" width="107" height="20" uuid="99db87b1-cbad-4927-8d27-0cde8f69d8d9"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-55" x="332" y="295" width="94" height="8" uuid="336ccd59-48ee-47b0-a3d0-7d69a4526e73"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[VALOR DO ICMS]]></text>
+			</staticText>
+			<rectangle radius="3">
+				<reportElement key="rectangle-30" mode="Opaque" x="427" y="294" width="107" height="20" uuid="4ede974a-3c0c-47c3-b607-d1390157f5aa"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-56" x="439" y="295" width="88" height="8" uuid="24d66a9c-5046-49c0-b576-ba92509f43c6"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[VALOR TOTAL DOS PRODUTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-57" x="13" y="315" width="63" height="7" uuid="afa06914-ce6b-4669-aed7-2bd83dfbdc68"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[VALOR DO FRETE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-58" x="98" y="315" width="63" height="8" uuid="64f8235b-11cb-407b-bd65-a386ed9c6bc6"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[VALOR DO SEGURO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-59" x="186" y="315" width="63" height="8" uuid="a74d2ee0-70f3-4ef0-98f4-3cdfbc052e36"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[TERCEIROS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-60" x="269" y="315" width="76" height="8" uuid="21141867-2f69-4a26-a602-6462c952477a"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[OUTRS DESPESAS ACESSÓRIA]]></text>
+			</staticText>
+			<rectangle radius="3">
+				<reportElement key="rectangle-35" mode="Opaque" x="342" y="314" width="85" height="20" uuid="9b3dc35c-6083-4153-8d7b-a3db13cb42b3"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-61" x="355" y="315" width="63" height="8" uuid="891d6f18-41f0-4d8c-a659-54d2b4385156"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[VALOR DO IPI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-62" x="439" y="315" width="88" height="8" uuid="ac361548-b175-4a9a-affd-7a7f2c5b45ff"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[VALOR TOTAL DA VENDA]]></text>
+			</staticText>
+			<textField pattern="#,###.00" isBlankWhenNull="true">
+				<reportElement x="2" y="301" width="100" height="13" uuid="406ecc18-45b2-4d1c-a8f9-8a1fff7293e3"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valorAcrescimo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00" isBlankWhenNull="true">
+				<reportElement x="111" y="300" width="100" height="15" uuid="8be201c0-8bec-46aa-9a37-ecda04d44416"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valorDesconto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="216" y="300" width="100" height="14" uuid="8d99f8da-b4db-4d6b-9a47-d0a5f89d1a08"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["0,00"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="321" y="300" width="100" height="13" uuid="0125aab1-bc03-4c7b-bd5f-1a4ee26387ea"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["0,00"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00" isBlankWhenNull="true">
+				<reportElement x="430" y="301" width="98" height="13" uuid="027cba66-bcec-4296-8dc6-83bb326dd9d5"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valorTotalProdutos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="10" y="320" width="76" height="14" uuid="ee46f760-0d3e-48dd-b2bb-5138a030b94d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["0,00"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="93" y="320" width="75" height="14" uuid="62873190-8c56-4f7f-84a6-5bc98436f679">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["0,00"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="181" y="320" width="68" height="14" uuid="7af9eb0a-2450-4c32-a665-105c23fe7ba2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["0,00"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="260" y="320" width="76" height="14" uuid="b354fe15-823e-45b8-aabe-665bc24b132e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["0,00"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="345" y="320" width="76" height="14" uuid="3298b2d5-7d15-4efe-9b68-d4b2d1a97362"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["0,00"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00" isBlankWhenNull="true">
+				<reportElement x="430" y="321" width="98" height="13" uuid="23f49267-70e7-42f8-bcce-4dc79d5d57cd"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valorTotalVenda}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="3">
+				<reportElement key="rectangle-19" mode="Opaque" x="450" y="170" width="85" height="40" uuid="5dd5b043-f930-4147-a3f6-ce7a47158062">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<rectangle radius="3">
+				<reportElement key="rectangle-15" mode="Opaque" x="450" y="210" width="85" height="20" uuid="da0cabae-119b-4dff-a3bf-319de68bd13d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-19" x="453" y="210" width="79" height="8" uuid="b6150146-206f-486e-b2d7-c027dcc59319"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[DATA DA EMISSÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="staticText-23" x="453" y="171" width="74" height="9" uuid="59573769-437e-428a-a71b-a2828e823452"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Venda]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="461" y="216" width="68" height="14" uuid="8c66a1c0-0460-4e58-ac16-a1f6bf469cf3"/>
+				<textFieldExpression><![CDATA[$F{dataVenda}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-29" x="0" y="161" width="175" height="10" uuid="76809ee6-5277-44e8-a2f5-1e1c88dc7643"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[DESTINATÁRIO / REMETENTE]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement x="446" y="16" width="74" height="24" uuid="a435e8fe-9198-46af-aa52-0316c09c877c"/>
+				<textElement textAlignment="Right">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="464" y="180" width="64" height="24" uuid="0d0925ba-418d-440f-a0bb-b476aea62f33"/>
+				<textElement textAlignment="Right">
+					<font size="15" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="452" y="183" width="12" height="15" uuid="64bb0f40-ce45-47f7-9001-0171a9f309c2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<subreport overflowType="Stretch">
+				<reportElement stretchType="RelativeToTallestObject" x="7" y="246" width="520" height="39" isRemoveLineWhenBlank="true" uuid="fc41eb24-d778-48db-96ed-931a717f3408"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{parcelasVenda})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"sub_parcelas_venda.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement key="staticText-76" x="0" y="337" width="175" height="10" uuid="89f645a0-b288-4c04-8aec-632e70d771cb"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[DADOS DO PRODUTO / SERVIÇO]]></text>
+			</staticText>
+			<subreport>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="347" width="533" height="235" uuid="b1c05253-e296-4c23-ac6c-67b17fedb991">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{itemVenda})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"sub_itemVenda.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="8" y="10" width="371" height="15" uuid="f6ba8424-3abc-4392-af78-44c752f879c5"/>
+				<textFieldExpression><![CDATA[$P{empresa}.get(0).toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="273" width="252" height="12" uuid="1d8f30f6-2b80-441b-82a4-6c2067fee7f2"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band/>
+	</detail>
+	<columnFooter>
+		<band height="102">
+			<rectangle radius="3">
+				<reportElement key="rectangle-71" mode="Opaque" x="0" y="10" width="533" height="92" uuid="663a296a-680a-4248-9509-1c3ad95ec14d">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement key="staticText-103" x="7" y="11" width="122" height="8" uuid="435423bb-c270-40c7-9a54-e8d8ad4417c3"/>
+				<textElement>
+					<font size="5"/>
+				</textElement>
+				<text><![CDATA[INFORMAÇÕES COMPLEMENTARES]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="4" y="19" width="524" height="78" uuid="b135ba1e-0487-4b08-a429-ac59b4f4472a"/>
+				<textElement>
+					<font fontName="SansSerif" size="6" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ACRESCIMO: "+ $F{motivoAcrescimo}+
+ "\n\nOBSERVAÇÕES: "+$F{observacoes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement key="staticText-105" x="4" y="1" width="175" height="10" uuid="6dcc38cc-d351-4970-b788-5285fb39b349"/>
+				<box leftPadding="3"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[DADOS ADICIONAIS]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

@@ -3,6 +3,7 @@ package cashFlow.MVC.DAO;
 import cashFlow.MVC.Models.ConexaoEntityManager;
 import cashFlow.MVC.Models.ItemVenda;
 import cashFlow.MVC.Models.Vendas;
+import java.util.List;
 import javax.persistence.EntityManager;
 
 public class ItemVendaDAO {
@@ -39,5 +40,10 @@ public class ItemVendaDAO {
             em.getTransaction().commit();
             em.close();
         }
+    }
+        public List getListaItemVenda(int codVenda) {
+        em = ConexaoEntityManager.getInstance();
+        List listaItemVenda = em.createQuery("FROM ItemVenda WHERE VENDA = " + codVenda).getResultList();
+        return listaItemVenda;
     }
 }

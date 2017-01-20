@@ -2,7 +2,6 @@ package cashFlow.MVC.DAO;
 
 import cashFlow.MVC.Models.ConexaoEntityManager;
 import cashFlow.MVC.Models.Empresa;
-import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 
@@ -22,7 +21,7 @@ public class EmpresasDAO {
         JOptionPane.showMessageDialog(null, "Empresa Cadastrada com Sucesso!");
     }
 
-    public Empresa getCadastroEmpresa() throws SQLException {
+    public Empresa getCadastroEmpresa() {
         em = ConexaoEntityManager.getInstance();
         Empresa empresaBusca = em.find(Empresa.class, 1);
         if (empresaBusca != null) {

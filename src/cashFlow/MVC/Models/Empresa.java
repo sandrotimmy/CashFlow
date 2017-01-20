@@ -13,6 +13,8 @@ public class Empresa implements Serializable {
     int tipoInscricao;
     @Column(length = 14)
     private String cpfCnpj;
+    @Column(length = 20)
+    private String inscEstadual;
     @Column(length = 50)
     private String nomeEmpresa;
     @Column(length = 30)
@@ -25,6 +27,8 @@ public class Empresa implements Serializable {
     private String numero;
     @Column(length = 20)
     private String municipio;
+    @Column(length = 30)
+    private String bairro;
     @Column(length = 2)
     private String uf;
     @Column(length = 8)
@@ -48,16 +52,18 @@ public class Empresa implements Serializable {
         this.nomeEmpresa = nomeEmpresa;
     }
 
-    public Empresa(int idEmpresa, int tipoInscricao, String cpfCnpj, String nomeEmpresa, String nomeFantasia, String endereco, String complemento, String numero, String municipio, String uf, String cep, String caixaPostal, String ddd, String fone, String cel, String email) {
+    public Empresa(int idEmpresa, int tipoInscricao, String cpfCnpj, String inscEstadual, String nomeEmpresa, String nomeFantasia, String endereco, String complemento, String numero, String municipio, String bairro, String uf, String cep, String caixaPostal, String ddd, String fone, String cel, String email) {
         this.idEmpresa = idEmpresa;
         this.tipoInscricao = tipoInscricao;
         this.cpfCnpj = cpfCnpj;
+        this.inscEstadual = inscEstadual;
         this.nomeEmpresa = nomeEmpresa;
         this.nomeFantasia = nomeFantasia;
         this.endereco = endereco;
         this.complemento = complemento;
         this.numero = numero;
         this.municipio = municipio;
+        this.bairro = bairro;
         this.uf = uf;
         this.cep = cep;
         this.caixaPostal = caixaPostal;
@@ -74,10 +80,13 @@ public class Empresa implements Serializable {
     public int getTipoInscricao() {
         return tipoInscricao;
     }
-    
 
     public String getCpfCnpj() {
         return cpfCnpj;
+    }
+
+    public String getInscEstadual() {
+        return inscEstadual;
     }
 
     public String getNomeEmpresa() {
@@ -94,6 +103,10 @@ public class Empresa implements Serializable {
 
     public String getMunicipio() {
         return municipio;
+    }
+
+    public String getBairro() {
+        return bairro;
     }
 
     public String getCaixaPostal() {
@@ -140,6 +153,10 @@ public class Empresa implements Serializable {
         this.municipio = municipio;
     }
 
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
@@ -158,6 +175,10 @@ public class Empresa implements Serializable {
 
     public void setCpfCnpj(String cpfCnpj) {
         this.cpfCnpj = cpfCnpj;
+    }
+
+    public void setInscEstadual(String inscEstadual) {
+        this.inscEstadual = inscEstadual;
     }
 
     public void setIdEmpresa(int idEmpresa) {
@@ -198,7 +219,7 @@ public class Empresa implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString();
+        return nomeEmpresa;
     }
 
     @Override

@@ -13,6 +13,8 @@ public class Fornecedores implements Serializable {
     int tipoInscricao;
     @Column(length = 14)
     private String cpfCnpj;
+    @Column(length = 20)
+    private String inscEstadual;
     @Column(length = 50)
     private String razaosocial;
     @Column(length = 30)
@@ -24,6 +26,8 @@ public class Fornecedores implements Serializable {
     private String complemento;
     @Column(length = 20)
     private String municipio;
+    @Column(length = 30)
+    private String bairro;
     @Column(length = 2)
     private String uf;
     @Column(length = 8)
@@ -42,16 +46,18 @@ public class Fornecedores implements Serializable {
     public Fornecedores() {
     }
 
-    public Fornecedores(Integer cod, int tipoInscricao, String cpfCnpj, String razaosocial, String nomefantasia, String endereco, String numero, String complemento, String municipio, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
+    public Fornecedores(Integer cod, int tipoInscricao, String cpfCnpj, String inscEstadual, String razaosocial, String nomefantasia, String endereco, String numero, String complemento, String municipio, String bairro, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
         this.cod = cod;
         this.tipoInscricao = tipoInscricao;
         this.cpfCnpj = cpfCnpj;
+        this.inscEstadual = inscEstadual;
         this.razaosocial = razaosocial;
         this.nomefantasia = nomefantasia;
         this.endereco = endereco;
         this.numero = numero;
         this.complemento = complemento;
         this.municipio = municipio;
+        this.bairro = bairro;
         this.uf = uf;
         this.cep = cep;
         this.caixapostal = caixapostal;
@@ -77,6 +83,10 @@ public class Fornecedores implements Serializable {
         return cpfCnpj;
     }
 
+    public String getInscEstadual() {
+        return inscEstadual;
+    }
+
     public String getRazaosocial() {
         return razaosocial;
     }
@@ -99,6 +109,10 @@ public class Fornecedores implements Serializable {
 
     public String getMunicipio() {
         return municipio;
+    }
+
+    public String getBairro() {
+        return bairro;
     }
 
     public String getUf() {
@@ -141,6 +155,10 @@ public class Fornecedores implements Serializable {
         this.cpfCnpj = cpfCnpj;
     }
 
+    public void setInscEstadual(String inscEstadual) {
+        this.inscEstadual = inscEstadual;
+    }
+
     public void setRazaosocial(String razaosocial) {
         this.razaosocial = razaosocial;
     }
@@ -163,6 +181,10 @@ public class Fornecedores implements Serializable {
 
     public void setMunicipio(String municipio) {
         this.municipio = municipio;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public void setUf(String uf) {

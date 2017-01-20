@@ -25,7 +25,6 @@ public class LancamentosDAO {
         em.persist(lancamento);
         em.getTransaction().commit();
         em.close();
-        JOptionPane.showMessageDialog(null, "Lancamento Cadastrado com Sucesso!");
     }
 
     public void removeLancamento(int idLancamento) {
