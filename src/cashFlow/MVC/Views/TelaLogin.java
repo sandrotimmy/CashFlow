@@ -1,21 +1,14 @@
 package cashFlow.MVC.Views;
 
-import cashFlow.MVC.Controllers.ParametrosCtrl;
 import cashFlow.MVC.Controllers.UsuariosCtrl;
-import cashFlow.MVC.Models.ConexaoEntityManager;
 import java.awt.AWTKeyStroke;
-import java.awt.BorderLayout;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashSet;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 public final class TelaLogin extends javax.swing.JFrame {
@@ -136,7 +129,7 @@ public final class TelaLogin extends javax.swing.JFrame {
 
         labelDireitosReservados.setText("Todos Direitos Reservados");
 
-        labelImagemEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logo.png"))); // NOI18N
+        labelImagemEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/CashFlowLogo.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

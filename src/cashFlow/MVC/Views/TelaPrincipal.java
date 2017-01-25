@@ -77,6 +77,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         relatoriosMovimentosCarne = new javax.swing.JMenuItem();
         menuUtilitarios = new javax.swing.JMenu();
         menuUtilitariosCalculadora = new javax.swing.JMenuItem();
+        menuAjuda = new javax.swing.JMenu();
+        menuAjudaSobre = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -102,7 +104,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelPrincipalLayout.setVerticalGroup(
             painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
+                .addContainerGap(208, Short.MAX_VALUE)
                 .addComponent(labelImagemLogo)
                 .addContainerGap())
         );
@@ -367,6 +369,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuPrincipal.add(menuUtilitarios);
 
+        menuAjuda.setText("Ajuda");
+        menuAjuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAjudaActionPerformed(evt);
+            }
+        });
+
+        menuAjudaSobre.setText("Sobre");
+        menuAjudaSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAjudaSobreActionPerformed(evt);
+            }
+        });
+        menuAjuda.add(menuAjudaSobre);
+
+        menuPrincipal.add(menuAjuda);
+
         menuSair.setText("Sair");
         menuSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -584,6 +603,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         relatorioVendasCarne.setLocationRelativeTo(null);
         relatorioVendasCarne.setVisible(true);
     }//GEN-LAST:event_relatoriosMovimentosCarneActionPerformed
+
+    private void menuAjudaSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjudaSobreActionPerformed
+        Sobre sobre = new Sobre();
+        sobre.setLocationRelativeTo(null);
+        sobre.setVisible(true);
+    }//GEN-LAST:event_menuAjudaSobreActionPerformed
+
+    private void menuAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjudaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuAjudaActionPerformed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             try {
@@ -605,6 +634,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JLabel labelImagemLogo;
+    private javax.swing.JMenu menuAjuda;
+    private javax.swing.JMenuItem menuAjudaSobre;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuItem menuCadastroClientes;
     private javax.swing.JMenuItem menuCadastroEmpresa;

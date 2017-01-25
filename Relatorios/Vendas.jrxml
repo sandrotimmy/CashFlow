@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-01-20T16:20:46 -->
+<!-- 2017-01-23T09:31:08 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Vendas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c15f76e-d83e-482c-b11f-7790e5fd13e5">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BANCOCF"/>
@@ -395,13 +395,6 @@
 			<textField>
 				<reportElement x="8" y="10" width="371" height="15" uuid="f6ba8424-3abc-4392-af78-44c752f879c5"/>
 				<textFieldExpression><![CDATA[$P{empresa}.get(0).toString()]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="280" y="273" width="252" height="12" uuid="1d8f30f6-2b80-441b-82a4-6c2067fee7f2"/>
-				<textElement textAlignment="Right" verticalAlignment="Bottom">
-					<font size="6" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

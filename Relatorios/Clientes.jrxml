@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2017-01-13T14:08:42 -->
+<!-- 2017-01-23T09:27:38 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Foenecedores" pageWidth="595" pageHeight="842" whenNoDataType="BlankPage" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="07f6748c-1766-4ffb-a4b3-b4d61abd69bf">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BANCOCF"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -198,7 +198,7 @@
 			</staticText>
 			<textField>
 				<reportElement x="211" y="65" width="80" height="13" uuid="7f7ccb2c-9511-459c-a39f-519358ee96c0"/>
-				<textFieldExpression><![CDATA["("+$F{ddd}+") " +$F{cel}.substring(0, 4) + "-" +$F{cel}.substring(4, 8)]]></textFieldExpression>
+				<textFieldExpression><![CDATA["("+$F{ddd}+") " +$F{cel}.substring(0, 5) + "-" +$F{cel}.substring(5, 9)]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="110" y="26" width="100" height="13" uuid="5ca3a9e4-4e56-40fa-978b-b28a9d9a8e00"/>
