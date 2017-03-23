@@ -1,10 +1,10 @@
 package cashFlow.MVC.Views;
 
+import cashFlow.MVC.DAO.ComprasDAO;
 import cashFlow.MVC.Models.Compras;
 import cashFlow.MVC.Models.IntegerDocument;
 import cashFlow.MVC.Models.ParcelamentoVendas;
 import cashFlow.MVC.Models.Vendas;
-import cashFlow.MVC.DAO.ComprasDAO;
 import java.awt.event.KeyEvent;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -601,6 +601,21 @@ public class ConsultaCompras extends javax.swing.JDialog implements InterfaceLis
 
     @Override
     public void parcelamentoVendas(ParcelamentoVendas parcelamentoVendas) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mensagemCodComissoes(String codComissao) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mensagemCodDescontos(String codDesconto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mensagemCodCalculoFolhaPagamento(String codBusca) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

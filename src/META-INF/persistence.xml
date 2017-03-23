@@ -20,14 +20,23 @@
     <class>cashFlow.MVC.Models.CancelamentoVendas</class>
     <class>cashFlow.MVC.Models.ParcelamentoVendas</class>
     <class>cashFlow.MVC.Models.ParcelasVenda</class>
+    <class>cashFlow.MVC.Models.Comissoes</class>
+    <class>cashFlow.MVC.Models.FolhaDePagamento</class>
+    <class>cashFlow.MVC.Models.Proventos</class>
+    <class>cashFlow.MVC.Models.Empregados</class>
+    <class>cashFlow.MVC.Models.Descontos</class>
+    <class>cashFlow.MVC.Models.ItemDesconto</class>
     <properties>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name="hibernate.format_sql" value="true"/>
       <property name="hibernate.max_fetch_depth" value="2"/>
       <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.FirebirdDialect"/>
       <property name="hibernate.connection.useUnicode" value="true"/>
       <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
       <property name="hibernate.connection.driver_class" value="org.firebirdsql.jdbc.FBDriver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:firebirdsql:localhost/3050:C:/Arquivos de Programas/CashFlow/banco/BANCOCF.FDB"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:firebirdsql:localhost/3050:C:\Arquivos de Programas\CashFlow\banco\BANCOCF.FDB"/>
+      <!--<property name="javax.persistence.jdbc.url" value="jdbc:firebirdsql:localhost/3050:C:\Users\Sandro\Documents\RepositorioGIT\CashFlow\banco\BANCOCF.FDB"/>-->
       <property name="javax.persistence.jdbc.user" value="sysdba"/>
       <property name="javax.persistence.jdbc.password" value="masterkey"/>
     </properties>

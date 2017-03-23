@@ -1,9 +1,12 @@
 package cashFlow.MVC.Models;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Clientes implements Serializable {
@@ -17,6 +20,9 @@ public class Clientes implements Serializable {
     private String inscEstadual;
     @Column(length = 100, nullable = false)
     private String nome;
+    @Temporal(TemporalType.DATE)
+    @Column
+    private Date dataNascimento;
     @Column(length = 100)
     private String endereco;
     @Column(length = 7)
@@ -49,12 +55,13 @@ public class Clientes implements Serializable {
         this.cod = cod;
     }
 
-    public Clientes(Integer cod, int tipoInscricao, String cpfCnpj, String inscEstadual, String nome, String endereco, String numero, String complemento, String municipio, String bairro, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
+    public Clientes(Integer cod, int tipoInscricao, String cpfCnpj, String inscEstadual, String nome, Date dataNascimento, String endereco, String numero, String complemento, String municipio, String bairro, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
         this.cod = cod;
         this.tipoInscricao = tipoInscricao;
         this.cpfCnpj = cpfCnpj;
         this.inscEstadual = inscEstadual;
         this.nome = nome;
+        this.dataNascimento = dataNascimento;
         this.endereco = endereco;
         this.numero = numero;
         this.complemento = complemento;
@@ -87,6 +94,10 @@ public class Clientes implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public void setEndereco(String endereco) {
@@ -155,6 +166,10 @@ public class Clientes implements Serializable {
 
     public String getNome() {
         return nome;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
     }
 
     public String getEndereco() {

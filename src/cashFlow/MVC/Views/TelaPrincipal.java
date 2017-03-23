@@ -41,10 +41,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         menuCadastroClientes = new javax.swing.JMenuItem();
         menuCadastroFornecedores = new javax.swing.JMenuItem();
+        menuCadastroEmpregados = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         menuCadastroProdutos = new javax.swing.JMenuItem();
         menuCadastroHistoricos = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        menuCadastroComissoes = new javax.swing.JMenuItem();
+        menuCadastroDescontos = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenuItem1 = new javax.swing.JMenuItem();
         menuProcessos = new javax.swing.JMenu();
         MenuProcessosLancamentos = new javax.swing.JMenuItem();
@@ -57,6 +61,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         processosComprasConsultar = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         menuProcessosReajusteProdutos = new javax.swing.JMenuItem();
+        processosFolhaDePagamento = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         menuConsultasLancamentos = new javax.swing.JMenuItem();
         menuConsultasHistoricos = new javax.swing.JMenuItem();
@@ -148,6 +153,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastro.add(menuCadastroFornecedores);
+
+        menuCadastroEmpregados.setText("Empregados");
+        menuCadastroEmpregados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroEmpregadosActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(menuCadastroEmpregados);
         menuCadastro.add(jSeparator1);
 
         menuCadastroProdutos.setText("Produtos");
@@ -166,6 +179,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(menuCadastroHistoricos);
         menuCadastro.add(jSeparator5);
+
+        menuCadastroComissoes.setText("Comissões");
+        menuCadastroComissoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroComissoesActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(menuCadastroComissoes);
+
+        menuCadastroDescontos.setText("Descontos");
+        menuCadastroDescontos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastroDescontosActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(menuCadastroDescontos);
+        menuCadastro.add(jSeparator7);
 
         jMenuItem1.setText("Parametros");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -237,6 +267,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuProcessos.add(menuProcessosReajusteProdutos);
+
+        processosFolhaDePagamento.setText("Cálculo Folha de Pagamento");
+        processosFolhaDePagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                processosFolhaDePagamentoActionPerformed(evt);
+            }
+        });
+        menuProcessos.add(processosFolhaDePagamento);
 
         menuPrincipal.add(menuProcessos);
 
@@ -613,6 +651,43 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void menuAjudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjudaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuAjudaActionPerformed
+
+    private void menuCadastroEmpregadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroEmpregadosActionPerformed
+        CadastroEmpregados cadastroEmpregados = new CadastroEmpregados();
+        pc.passaCamposComEnter(cadastroEmpregados);
+        cadastroEmpregados.setModal(true);
+        cadastroEmpregados.setLocationRelativeTo(null);
+        cadastroEmpregados.setVisible(true);
+    }//GEN-LAST:event_menuCadastroEmpregadosActionPerformed
+
+    private void menuCadastroComissoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroComissoesActionPerformed
+        CadastroComissoes cadastroComissoes = new CadastroComissoes();
+        pc.passaCamposComEnter(cadastroComissoes);
+        cadastroComissoes.setModal(true);
+        cadastroComissoes.setLocationRelativeTo(null);
+        cadastroComissoes.setVisible(true);
+    }//GEN-LAST:event_menuCadastroComissoesActionPerformed
+
+    private void menuCadastroDescontosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroDescontosActionPerformed
+        CadastroDescontos cadastroDescontos = new CadastroDescontos();
+        pc.passaCamposComEnter(cadastroDescontos);
+        cadastroDescontos.setModal(true);
+        cadastroDescontos.setLocationRelativeTo(null);
+        cadastroDescontos.setVisible(true);
+    }//GEN-LAST:event_menuCadastroDescontosActionPerformed
+
+    private void processosFolhaDePagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processosFolhaDePagamentoActionPerformed
+        CalculoFolhaPagamento calculoFolhaPagamento;
+        try {
+            calculoFolhaPagamento = new CalculoFolhaPagamento();
+            calculoFolhaPagamento.setModal(true);
+            calculoFolhaPagamento.setLocationRelativeTo(null);
+            calculoFolhaPagamento.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_processosFolhaDePagamentoActionPerformed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             try {
@@ -633,11 +708,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JLabel labelImagemLogo;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuItem menuAjudaSobre;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuItem menuCadastroClientes;
+    private javax.swing.JMenuItem menuCadastroComissoes;
+    private javax.swing.JMenuItem menuCadastroDescontos;
+    private javax.swing.JMenuItem menuCadastroEmpregados;
     private javax.swing.JMenuItem menuCadastroEmpresa;
     private javax.swing.JMenuItem menuCadastroFornecedores;
     private javax.swing.JMenuItem menuCadastroHistoricos;
@@ -664,6 +743,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel painelPrincipal;
     private javax.swing.JMenu processosCompras;
     private javax.swing.JMenuItem processosComprasConsultar;
+    private javax.swing.JMenuItem processosFolhaDePagamento;
     private javax.swing.JMenuItem relCadastraisClientes;
     private javax.swing.JMenuItem relCadastraisFornecedores;
     private javax.swing.JMenu relatoriosControle;

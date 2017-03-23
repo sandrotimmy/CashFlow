@@ -37,6 +37,26 @@ public class MetodosGerais {
         return dataBanco;
     }
 
+    public java.sql.Date convCompetenciaBanco(String dataSistema) {
+        //Conversão da data do sistema para formato da data do Banco
+        java.sql.Date dataBanco = new java.sql.Date(1);
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            dataBanco = new java.sql.Date(format.parse("01/" + dataSistema).getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(ProdutosDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dataBanco;
+    }
+
+    public String convCompetenciaSistema(java.util.Date dataBanco) {
+        String dataSistema;
+        SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
+        dataSistema = format.format(dataBanco);
+        return dataSistema;
+
+    }
+
     public String convDataSistema(java.util.Date dataBanco) {
         String dataSistema;
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -73,6 +93,11 @@ public class MetodosGerais {
         return new BigDecimal(valorSistema.replaceAll("\\.", "").replaceAll(",", "."));
     }
 
+    public BigDecimal convValorTabela(String valorSistema) {
+        String valor = valorSistema.replaceAll("\\.", "").replaceAll(",", ".").replaceAll("R", "").replaceAll("\\$", "").trim();
+        return new BigDecimal(valor);
+    }
+
     public boolean validaCpfCnpj(String cpfCnpj) {
         if (cpfCnpj.length() > 12) {
             return isCNPJ(cpfCnpj);
@@ -83,7 +108,7 @@ public class MetodosGerais {
 
     public boolean isCNPJ(String CNPJ) {
 // considera-se erro CNPJ's formados por uma sequencia de numeros iguais
-        if (       CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111")
+        if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111")
                 || CNPJ.equals("22222222222222") || CNPJ.equals("33333333333333")
                 || CNPJ.equals("44444444444444") || CNPJ.equals("55555555555555")
                 || CNPJ.equals("66666666666666") || CNPJ.equals("77777777777777")

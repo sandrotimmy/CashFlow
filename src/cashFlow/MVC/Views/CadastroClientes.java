@@ -38,7 +38,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
         listaClientes = persistCliente.getListaClientes();//busca do banco a lista de clientes
         carregaMascaraCpfCnpj();
         carregaPrimeiroCliente();//carrega primeiros dados e configurações na tela
-        setCamposFocus();
+        setCamposFocus();   
     }
 
     public void carregaMascaraCpfCnpj() {
@@ -74,6 +74,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
             campoCpfCnpj.setEnabled(false);
             campoInscEstadual.setEnabled(false);
             campoNome.setEnabled(false);
+            campoDataNascimento.setEnabled(false);
             campoEndereco.setEnabled(false);
             campoComplemento.setEnabled(false);
             campoNumero.setEnabled(false);
@@ -112,6 +113,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
                 mg.limpaCnpj(campoCpfCnpj.getText()),
                 campoInscEstadual.getText(),
                 campoNome.getText(),
+                mg.convDataBanco(campoDataNascimento.getText()),
                 campoEndereco.getText(),
                 mg.validaNumeros(campoNumero.getText()),
                 campoComplemento.getText(),
@@ -173,6 +175,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
         campoCpfCnpj.setText(cliente.getCpfCnpj());
         campoInscEstadual.setText(cliente.getInscEstadual());
         campoNome.setText(cliente.getNome());
+        campoDataNascimento.setText(mg.convDataSistema(cliente.getDataNascimento()));
         campoEndereco.setText(cliente.getEndereco());
         campoNumero.setText(cliente.getNumero());
         campoComplemento.setText(cliente.getComplemento());
@@ -192,6 +195,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
         campoCpfCnpj.setEnabled(campos);
         campoInscEstadual.setEnabled(campos);
         campoNome.setEnabled(campos);
+        campoDataNascimento.setEnabled(campos);
         campoEndereco.setEnabled(campos);
         campoComplemento.setEnabled(campos);
         campoNumero.setEnabled(campos);
@@ -213,6 +217,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
             if (limpaCampos == true) {
                 campoInscEstadual.setText("");
                 campoNome.setText("");
+                campoDataNascimento.setText("");
                 campoEndereco.setText("");
                 campoComplemento.setText("");
                 campoNumero.setText("");
@@ -286,6 +291,8 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
         campoBairro = new javax.swing.JTextField();
         labelInscEstadual = new javax.swing.JLabel();
         campoInscEstadual = new javax.swing.JTextField();
+        campoDataNascimento = new javax.swing.JTextField();
+        labelDataNascimento = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -459,6 +466,21 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
             }
         });
 
+        try{
+            javax.swing.text.MaskFormatter data = new javax.swing.text.MaskFormatter("##/##/####");
+            campoDataNascimento = new javax.swing.JFormattedTextField(data);
+        }
+        catch (Exception e){
+        }
+        campoDataNascimento.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        campoDataNascimento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoDataNascimentoMouseClicked(evt);
+            }
+        });
+
+        labelDataNascimento.setText("Dt. Nasc.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -507,7 +529,6 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
                         .addComponent(labelComplemento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(campoComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(campoNome, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -551,11 +572,17 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BotaoListaUltimo))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(campoEndereco)
-                        .addGap(9, 9, 9)
-                        .addComponent(labelNumero)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoEndereco)
+                            .addComponent(campoNome))
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(labelNumero)
+                            .addComponent(labelDataNascimento))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoDataNascimento)
+                            .addComponent(campoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -587,7 +614,9 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelRazaoSocial))
+                    .addComponent(labelRazaoSocial)
+                    .addComponent(campoDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelDataNascimento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -742,6 +771,10 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
     private void campoInscEstadualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoInscEstadualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoInscEstadualActionPerformed
+
+    private void campoDataNascimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoDataNascimentoMouseClicked
+        campoDataNascimento.setCaretPosition(0);
+    }//GEN-LAST:event_campoDataNascimentoMouseClicked
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -767,6 +800,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
     private javax.swing.JTextField campoComplemento;
     private javax.swing.JFormattedTextField campoCpfCnpj;
     private javax.swing.JTextField campoDDD;
+    private javax.swing.JTextField campoDataNascimento;
     private javax.swing.JTextField campoEmail;
     private javax.swing.JTextField campoEndereco;
     private javax.swing.JTextField campoFax;
@@ -784,6 +818,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
     private javax.swing.JLabel labelCaixaPostal;
     private javax.swing.JLabel labelComplemento;
     private javax.swing.JLabel labelDDD;
+    private javax.swing.JLabel labelDataNascimento;
     private javax.swing.JLabel labelEmail;
     private javax.swing.JLabel labelEndereco;
     private javax.swing.JLabel labelFax;
@@ -858,5 +893,21 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
     public void parcelamentoVendas(ParcelamentoVendas parcelamentoVendas) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void mensagemCodComissoes(String codComissao) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mensagemCodDescontos(String codDesconto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mensagemCodCalculoFolhaPagamento(String codBusca) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 
 }

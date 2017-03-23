@@ -1,5 +1,6 @@
 package cashFlow.MVC.Views;
 
+import cashFlow.MVC.Controllers.GuiUtils;
 import cashFlow.MVC.Controllers.LancamentosCtrl;
 import cashFlow.MVC.Controllers.MetodosGerais;
 import cashFlow.MVC.Models.Compras;
@@ -80,9 +81,8 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
         campoValorDebito.setText("");
         campoValorCredito.setText("");
         botaoIncluir.setEnabled(false);
-        botaoFiltrarActionPerformed(null);
         campoData.requestFocus();
-
+        botaoFiltrarActionPerformed(null);
     }
 
     public void setDebitoCredito(boolean valorDebito, boolean valorCredito) {
@@ -105,6 +105,9 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
     }
 
     public void insereNaTabela(Lancamentos lancamento) {
+        if (lancamento.getHistorico() == null) {
+            lancamento.setHistorico(new HistoricoPadrao(99999));
+        }
         val.addRow(new String[]{mg.convDataSistema(lancamento.getDataLancamento()),
             Integer.toString(lancamento.getHistorico().getCod()),
             lancamento.getHistorico().getTipo(),
@@ -112,6 +115,7 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
             lancamento.getObservacoes(),
             f.format(lancamento.getValorDebito()),
             f.format(lancamento.getValorCredito())});
+        GuiUtils.scrollToVisible(tabelaLancamentos, tabelaLancamentos.getHeight());
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -284,6 +288,11 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
         campoData.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 campoDataMouseClicked(evt);
+            }
+        });
+        campoData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoDataActionPerformed(evt);
             }
         });
         campoData.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -589,6 +598,7 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
             lancamento = coletaDadosCampos();
             lancamentosCtrl.cadastrarLancamento(lancamento);//insere dados no banco
             insereNaTabela(lancamento);//insere na tabela
+
             preparaCampos();//prepara os campos para digitar novo                
         } catch (ParseException ex) {
             Logger.getLogger(CadastroLancamentos.class.getName()).log(Level.SEVERE, null, ex);
@@ -625,7 +635,7 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
                 botaoIncluir.setEnabled(true);
                 campoObservacoes.requestFocus();
             } else {
-            JOptionPane.showMessageDialog(rootPane, "Histórico Inexistente!");
+                JOptionPane.showMessageDialog(rootPane, "Histórico Inexistente!");
             }
         } else if (evt.getKeyCode() == KeyEvent.VK_F2) {
             consultaHistorico.setVisible(true);
@@ -680,6 +690,8 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
         }
         campoSaldoPeriodo.setText(f.format(totalSaldoPeriodo));
         campoTotalEmCaixa.setText(f.format(totalEmCaixa));
+//        jScrollPane1.getVerticalScrollBar().setValue(tabelaLancamentos.getHeight());
+        GuiUtils.scrollToVisible(tabelaLancamentos, tabelaLancamentos.getHeight());
     }//GEN-LAST:event_botaoFiltrarActionPerformed
     private void campoDataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoDataKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
@@ -720,6 +732,10 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
     private void campoDataFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDataFocusGained
         campoData.setCaretPosition(0);
     }//GEN-LAST:event_campoDataFocusGained
+
+    private void campoDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoDataActionPerformed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             try {
@@ -833,6 +849,21 @@ public class CadastroLancamentos extends javax.swing.JDialog implements Interfac
     @Override
     public void parcelamentoVendas(ParcelamentoVendas parcelamentoVendas) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void mensagemCodComissoes(String codComissao) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mensagemCodDescontos(String codDesconto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mensagemCodCalculoFolhaPagamento(String codBusca) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

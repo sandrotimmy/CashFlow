@@ -56,9 +56,9 @@ public class Sobre extends javax.swing.JDialog {
         labelNomeProduto.setText("CashFlow");
 
         labelVersaoProduto.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
-        labelVersaoProduto.setText("Versão: 1.0");
+        labelVersaoProduto.setText("Versão: 1.1.1");
 
-        labelVersaoBanco.setText("Versão do Bando de Dados: 1.0");
+        labelVersaoBanco.setText("Versão do Bando de Dados: 1.1.1");
 
         labelGerencBanco.setText("Gerenciador do Bando de Dados: FlameRobin 0.9.2.1851");
 
@@ -154,7 +154,7 @@ public class Sobre extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(labelNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelVersaoProduto)
+                        .addComponent(labelVersaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelVersaoBanco)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

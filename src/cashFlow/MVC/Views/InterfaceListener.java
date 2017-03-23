@@ -34,4 +34,9 @@ public interface InterfaceListener {
     
     public void parcelamentoVendas (ParcelamentoVendas parcelamentoVendas);
     
+    public void mensagemCodComissoes (String codComissao);
+    
+    public void mensagemCodDescontos(String codDesconto);
+    
+    public void mensagemCodCalculoFolhaPagamento(String codBusca);
 }

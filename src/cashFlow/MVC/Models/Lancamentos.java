@@ -32,7 +32,7 @@ public class Lancamentos implements Serializable {
     private BigDecimal valorDebito;
     @Column(columnDefinition = "DECIMAL(9,2)")
     private BigDecimal valorCredito;
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.DETACH, optional = true)
     @JoinColumn(name = "historico", foreignKey = @ForeignKey(name = "fk_historicoPadrao_lancamento"))
     HistoricoPadrao historico;
 

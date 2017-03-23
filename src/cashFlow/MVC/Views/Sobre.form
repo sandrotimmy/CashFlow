@@ -70,7 +70,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="labelNomeProduto" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="labelVersaoProduto" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelVersaoProduto" min="-2" pref="17" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="labelVersaoBanco" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -118,12 +118,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial Narrow" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Vers&#xe3;o: 1.0"/>
+        <Property name="text" type="java.lang.String" value="Vers&#xe3;o: 1.1.1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelVersaoBanco">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Vers&#xe3;o do Bando de Dados: 1.0"/>
+        <Property name="text" type="java.lang.String" value="Vers&#xe3;o do Bando de Dados: 1.1.1"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labelGerencBanco">
