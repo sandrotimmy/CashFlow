@@ -92,7 +92,7 @@ public class FolhaDePagamentoView extends javax.swing.JDialog implements Interfa
                 for (int i = 0; i < listaItemDescontos.size(); i++) {
                     ItemDesconto itemDescontoTemp = listaItemDescontos.get(i);
                     insereNaTabelaDesc(itemDescontoTemp);
-                    calculaTotais(1, BigDecimal.ZERO, itemDescontoTemp.getValorTotalDesconto());
+                    calculaTotais(1, BigDecimal.ZERO, itemDescontoTemp.getValorBase());
                 }
             }
         } else {

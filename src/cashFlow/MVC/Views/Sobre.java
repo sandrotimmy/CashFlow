@@ -31,6 +31,7 @@ public class Sobre extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLayeredPane1 = new javax.swing.JLayeredPane();
         labelLogo = new javax.swing.JLabel();
         labelNomeProduto = new javax.swing.JLabel();
         labelVersaoProduto = new javax.swing.JLabel();
@@ -47,6 +48,17 @@ public class Sobre extends javax.swing.JDialog {
         labelAvisoPirataria = new javax.swing.JLabel();
         botaoOk = new javax.swing.JButton();
 
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sobre CashFlow");
 
@@ -56,7 +68,7 @@ public class Sobre extends javax.swing.JDialog {
         labelNomeProduto.setText("CashFlow");
 
         labelVersaoProduto.setFont(new java.awt.Font("Arial Narrow", 1, 14)); // NOI18N
-        labelVersaoProduto.setText("Versão: 1.1.1");
+        labelVersaoProduto.setText("Versão: 1.1.2");
 
         labelVersaoBanco.setText("Versão do Bando de Dados: 1.1.1");
 
@@ -227,6 +239,7 @@ public class Sobre extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoOk;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLabel labelAvisoPirataria;
     private javax.swing.JLabel labelContato;
     private javax.swing.JLabel labelDireitos;
