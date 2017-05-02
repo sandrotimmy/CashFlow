@@ -2,19 +2,17 @@ package cashFlow.MVC.DAO;
 
 import cashFlow.MVC.Models.Clientes;
 import cashFlow.MVC.Models.ConexaoEntityManager;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.RollbackException;
-import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 
 public class ClientesDAO {
 
     private EntityManager em;
-    private final ArrayList<Clientes> listaClientes;
 
     public ClientesDAO() {
-        this.listaClientes = new ArrayList();
+
     }
 
     public int getProximoCliente() {
@@ -74,57 +72,21 @@ public class ClientesDAO {
         return cliente;
     }
 
-    public ArrayList getUmCliente(Integer codCliente) {
+    public List getUmCliente(Integer codCliente) {
         em = ConexaoEntityManager.getInstance();
-        TypedQuery<Clientes> q = em.createQuery("FROM Clientes where cod = " + codCliente, Clientes.class);
-        for (Clientes each : q.getResultList()) {
-            listaClientes.add(new Clientes(
-                    each.getCod(),
-                    each.getTipoInscricao(),
-                    each.getCpfCnpj(),
-                    each.getInscEstadual(),
-                    each.getNome(),
-                    each.getDataNascimento(),
-                    each.getEndereco(),
-                    each.getNumero(),
-                    each.getComplemento(),
-                    each.getMunicipio(),
-                    each.getBairro(),
-                    each.getUf(),
-                    each.getCep(),
-                    each.getCaixapostal(),
-                    each.getDdd(),
-                    each.getFone(),
-                    each.getCel(),
-                    each.getEmail()));
-        }
+        List<Clientes> listaClientes = em.createQuery("FROM Clientes where cod = " + codCliente).getResultList();
         return listaClientes;
     }
 
-    public ArrayList getListaClientes() {
+    public List getListaClientes() {
         em = ConexaoEntityManager.getInstance();
-        TypedQuery<Clientes> q = em.createQuery("FROM Clientes c ORDER BY c.cod", Clientes.class);
-        for (Clientes each : q.getResultList()) {
-            listaClientes.add(new Clientes(
-                    each.getCod(),
-                    each.getTipoInscricao(),
-                    each.getCpfCnpj(),
-                    each.getInscEstadual(),
-                    each.getNome(),
-                    each.getDataNascimento(),
-                    each.getEndereco(),
-                    each.getNumero(),
-                    each.getComplemento(),
-                    each.getMunicipio(),
-                    each.getBairro(),
-                    each.getUf(),
-                    each.getCep(),
-                    each.getCaixapostal(),
-                    each.getDdd(),
-                    each.getFone(),
-                    each.getCel(),
-                    each.getEmail()));
-        }
+        List<Clientes> listaClientes = em.createQuery("FROM Clientes c ORDER BY c.nome").getResultList();
+        return listaClientes;
+    }
+
+    public List getListaAniversariantes(int mes) {
+        em = ConexaoEntityManager.getInstance();
+        List<Clientes> listaClientes = em.createQuery("FROM Clientes c WHERE (extract (month from dataNascimento)) = "+mes+" ORDER BY c.dataNascimento").getResultList();
         return listaClientes;
     }
 }

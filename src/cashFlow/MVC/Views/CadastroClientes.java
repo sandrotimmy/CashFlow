@@ -13,7 +13,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,7 +23,7 @@ import javax.swing.text.MaskFormatter;
 public class CadastroClientes extends javax.swing.JDialog implements InterfaceListener {
 
     private final ClientesDAO persistCliente;//persistencia dos dados
-    private final ArrayList<Clientes> listaClientes;//recebe os clientes para exibir na tela
+    private final List<Clientes> listaClientes;//recebe os clientes para exibir na tela
     private int posicao;//controla o caminhamento do cadastro
     private ConsultaCliente consultaCliente;//recebe a instancia da tela de consulta
     private Clientes cliente;
@@ -74,6 +74,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
             campoCpfCnpj.setEnabled(false);
             campoInscEstadual.setEnabled(false);
             campoNome.setEnabled(false);
+            comboBoxSexo.setEnabled(false);
             campoDataNascimento.setEnabled(false);
             campoEndereco.setEnabled(false);
             campoComplemento.setEnabled(false);
@@ -113,6 +114,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
                 mg.limpaCnpj(campoCpfCnpj.getText()),
                 campoInscEstadual.getText(),
                 campoNome.getText(),
+                comboBoxSexo.getSelectedItem().toString(),
                 mg.convDataBanco(campoDataNascimento.getText()),
                 campoEndereco.getText(),
                 mg.validaNumeros(campoNumero.getText()),
@@ -175,6 +177,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
         campoCpfCnpj.setText(cliente.getCpfCnpj());
         campoInscEstadual.setText(cliente.getInscEstadual());
         campoNome.setText(cliente.getNome());
+        comboBoxSexo.setSelectedItem(cliente.getSexo());
         campoDataNascimento.setText(mg.convDataSistema(cliente.getDataNascimento()));
         campoEndereco.setText(cliente.getEndereco());
         campoNumero.setText(cliente.getNumero());
@@ -195,6 +198,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
         campoCpfCnpj.setEnabled(campos);
         campoInscEstadual.setEnabled(campos);
         campoNome.setEnabled(campos);
+        comboBoxSexo.setEnabled(campos);
         campoDataNascimento.setEnabled(campos);
         campoEndereco.setEnabled(campos);
         campoComplemento.setEnabled(campos);
@@ -217,13 +221,14 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
             if (limpaCampos == true) {
                 campoInscEstadual.setText("");
                 campoNome.setText("");
+                comboBoxSexo.setSelectedIndex(0);
                 campoDataNascimento.setText("");
                 campoEndereco.setText("");
                 campoComplemento.setText("");
                 campoNumero.setText("");
                 campoMunicipio.setText("");
                 campoBairro.setText("");
-                comboBoxUF.setSelectedItem("");
+                comboBoxUF.setSelectedIndex(0);
                 campoCEP.setText("");
                 campoCaixaPostal.setText("");
                 campoDDD.setText("");
@@ -293,6 +298,8 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
         campoInscEstadual = new javax.swing.JTextField();
         campoDataNascimento = new javax.swing.JTextField();
         labelDataNascimento = new javax.swing.JLabel();
+        labelSexo = new javax.swing.JLabel();
+        comboBoxSexo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -481,6 +488,15 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
 
         labelDataNascimento.setText("Dt. Nasc.");
 
+        labelSexo.setText("Sexo:");
+
+        comboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Masculino", "Feminino" }));
+        comboBoxSexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxSexoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -573,9 +589,16 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
                         .addComponent(BotaoListaUltimo))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoEndereco)
-                            .addComponent(campoNome))
-                        .addGap(5, 5, 5)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(campoEndereco)
+                                .addGap(5, 5, 5))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(campoNome)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelSexo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelNumero)
                             .addComponent(labelDataNascimento))
@@ -616,7 +639,9 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
                     .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelRazaoSocial)
                     .addComponent(campoDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelDataNascimento))
+                    .addComponent(labelDataNascimento)
+                    .addComponent(labelSexo)
+                    .addComponent(comboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -775,6 +800,10 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
     private void campoDataNascimentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoDataNascimentoMouseClicked
         campoDataNascimento.setCaretPosition(0);
     }//GEN-LAST:event_campoDataNascimentoMouseClicked
+
+    private void comboBoxSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxSexoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxSexoActionPerformed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -809,6 +838,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
     private javax.swing.JTextField campoMunicipio;
     private javax.swing.JTextField campoNome;
     private javax.swing.JTextField campoNumero;
+    private javax.swing.JComboBox<String> comboBoxSexo;
     private javax.swing.JComboBox comboBoxUF;
     private javax.swing.JComboBox<String> comboCpfCnpj;
     private javax.swing.JLabel jLabel1;
@@ -826,6 +856,7 @@ public class CadastroClientes extends javax.swing.JDialog implements InterfaceLi
     private javax.swing.JLabel labelInscEstadual;
     private javax.swing.JLabel labelNumero;
     private javax.swing.JLabel labelRazaoSocial;
+    private javax.swing.JLabel labelSexo;
     private javax.swing.JLabel labelUF;
     private javax.swing.JLabel labemMunicipio;
     // End of variables declaration//GEN-END:variables

@@ -3,19 +3,15 @@ package cashFlow.MVC.DAO;
 import cashFlow.MVC.Models.ConexaoEntityManager;
 import cashFlow.MVC.Models.Produtos;
 import cashFlow.MVC.Models.ReajusteProdutos;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 
 public class ProdutosDAO {
 
     private EntityManager em;
-    private final ArrayList<Produtos> listaProdutos;
 
     public ProdutosDAO() {
-        this.listaProdutos = new ArrayList();
     }
 
     public void cadastrarProduto(Produtos produto) {
@@ -49,21 +45,19 @@ public class ProdutosDAO {
         }
     }
 
-    public ArrayList getListaProdutos() {
+    public List getListaProdutos() {
         em = ConexaoEntityManager.getInstance();
-        TypedQuery<Produtos> q = em.createQuery("FROM Produtos p ORDER BY p.cod", Produtos.class);
-        for (Produtos each : q.getResultList()) {
-            listaProdutos.add(new Produtos(each.getCod(), each.getIdentificador(), each.getDescricao(), each.getUnidade(), each.getQuantidade(), each.getValorUnitario(), each.getValorTotal(), each.getValorUnitarioVenda(), each.getValorTotalVenda()));
-        }
+        List<Produtos> listaProdutos = em.createQuery("FROM Produtos p ORDER BY p.cod").getResultList();
         return listaProdutos;
     }
-
-    public ArrayList getUmProduto(int cod) {
+    public List getListaProdutosPorNome() {
         em = ConexaoEntityManager.getInstance();
-        TypedQuery<Produtos> q = em.createQuery("FROM Produtos where cod = "+cod, Produtos.class);
-        for (Produtos each : q.getResultList()) {
-            listaProdutos.add(new Produtos(each.getCod(), each.getIdentificador(), each.getDescricao(), each.getUnidade(), each.getQuantidade(), each.getValorUnitario(), each.getValorTotal(), each.getValorUnitarioVenda(), each.getValorTotalVenda()));
-        }
+        List<Produtos> listaProdutos = em.createQuery("FROM Produtos p ORDER BY p.descricao").getResultList();
+        return listaProdutos;
+    }
+    public List getUmProduto(int cod) {
+        em = ConexaoEntityManager.getInstance();
+        List<Produtos> listaProdutos = em.createQuery("FROM Produtos where cod = "+cod).getResultList();
         return listaProdutos;
     }
 

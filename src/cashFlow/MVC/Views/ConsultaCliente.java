@@ -5,14 +5,14 @@ import cashFlow.MVC.Models.Clientes;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 public final class ConsultaCliente extends javax.swing.JDialog {
 
-    private final ArrayList<Clientes> listaClientes;
+    private final List<Clientes> listaClientes;
     private final ClientesDAO persist;
     private final DefaultTableModel val;
     private InterfaceListener listner = null;
@@ -159,7 +159,6 @@ public final class ConsultaCliente extends javax.swing.JDialog {
             listaClientes.stream().forEach((Clientes listaClientes) -> {
                 String pesquisa = campoBusca.getText();
                 String lista = "";
-                listaClientes.getNome().length();
                 if (listaClientes.getNome().length() >= quantCar) {
                     lista = listaClientes.getNome().substring(0, quantCar);
                 }

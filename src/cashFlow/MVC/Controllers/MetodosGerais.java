@@ -59,10 +59,13 @@ public class MetodosGerais {
 
     public String convDataSistema(java.util.Date dataBanco) {
         String dataSistema;
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        dataSistema = format.format(dataBanco);
-        return dataSistema;
-
+        if (dataBanco != null) {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            dataSistema = format.format(dataBanco);
+            return dataSistema;
+        } else {
+            return "";
+        }
     }
 
     //Pega a data do Computador

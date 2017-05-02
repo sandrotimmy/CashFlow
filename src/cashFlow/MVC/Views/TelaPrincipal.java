@@ -44,6 +44,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadastroEmpregados = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         menuCadastroProdutos = new javax.swing.JMenuItem();
+        menuClassificacaoProdutos = new javax.swing.JMenuItem();
         menuCadastroHistoricos = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
         menuCadastroComissoes = new javax.swing.JMenuItem();
@@ -80,6 +81,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
         relatoriosMovimentosVenda = new javax.swing.JMenuItem();
         relatoriosMovimentosCarne = new javax.swing.JMenuItem();
+        menuAcomp = new javax.swing.JMenu();
+        porCusto = new javax.swing.JMenuItem();
+        clientesAniversariantes = new javax.swing.JMenuItem();
         menuUtilitarios = new javax.swing.JMenu();
         menuUtilitariosCalculadora = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
@@ -170,6 +174,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastro.add(menuCadastroProdutos);
+
+        menuClassificacaoProdutos.setText("Classificação de Produtos");
+        menuClassificacaoProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuClassificacaoProdutosActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(menuClassificacaoProdutos);
 
         menuCadastroHistoricos.setText("Historicos");
         menuCadastroHistoricos.addActionListener(new java.awt.event.ActionListener() {
@@ -392,6 +404,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.add(relatoriosMovimentosCarne);
 
         menuRelatorios.add(jMenu1);
+
+        menuAcomp.setText("Acompanhamentos");
+
+        porCusto.setText("Por Histórico");
+        porCusto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                porCustoActionPerformed(evt);
+            }
+        });
+        menuAcomp.add(porCusto);
+
+        clientesAniversariantes.setText("Aniversariantes");
+        clientesAniversariantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientesAniversariantesActionPerformed(evt);
+            }
+        });
+        menuAcomp.add(clientesAniversariantes);
+
+        menuRelatorios.add(menuAcomp);
 
         menuPrincipal.add(menuRelatorios);
 
@@ -686,8 +718,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_processosFolhaDePagamentoActionPerformed
+
+    private void porCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_porCustoActionPerformed
+        RelatorioCustos relatorioCustos;
+        relatorioCustos = new RelatorioCustos();
+        relatorioCustos.setLocationRelativeTo(null);
+        relatorioCustos.setVisible(true);
+    }//GEN-LAST:event_porCustoActionPerformed
+
+    private void clientesAniversariantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesAniversariantesActionPerformed
+        RelatorioClientesAniversariantes relatorioClientesAniversariantes = new RelatorioClientesAniversariantes();
+        pc.passaCamposComEnter(relatorioClientesAniversariantes);
+        relatorioClientesAniversariantes.setLocationRelativeTo(null);
+        relatorioClientesAniversariantes.setVisible(true);
+    }//GEN-LAST:event_clientesAniversariantesActionPerformed
+
+    private void menuClassificacaoProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuClassificacaoProdutosActionPerformed
+        CadastroClassificacaoProdutos cadastroClassificacaoProdutos = new CadastroClassificacaoProdutos();
+        pc.passaCamposComEnter(cadastroClassificacaoProdutos);
+        cadastroClassificacaoProdutos.setLocationRelativeTo(null);
+        cadastroClassificacaoProdutos.setVisible(true);
+    }//GEN-LAST:event_menuClassificacaoProdutosActionPerformed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             try {
@@ -699,6 +751,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MenuProcessosLancamentos;
+    private javax.swing.JMenuItem clientesAniversariantes;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -710,6 +763,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JLabel labelImagemLogo;
+    private javax.swing.JMenu menuAcomp;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuItem menuAjudaSobre;
     private javax.swing.JMenu menuCadastro;
@@ -722,6 +776,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuCadastroHistoricos;
     private javax.swing.JMenuItem menuCadastroProdutos;
     private javax.swing.JMenuItem menuCadastroUsuarios;
+    private javax.swing.JMenuItem menuClassificacaoProdutos;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenuItem menuConsultasClientes;
     private javax.swing.JMenuItem menuConsultasHistoricos;
@@ -741,6 +796,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuUtilitariosCalculadora;
     private javax.swing.JMenuItem menuVendasConsutar;
     private javax.swing.JPanel painelPrincipal;
+    private javax.swing.JMenuItem porCusto;
     private javax.swing.JMenu processosCompras;
     private javax.swing.JMenuItem processosComprasConsultar;
     private javax.swing.JMenuItem processosFolhaDePagamento;

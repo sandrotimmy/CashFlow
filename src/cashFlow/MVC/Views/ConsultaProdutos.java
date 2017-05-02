@@ -1,19 +1,18 @@
 package cashFlow.MVC.Views;
 
-import cashFlow.MVC.Models.Produtos;
 import cashFlow.MVC.DAO.ProdutosDAO;
+import cashFlow.MVC.Models.Produtos;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.table.DefaultTableModel;
 
 public final class ConsultaProdutos extends javax.swing.JDialog {
 
-    private final ArrayList<Produtos> listaProdutos;
+    private final List<Produtos> listaProdutos;
     private final ProdutosDAO persist;
     private final DefaultTableModel val;
     private InterfaceListener listner = null;

@@ -118,15 +118,21 @@ public class FolhaDePagamentoCtrl {
         persistProventos.cadastrarProvento(provento);
 
     }
+
     public void atualizaProvento(Proventos provento) {
         persistProventos.atualizaProvento(provento);
     }
+
     public void removeProvento(int codProvento) {
         persistProventos.removeProvento(codProvento);
     }
 
     public Proventos getProventos(int codProvento) {
         return persistProventos.getProventos(codProvento);
+    }
+
+    public List getListaProventos(int codFolhaDePagamento) {
+        return persistProventos.getListaProventos(codFolhaDePagamento);
     }
 
     //Item Descontos

@@ -1,6 +1,8 @@
 package cashFlow.MVC.Views;
 
+import cashFlow.MVC.Controllers.ClassificacaoProdutosCtrl;
 import cashFlow.MVC.DAO.ProdutosDAO;
+import cashFlow.MVC.Models.ClassificacaoProdutos;
 import cashFlow.MVC.Models.Compras;
 import cashFlow.MVC.Models.DocumentoLimitado;
 import cashFlow.MVC.Models.JNumberFormatField;
@@ -11,7 +13,7 @@ import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,8 +21,10 @@ import javax.swing.JOptionPane;
 public class CadastroProdutos extends javax.swing.JDialog implements InterfaceListener {
 
     private final ProdutosDAO persistProduto;
+    private final ClassificacaoProdutosCtrl classificacaoProdutos;
     private Produtos produto;
-    private final ArrayList<Produtos> listaProdutos;
+    private final List<Produtos> listaProdutos;
+    private final List<ClassificacaoProdutos> listaClassificacaoProdutos;
     private int posicao;
     private final NumberFormat f;
     private ConsultaProdutos consultaProduto;
@@ -29,10 +33,28 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
         initComponents();
         produto = new Produtos();
         persistProduto = new ProdutosDAO();
+        classificacaoProdutos = new ClassificacaoProdutosCtrl();
         f = NumberFormat.getCurrencyInstance();
         listaProdutos = persistProduto.getListaProdutos();
+        listaClassificacaoProdutos = classificacaoProdutos.getListaClassificacao();
         setFocusCampos();
+        carregaClassificacao();
         carregaPrimeiroProduto();
+    }
+
+    public void carregaClassificacao() {
+        for (int i = 0; i < listaClassificacaoProdutos.size(); i++) {
+            comboClassificacao.addItem(listaClassificacaoProdutos.get(i).getNomeClassificacao());
+        }
+    }
+
+    public ClassificacaoProdutos buscaClassificacao(String buscar) {
+        for (int i = 0; i < listaClassificacaoProdutos.size(); i++) {
+            if (buscar.equals(listaClassificacaoProdutos.get(i).getNomeClassificacao())) {
+                return listaClassificacaoProdutos.get(i);
+            }
+        }
+        return listaClassificacaoProdutos.get(0);
     }
 
     public final void setFocusCampos() {
@@ -49,6 +71,7 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
             posicao = listaProdutos.size() - 1;
             //bloqueia todos os campos e seta o focus do botao Cadastrar
             campoIdentificador.setEnabled(false);
+            comboClassificacao.setEnabled(false);
             campoDescricao.setEnabled(false);
             campoUnidade.setEnabled(false);
             campoQuantidade.setEnabled(false);
@@ -86,6 +109,13 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
     }
 
     private void exibeDados(Produtos produto) {
+        String classificacao;
+        if (produto.getClassificacaoProdutos() == null) {
+            classificacao = " ";
+        } else {
+            classificacao = produto.getClassificacaoProdutos().getNomeClassificacao();
+        }
+        comboClassificacao.setSelectedItem(classificacao);
         campoCodigo.setText(produto.getCod().toString());
         campoIdentificador.setText(produto.getIdentificador());
         campoDescricao.setText(produto.getDescricao());
@@ -112,13 +142,16 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
                     produto.convValorBanco(campoValorUnitario.getText()),
                     produto.convValorBanco(campoValorTotal.getText()),
                     produto.convValorBanco(campoValorUnitarioVenda.getText()),
-                    produto.convValorBanco(campoValorTotalVenda.getText()));
+                    produto.convValorBanco(campoValorTotalVenda.getText()),
+                    buscaClassificacao(comboClassificacao.getSelectedItem().toString())
+            );
             return produto;
         }
     }
 
     public void habilitaDesabilitaCampos(int tipo, boolean limpaCampos, boolean campos, boolean botoes) {
         campoIdentificador.setEnabled(campos);
+        comboClassificacao.setEnabled(campos);
         campoDescricao.setEnabled(campos);
         campoUnidade.setEnabled(campos);
         BotaoListaPrimeiro.setEnabled(botoes);
@@ -135,6 +168,7 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
             if (limpaCampos == true) {
 
                 campoIdentificador.setText("");
+                comboClassificacao.setSelectedItem(" ");
                 campoDescricao.setText("");
                 campoUnidade.setText("");
                 campoQuantidade.setText("");
@@ -185,6 +219,8 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
         BotaoListaAnterior = new javax.swing.JButton();
         BotaoListaPrimeiro = new javax.swing.JButton();
         botaoBuscar = new javax.swing.JButton();
+        labelClassificacao = new javax.swing.JLabel();
+        comboClassificacao = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produtos");
@@ -383,6 +419,11 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
             }
         });
 
+        labelClassificacao.setText("Classificação:");
+
+        comboClassificacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        comboClassificacao.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -392,16 +433,28 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelIdentificador)
-                            .addComponent(labelDescricao))
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(campoIdentificador, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(labelUnidade)
+                                .addGap(36, 36, 36)
+                                .addComponent(campoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(campoDescricao)
-                                .addContainerGap())))
+                                .addComponent(labelQuantidade)
+                                .addGap(18, 18, 18)
+                                .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelvalorUnitario)
+                                    .addComponent(labelValorTotal))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(campoValorTotal)
+                                    .addComponent(campoValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(painelVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelDescricao)
+                        .addGap(29, 29, 29)
+                        .addComponent(campoDescricao))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -410,7 +463,7 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
                                 .addComponent(campoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botaoBuscar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                                .addGap(16, 16, 16)
                                 .addComponent(BotaoListaPrimeiro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BotaoListaAnterior)
@@ -420,34 +473,22 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
                                 .addComponent(BotaoListaUltimo))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(labelUnidade)
-                                        .addGap(36, 36, 36)
-                                        .addComponent(campoUnidade, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(labelQuantidade)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(labelvalorUnitario)
-                                            .addComponent(labelValorTotal))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(campoValorTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                                            .addComponent(campoValorUnitario))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(painelVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labelIdentificador)
+                                    .addComponent(labelClassificacao))
+                                .addGap(14, 14, 14)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(campoIdentificador, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboClassificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(78, 78, 78)
+                                .addComponent(botaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botaoAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botaoExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botaoCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -473,6 +514,10 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
                     .addComponent(campoIdentificador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelClassificacao)
+                    .addComponent(comboClassificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelDescricao)
                     .addComponent(campoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -492,15 +537,15 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelValorTotal)
-                            .addComponent(campoValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botaoCancelar)
-                            .addComponent(botaoExcluir)
-                            .addComponent(botaoAtualizar)
-                            .addComponent(botaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(campoValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(painelVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoCancelar)
+                    .addComponent(botaoExcluir)
+                    .addComponent(botaoAtualizar)
+                    .addComponent(botaoCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -692,6 +737,8 @@ public class CadastroProdutos extends javax.swing.JDialog implements InterfaceLi
     private javax.swing.JTextField campoValorTotalVenda;
     private javax.swing.JTextField campoValorUnitario;
     private javax.swing.JTextField campoValorUnitarioVenda;
+    private javax.swing.JComboBox<String> comboClassificacao;
+    private javax.swing.JLabel labelClassificacao;
     private javax.swing.JLabel labelCodigo;
     private javax.swing.JLabel labelDescricao;
     private javax.swing.JLabel labelIdentificador;

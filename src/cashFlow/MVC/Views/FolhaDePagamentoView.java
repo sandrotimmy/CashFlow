@@ -73,8 +73,9 @@ public class FolhaDePagamentoView extends javax.swing.JDialog implements Interfa
             for (int i = 0; i < empregado.getListaFolhaPagamento().size(); i++) {
                 if (empregado.getListaFolhaPagamento().get(i).getCompetencia().compareTo(competencia) == 0) {
                     folhaDePagamento = empregado.getListaFolhaPagamento().get(i);
-                    for (int j = 0; j < folhaDePagamento.getListaProventos().size(); j++) {
-                        Proventos proventoTemp = folhaDePagamento.getListaProventos().get(j);
+                    List <Proventos> listaProventos = folhaDePagamentoCtrl.getListaProventos(folhaDePagamento.getCod());
+                    for (int j = 0; j < listaProventos.size(); j++) {
+                        Proventos proventoTemp = listaProventos.get(j);
                         insereNaTabelaProv(proventoTemp);
                         calculaTotais(1, proventoTemp.getValorTotalComissao(), BigDecimal.ZERO);
                     }

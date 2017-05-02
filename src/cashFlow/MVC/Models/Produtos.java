@@ -3,10 +3,14 @@ package cashFlow.MVC.Models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.persistence.CascadeType;
 import static javax.persistence.CascadeType.ALL;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -33,11 +37,14 @@ public class Produtos implements Serializable {
     private BigDecimal valorTotalVenda;
     @OneToMany(mappedBy = "produto", cascade = ALL)
     private List<ReajusteProdutos> reajusteProdutos;
+    @ManyToOne(cascade = CascadeType.DETACH, optional = true)
+    @JoinColumn(name = "classificacao", foreignKey = @ForeignKey(name = "fk_classificacao_produtos"))
+    ClassificacaoProdutos classificacaoProdutos;
 
     public Produtos() {
     }
 
-    public Produtos(Integer cod, String identificador, String descricao, String unidade, BigDecimal quantidade, BigDecimal valorUnitario, BigDecimal valorTotal, BigDecimal valorUnitarioVenda, BigDecimal valorTotalVenda, List<ReajusteProdutos> reajusteProdutos) {
+    public Produtos(Integer cod, String identificador, String descricao, String unidade, BigDecimal quantidade, BigDecimal valorUnitario, BigDecimal valorTotal, BigDecimal valorUnitarioVenda, BigDecimal valorTotalVenda, List<ReajusteProdutos> reajusteProdutos, ClassificacaoProdutos classificacaoProdutos) {
         this.cod = cod;
         this.identificador = identificador;
         this.descricao = descricao;
@@ -48,9 +55,10 @@ public class Produtos implements Serializable {
         this.valorUnitarioVenda = valorUnitarioVenda;
         this.valorTotalVenda = valorTotalVenda;
         this.reajusteProdutos = reajusteProdutos;
+        this.classificacaoProdutos = classificacaoProdutos;
     }
 
-    public Produtos(int cod, String identificador, String descricao, String unidade, BigDecimal quantidade, BigDecimal valorUnitario, BigDecimal valorTotal, BigDecimal valorUnitarioVenda, BigDecimal valorTotalVenda) {
+    public Produtos(int cod, String identificador, String descricao, String unidade, BigDecimal quantidade, BigDecimal valorUnitario, BigDecimal valorTotal, BigDecimal valorUnitarioVenda, BigDecimal valorTotalVenda, ClassificacaoProdutos classificacaoProdutos) {
         this.cod = cod;
         this.identificador = identificador;
         this.descricao = descricao;
@@ -60,6 +68,7 @@ public class Produtos implements Serializable {
         this.valorTotal = valorTotal;
         this.valorUnitarioVenda = valorUnitarioVenda;
         this.valorTotalVenda = valorTotalVenda;
+        this.classificacaoProdutos = classificacaoProdutos;
     }
 
     public Produtos(Integer cod) {
@@ -96,6 +105,10 @@ public class Produtos implements Serializable {
 
     public String getUnidade() {
         return unidade;
+    }
+
+    public ClassificacaoProdutos getClassificacaoProdutos() {
+        return classificacaoProdutos;
     }
 
     public void setUnidade(String unidade) {
@@ -144,6 +157,14 @@ public class Produtos implements Serializable {
 
     public void setReajusteProdutos(List<ReajusteProdutos> reajusteProdutos) {
         this.reajusteProdutos = reajusteProdutos;
+    }
+
+    public void setClassificacaoProdutos(ClassificacaoProdutos classificacaoProdutos) {
+        this.classificacaoProdutos = classificacaoProdutos;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public void atualizaValorDeVenda(BigDecimal novoValor) {

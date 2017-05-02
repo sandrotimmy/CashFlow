@@ -20,6 +20,8 @@ public class Clientes implements Serializable {
     private String inscEstadual;
     @Column(length = 100, nullable = false)
     private String nome;
+    @Column(length = 10)
+    private String sexo;
     @Temporal(TemporalType.DATE)
     @Column
     private Date dataNascimento;
@@ -55,12 +57,13 @@ public class Clientes implements Serializable {
         this.cod = cod;
     }
 
-    public Clientes(Integer cod, int tipoInscricao, String cpfCnpj, String inscEstadual, String nome, Date dataNascimento, String endereco, String numero, String complemento, String municipio, String bairro, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
+    public Clientes(Integer cod, int tipoInscricao, String cpfCnpj, String inscEstadual, String nome, String sexo, Date dataNascimento, String endereco, String numero, String complemento, String municipio, String bairro, String uf, String cep, String caixapostal, String ddd, String fone, String cel, String email) {
         this.cod = cod;
         this.tipoInscricao = tipoInscricao;
         this.cpfCnpj = cpfCnpj;
         this.inscEstadual = inscEstadual;
         this.nome = nome;
+        this.sexo = sexo;
         this.dataNascimento = dataNascimento;
         this.endereco = endereco;
         this.numero = numero;
@@ -94,6 +97,10 @@ public class Clientes implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public void setDataNascimento(Date dataNascimento) {
@@ -167,6 +174,11 @@ public class Clientes implements Serializable {
     public String getNome() {
         return nome;
     }
+
+    public String getSexo() {
+        return sexo;
+    }
+    
 
     public Date getDataNascimento() {
         return dataNascimento;

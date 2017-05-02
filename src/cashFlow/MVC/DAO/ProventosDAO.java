@@ -67,9 +67,9 @@ public class ProventosDAO {
         return true;
     }
 
-    public List getListaProventos() {
+    public List getListaProventos(int codFolhaDePagamento) {
         em = ConexaoEntityManager.getInstance();
-        List listaProventos = em.createQuery("FROM Proventos c ORDER BY c.cod").getResultList();
+        List listaProventos = em.createQuery("FROM Proventos c where FOLHADEPAGAMENTO = "+codFolhaDePagamento+" ORDER BY c.dataComissao").getResultList();
         return listaProventos;
     }
 

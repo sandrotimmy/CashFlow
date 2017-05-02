@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -26,7 +27,7 @@ public class CadastroReajusteProdutos extends javax.swing.JDialog implements Int
     private final ProdutosDAO persist;
     private final ReajusteProdutosDAO persistReajuste;
     private ReajusteProdutos reajusteProdutos;
-    private final ArrayList<Produtos> listaProdutos;
+    private final List<Produtos> listaProdutos;
     private int posicao;//controla a posicao do objeto na tela
     private final NumberFormat f;
     private ConsultaProdutos cp;
