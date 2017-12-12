@@ -17,17 +17,7 @@ public final class TelaLogin extends javax.swing.JFrame {
 
     public TelaLogin() throws IOException {
         initComponents();
-        setIcon();
         carregaTela();
-    }
-
-    public void setIcon() throws IOException {
-//        Properties parametros = ParametrosCtrl.getInstance();
-//        String caminho = parametros.getProperty("caminhoLogoLogin");
-//        File imagem = new File(caminho);
-//        BufferedImage img = ImageIO.read(imagem);
-//        labelImagemEmpresa.setSize(img.getHeight(), img.getWidth());
-//        labelImagemEmpresa.setIcon(new javax.swing.ImageIcon(caminho));
     }
 
     public void carregaTela() {
@@ -36,38 +26,21 @@ public final class TelaLogin extends javax.swing.JFrame {
         HashSet backup = (HashSet) conj.clone();
         conj.add(AWTKeyStroke.getAWTKeyStroke(KeyEvent.VK_ENTER, 0));
         this.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, conj);
+        campoSenha.setFocusTraversalKeysEnabled(false);
         botaoOk.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, backup);
         this.setLocationRelativeTo(null);
         setVisible(true);
     }
 
     public void autenticar() throws IOException, SQLException {
-
         if (!usuariosCtrl.autenticar(campoUsuario.getText(), campoSenha.getText())) {
             JOptionPane.showMessageDialog(null, "Login ou senha Inválidos!\n Tente Novamente!!");
         } else {
-
             TelaPrincipal telaPrincipal = new TelaPrincipal();
-
             telaPrincipal.setVisible(true);
             telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
             this.dispose();
         }
-//            } catch (SQLException ex) {
-//                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-////            StatusBar statusBar = new StatusBar();
-////            telaPrincipal.add(statusBar, BorderLayout.SOUTH);
-//            telaPrincipal.setVisible(true);
-//            telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
-//            this.dispose();
-////            }
-////        } catch (SQLException ex) {
-////            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-////        }
-////    
-//
-//        }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -115,11 +88,6 @@ public final class TelaLogin extends javax.swing.JFrame {
         campoSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoSenhaActionPerformed(evt);
-            }
-        });
-        campoSenha.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                campoSenhaKeyPressed(evt);
             }
         });
 
@@ -205,16 +173,6 @@ public final class TelaLogin extends javax.swing.JFrame {
             TelaLogin.this.dispose();
         }
     }//GEN-LAST:event_formKeyPressed
-
-    private void campoSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoSenhaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            try {
-                autenticar();
-            } catch (IOException | SQLException ex) {
-                Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_campoSenhaKeyPressed
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             try {

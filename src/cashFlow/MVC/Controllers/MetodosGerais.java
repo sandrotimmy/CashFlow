@@ -6,6 +6,9 @@
 package cashFlow.MVC.Controllers;
 
 import cashFlow.MVC.DAO.ProdutosDAO;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +17,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.MenuElement;
+import javax.swing.plaf.basic.BasicMenuBarUI;
 
 /**
  *
@@ -273,4 +283,46 @@ public class MetodosGerais {
         }
     }
 
+    //altera a cor da Barra de Menus
+    public void customizeMenuBar(JMenuBar menuBar) {
+
+        menuBar.setUI(new BasicMenuBarUI() {
+            public void paint(Graphics g, JComponent c) {
+                g.setColor(new Color(32,75,151));
+                g.fillRect(0, 0, c.getWidth(), c.getHeight());
+            }
+        });
+
+        MenuElement[] menus = menuBar.getSubElements();
+
+        for (MenuElement menuElement : menus) {
+
+            JMenu menu = (JMenu) menuElement.getComponent();
+            changeComponentColors(menu);
+            menu.setOpaque(true);
+
+//            MenuElement[] menuElements = menu.getSubElements();
+//
+////            for (MenuElement popupMenuElement : menuElements) {
+////
+////                JPopupMenu popupMenu = (JPopupMenu) popupMenuElement.getComponent();
+////                popupMenu.setBorder(null);
+////
+////                MenuElement[] menuItens = popupMenuElement.getSubElements();
+////
+////                for (MenuElement menuItemElement : menuItens) {
+////
+////                    JMenuItem menuItem = (JMenuItem) menuItemElement.getComponent();
+////                    changeComponentColors(menuItem);
+////                    menuItem.setOpaque(true);
+////
+////                }
+////            }
+        }
+    }
+
+    public void changeComponentColors(Component comp) {
+        comp.setBackground(new Color(32,75,151));
+        comp.setForeground(Color.white);
+    }
 }

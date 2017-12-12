@@ -1,23 +1,60 @@
 package cashFlow.MVC.Views;
 
+import cashFlow.MVC.Controllers.MetodosGerais;
+import cashFlow.MVC.Controllers.ParametrosCtrl;
 import cashFlow.MVC.Models.PassaCamposComEnter;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class TelaPrincipal extends javax.swing.JFrame {
 
     public Statement s;
     public PassaCamposComEnter pc;
+    public MetodosGerais mg;
 
     public TelaPrincipal() throws SQLException, IOException {
-
+        mg = new MetodosGerais();
         initComponents();
+        mg.customizeMenuBar(menuPrincipal);
+        setBotoes();
         setIcon();
+        setLogo();
+
         pc = new PassaCamposComEnter();
+    }
+
+    public void setLogo() throws IOException {
+        try {
+            Properties parametros = ParametrosCtrl.getInstance();
+            String caminhoLogo = parametros.getProperty("caminhoLogoTela");
+            areaLogo.setIcon(new javax.swing.ImageIcon(caminhoLogo));
+        } catch (NullPointerException e) {
+
+        }
+    }
+
+    private void setBotoes() {
+        menuCadastro.setBorderPainted(false);
+        menuProcessos.setBorderPainted(false);
+        menuConsultas.setBorderPainted(false);
+        menuRelatorios.setBorderPainted(false);
+        menuUtilitarios.setBorderPainted(false);
+        menuAjuda.setBorderPainted(false);
+        menuSair.setBorderPainted(false);
+
     }
 
     public void setIcon() throws IOException {
@@ -33,7 +70,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         painelPrincipal = new javax.swing.JPanel();
-        labelImagemLogo = new javax.swing.JLabel();
+        areaLogo = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        AtalhoEmpresa = new javax.swing.JLabel();
+        atalhoRelatorioCaixa = new javax.swing.JLabel();
+        atalhoLancamentoCaixa = new javax.swing.JLabel();
+        atalhoSair = new javax.swing.JLabel();
+        atalhoContasAReceber = new javax.swing.JLabel();
+        atalhoClientes = new javax.swing.JLabel();
+        AtalhoFornecedores = new javax.swing.JLabel();
+        atalhoContasAPagar = new javax.swing.JLabel();
+        atalhoCalculadora = new javax.swing.JLabel();
         menuPrincipal = new javax.swing.JMenuBar();
         menuCadastro = new javax.swing.JMenu();
         menuCadastroEmpresa = new javax.swing.JMenuItem();
@@ -63,6 +111,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         menuProcessosReajusteProdutos = new javax.swing.JMenuItem();
         processosFolhaDePagamento = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        menuContasAPagar = new javax.swing.JMenuItem();
+        menuContasAReceber = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         menuConsultasLancamentos = new javax.swing.JMenuItem();
         menuConsultasHistoricos = new javax.swing.JMenuItem();
@@ -98,27 +149,282 @@ public class TelaPrincipal extends javax.swing.JFrame {
         painelPrincipal.setBackground(new java.awt.Color(39, 91, 182));
         painelPrincipal.setForeground(new java.awt.Color(39, 91, 182));
 
-        labelImagemLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logoAzul.png"))); // NOI18N
-        labelImagemLogo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        areaLogo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        areaLogo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        jPanel3.setBackground(new java.awt.Color(32, 75, 151));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout painelPrincipalLayout = new javax.swing.GroupLayout(painelPrincipal);
         painelPrincipal.setLayout(painelPrincipalLayout);
         painelPrincipalLayout.setHorizontalGroup(
             painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(309, Short.MAX_VALUE)
-                .addComponent(labelImagemLogo)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(areaLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         painelPrincipalLayout.setVerticalGroup(
             painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(208, Short.MAX_VALUE)
-                .addComponent(labelImagemLogo)
+            .addGroup(painelPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(areaLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(32, 75, 151));
+
+        AtalhoEmpresa.setBackground(new java.awt.Color(27, 63, 133));
+        AtalhoEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/empresa.png"))); // NOI18N
+        AtalhoEmpresa.setToolTipText("Empresa");
+        AtalhoEmpresa.setMaximumSize(new java.awt.Dimension(14, 14));
+        AtalhoEmpresa.setMinimumSize(new java.awt.Dimension(14, 14));
+        AtalhoEmpresa.setOpaque(true);
+        AtalhoEmpresa.setPreferredSize(new java.awt.Dimension(14, 14));
+        AtalhoEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AtalhoEmpresaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AtalhoEmpresaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AtalhoEmpresaMouseExited(evt);
+            }
+        });
+
+        atalhoRelatorioCaixa.setBackground(new java.awt.Color(27, 63, 133));
+        atalhoRelatorioCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/relatorioCaixa.png"))); // NOI18N
+        atalhoRelatorioCaixa.setToolTipText("Relatório Caixa");
+        atalhoRelatorioCaixa.setMaximumSize(new java.awt.Dimension(14, 14));
+        atalhoRelatorioCaixa.setMinimumSize(new java.awt.Dimension(14, 14));
+        atalhoRelatorioCaixa.setOpaque(true);
+        atalhoRelatorioCaixa.setPreferredSize(new java.awt.Dimension(14, 14));
+        atalhoRelatorioCaixa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                atalhoRelatorioCaixaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                atalhoRelatorioCaixaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                atalhoRelatorioCaixaMouseExited(evt);
+            }
+        });
+
+        atalhoLancamentoCaixa.setBackground(new java.awt.Color(27, 63, 133));
+        atalhoLancamentoCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/lancamentoCaixa.png"))); // NOI18N
+        atalhoLancamentoCaixa.setToolTipText("Lançamento Caixa");
+        atalhoLancamentoCaixa.setMaximumSize(new java.awt.Dimension(14, 14));
+        atalhoLancamentoCaixa.setMinimumSize(new java.awt.Dimension(14, 14));
+        atalhoLancamentoCaixa.setOpaque(true);
+        atalhoLancamentoCaixa.setPreferredSize(new java.awt.Dimension(14, 14));
+        atalhoLancamentoCaixa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                atalhoLancamentoCaixaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                atalhoLancamentoCaixaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                atalhoLancamentoCaixaMouseExited(evt);
+            }
+        });
+
+        atalhoSair.setBackground(new java.awt.Color(27, 63, 133));
+        atalhoSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/sair.png"))); // NOI18N
+        atalhoSair.setToolTipText("Sair");
+        atalhoSair.setMaximumSize(new java.awt.Dimension(14, 14));
+        atalhoSair.setMinimumSize(new java.awt.Dimension(14, 14));
+        atalhoSair.setOpaque(true);
+        atalhoSair.setPreferredSize(new java.awt.Dimension(14, 14));
+        atalhoSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                atalhoSairMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                atalhoSairMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                atalhoSairMouseExited(evt);
+            }
+        });
+
+        atalhoContasAReceber.setBackground(new java.awt.Color(27, 63, 133));
+        atalhoContasAReceber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/contasReceber.png"))); // NOI18N
+        atalhoContasAReceber.setToolTipText("Contas a Receber");
+        atalhoContasAReceber.setMaximumSize(new java.awt.Dimension(14, 14));
+        atalhoContasAReceber.setMinimumSize(new java.awt.Dimension(14, 14));
+        atalhoContasAReceber.setOpaque(true);
+        atalhoContasAReceber.setPreferredSize(new java.awt.Dimension(14, 14));
+        atalhoContasAReceber.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                atalhoContasAReceberMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                atalhoContasAReceberMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                atalhoContasAReceberMouseExited(evt);
+            }
+        });
+
+        atalhoClientes.setBackground(new java.awt.Color(27, 63, 133));
+        atalhoClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/clientes.png"))); // NOI18N
+        atalhoClientes.setToolTipText("Clientes");
+        atalhoClientes.setMaximumSize(new java.awt.Dimension(14, 14));
+        atalhoClientes.setMinimumSize(new java.awt.Dimension(14, 14));
+        atalhoClientes.setOpaque(true);
+        atalhoClientes.setPreferredSize(new java.awt.Dimension(14, 14));
+        atalhoClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                atalhoClientesMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                atalhoClientesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                atalhoClientesMouseExited(evt);
+            }
+        });
+
+        AtalhoFornecedores.setBackground(new java.awt.Color(27, 63, 133));
+        AtalhoFornecedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fornecedores.png"))); // NOI18N
+        AtalhoFornecedores.setToolTipText("Fornecedores");
+        AtalhoFornecedores.setMaximumSize(new java.awt.Dimension(14, 14));
+        AtalhoFornecedores.setMinimumSize(new java.awt.Dimension(14, 14));
+        AtalhoFornecedores.setOpaque(true);
+        AtalhoFornecedores.setPreferredSize(new java.awt.Dimension(14, 14));
+        AtalhoFornecedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AtalhoFornecedoresMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AtalhoFornecedoresMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AtalhoFornecedoresMouseExited(evt);
+            }
+        });
+
+        atalhoContasAPagar.setBackground(new java.awt.Color(27, 63, 133));
+        atalhoContasAPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/contasPagar.png"))); // NOI18N
+        atalhoContasAPagar.setToolTipText("Contas a Pagar");
+        atalhoContasAPagar.setMaximumSize(new java.awt.Dimension(14, 14));
+        atalhoContasAPagar.setMinimumSize(new java.awt.Dimension(14, 14));
+        atalhoContasAPagar.setOpaque(true);
+        atalhoContasAPagar.setPreferredSize(new java.awt.Dimension(14, 14));
+        atalhoContasAPagar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                atalhoContasAPagarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                atalhoContasAPagarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                atalhoContasAPagarMouseExited(evt);
+            }
+        });
+
+        atalhoCalculadora.setBackground(new java.awt.Color(27, 63, 133));
+        atalhoCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/calculadora.png"))); // NOI18N
+        atalhoCalculadora.setToolTipText("Calculadora");
+        atalhoCalculadora.setMaximumSize(new java.awt.Dimension(14, 14));
+        atalhoCalculadora.setMinimumSize(new java.awt.Dimension(14, 14));
+        atalhoCalculadora.setOpaque(true);
+        atalhoCalculadora.setPreferredSize(new java.awt.Dimension(14, 14));
+        atalhoCalculadora.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                atalhoCalculadoraMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                atalhoCalculadoraMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                atalhoCalculadoraMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(AtalhoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(atalhoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(AtalhoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(atalhoContasAReceber, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(atalhoContasAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(atalhoLancamentoCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(atalhoRelatorioCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(atalhoCalculadora, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(atalhoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(atalhoRelatorioCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(AtalhoEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(atalhoLancamentoCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(atalhoSair, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(atalhoContasAReceber, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(atalhoClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(AtalhoFornecedores, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(atalhoContasAPagar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(atalhoCalculadora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        menuCadastro.setText("Cadastro");
+        menuPrincipal.setBorder(null);
+        menuPrincipal.setBorderPainted(false);
+        menuPrincipal.setFocusable(false);
+        menuPrincipal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        menuPrincipal.setMaximumSize(new java.awt.Dimension(513, 35488));
+        menuPrincipal.setMinimumSize(new java.awt.Dimension(513, 50));
+        menuPrincipal.setOpaque(false);
+        menuPrincipal.setPreferredSize(new java.awt.Dimension(513, 35));
+
+        menuCadastro.setBackground(new java.awt.Color(32, 71, 151));
+        menuCadastro.setBorder(null);
+        menuCadastro.setMnemonic('c');
+        menuCadastro.setText("<html><u>C</u>adastro");
+        menuCadastro.setContentAreaFilled(false);
+        menuCadastro.setFocusable(false);
+        menuCadastro.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        menuCadastro.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+                menuCadastroMenuDeselected(evt);
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuCadastroMenuSelected(evt);
+            }
+        });
         menuCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCadastroActionPerformed(evt);
@@ -219,7 +525,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuPrincipal.add(menuCadastro);
 
-        menuProcessos.setText("Processos");
+        menuProcessos.setBorder(null);
+        menuProcessos.setMnemonic('P');
+        menuProcessos.setText("<html><u>P</u>rocessos");
+        menuProcessos.setContentAreaFilled(false);
+        menuProcessos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        menuProcessos.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+                menuProcessosMenuDeselected(evt);
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuProcessosMenuSelected(evt);
+            }
+        });
 
         MenuProcessosLancamentos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         MenuProcessosLancamentos.setText("Lancamentos");
@@ -287,10 +607,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuProcessos.add(processosFolhaDePagamento);
+        menuProcessos.add(jSeparator8);
+
+        menuContasAPagar.setText("Contas a Pagar");
+        menuProcessos.add(menuContasAPagar);
+
+        menuContasAReceber.setText("Contas a Receber");
+        menuProcessos.add(menuContasAReceber);
 
         menuPrincipal.add(menuProcessos);
 
-        menuConsultas.setText("Consultas");
+        menuConsultas.setMnemonic('o');
+        menuConsultas.setText("<html>C<u>o</u>nsultas");
+        menuConsultas.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        menuConsultas.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+                menuConsultasMenuDeselected(evt);
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuConsultasMenuSelected(evt);
+            }
+        });
 
         menuConsultasLancamentos.setText("Lançamentos");
         menuConsultasLancamentos.addActionListener(new java.awt.event.ActionListener() {
@@ -326,7 +665,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuPrincipal.add(menuConsultas);
 
-        menuRelatorios.setText("Relatórios");
+        menuRelatorios.setBorder(null);
+        menuRelatorios.setMnemonic('R');
+        menuRelatorios.setText("<html><u>R</u>elatórios");
+        menuRelatorios.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        menuRelatorios.setHideActionText(true);
+        menuRelatorios.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+                menuRelatoriosMenuDeselected(evt);
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuRelatoriosMenuSelected(evt);
+            }
+        });
 
         menuRelatoriosCadastrais.setText("Cadastais");
 
@@ -427,7 +780,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuPrincipal.add(menuRelatorios);
 
-        menuUtilitarios.setText("Utilitários");
+        menuUtilitarios.setBorder(null);
+        menuUtilitarios.setMnemonic('U');
+        menuUtilitarios.setText("<html><u>U</u>tilitários");
+        menuUtilitarios.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        menuUtilitarios.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+                menuUtilitariosMenuDeselected(evt);
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuUtilitariosMenuSelected(evt);
+            }
+        });
 
         menuUtilitariosCalculadora.setText("Calculadora");
         menuUtilitariosCalculadora.addActionListener(new java.awt.event.ActionListener() {
@@ -439,7 +805,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuPrincipal.add(menuUtilitarios);
 
-        menuAjuda.setText("Ajuda");
+        menuAjuda.setBorder(null);
+        menuAjuda.setMnemonic('A');
+        menuAjuda.setText("<html><u>A</u>juda");
+        menuAjuda.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        menuAjuda.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+                menuAjudaMenuDeselected(evt);
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuAjudaMenuSelected(evt);
+            }
+        });
         menuAjuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuAjudaActionPerformed(evt);
@@ -456,15 +835,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuPrincipal.add(menuAjuda);
 
+        menuSair.setBorder(null);
+        menuSair.setMnemonic('S');
         menuSair.setText("Sair");
+        menuSair.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        menuSair.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+                menuSairMenuDeselected(evt);
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                menuSairMenuSelected(evt);
+            }
+        });
         menuSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuSairMouseClicked(evt);
-            }
-        });
-        menuSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuSairActionPerformed(evt);
             }
         });
         menuPrincipal.add(menuSair);
@@ -475,11 +862,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -492,8 +884,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         d.setLocationRelativeTo(null);
         d.setVisible(true);
     }//GEN-LAST:event_menuCadastroHistoricosActionPerformed
-    private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
-    }//GEN-LAST:event_menuSairActionPerformed
     private void menuCadastroUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastroUsuariosActionPerformed
         try {
             CadastroUsuarios d = new CadastroUsuarios();
@@ -740,6 +1130,184 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cadastroClassificacaoProdutos.setLocationRelativeTo(null);
         cadastroClassificacaoProdutos.setVisible(true);
     }//GEN-LAST:event_menuClassificacaoProdutosActionPerformed
+
+    private void AtalhoEmpresaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AtalhoEmpresaMouseEntered
+        AtalhoEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/empresa_s.png")));         // TODO add your handling code here:
+    }//GEN-LAST:event_AtalhoEmpresaMouseEntered
+
+    private void AtalhoEmpresaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AtalhoEmpresaMouseExited
+        AtalhoEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/empresa.png")));
+    }//GEN-LAST:event_AtalhoEmpresaMouseExited
+
+    private void AtalhoEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AtalhoEmpresaMouseClicked
+        menuCadastroEmpresaActionPerformed(null);
+    }//GEN-LAST:event_AtalhoEmpresaMouseClicked
+
+    private void atalhoRelatorioCaixaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoRelatorioCaixaMouseClicked
+        relatoriosControleLivroCaixaActionPerformed(null);
+    }//GEN-LAST:event_atalhoRelatorioCaixaMouseClicked
+
+    private void atalhoRelatorioCaixaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoRelatorioCaixaMouseEntered
+        atalhoRelatorioCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/relatoriocaixa_s.png")));
+    }//GEN-LAST:event_atalhoRelatorioCaixaMouseEntered
+
+    private void atalhoRelatorioCaixaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoRelatorioCaixaMouseExited
+        atalhoRelatorioCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/relatoriocaixa.png")));
+    }//GEN-LAST:event_atalhoRelatorioCaixaMouseExited
+
+    private void atalhoLancamentoCaixaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoLancamentoCaixaMouseClicked
+        MenuProcessosLancamentosActionPerformed(null);
+    }//GEN-LAST:event_atalhoLancamentoCaixaMouseClicked
+
+    private void atalhoLancamentoCaixaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoLancamentoCaixaMouseEntered
+        atalhoLancamentoCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/lancamentoCaixa_s.png")));
+    }//GEN-LAST:event_atalhoLancamentoCaixaMouseEntered
+
+    private void atalhoLancamentoCaixaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoLancamentoCaixaMouseExited
+        atalhoLancamentoCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/lancamentoCaixa.png")));
+    }//GEN-LAST:event_atalhoLancamentoCaixaMouseExited
+
+    private void atalhoSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoSairMouseClicked
+        menuSairMouseClicked(null);
+    }//GEN-LAST:event_atalhoSairMouseClicked
+
+    private void atalhoSairMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoSairMouseEntered
+        atalhoSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/sair_s.png")));
+    }//GEN-LAST:event_atalhoSairMouseEntered
+
+    private void atalhoSairMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoSairMouseExited
+        atalhoSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/sair.png")));
+    }//GEN-LAST:event_atalhoSairMouseExited
+
+    private void atalhoContasAReceberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoContasAReceberMouseClicked
+        JOptionPane.showMessageDialog(rootPane, "Esta nova funcionalidade será disponibilizada em breve!");
+    }//GEN-LAST:event_atalhoContasAReceberMouseClicked
+
+    private void atalhoContasAReceberMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoContasAReceberMouseEntered
+        atalhoContasAReceber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/contasReceber_s.png")));
+    }//GEN-LAST:event_atalhoContasAReceberMouseEntered
+
+    private void atalhoContasAReceberMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoContasAReceberMouseExited
+        atalhoContasAReceber.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/contasReceber.png")));
+    }//GEN-LAST:event_atalhoContasAReceberMouseExited
+
+    private void atalhoClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoClientesMouseClicked
+        menuCadastroClientesActionPerformed(null);
+    }//GEN-LAST:event_atalhoClientesMouseClicked
+
+    private void atalhoClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoClientesMouseEntered
+        atalhoClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/clientes_s.png")));         // TODO add your handling code here:
+    }//GEN-LAST:event_atalhoClientesMouseEntered
+
+    private void atalhoClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoClientesMouseExited
+        atalhoClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/clientes.png")));
+    }//GEN-LAST:event_atalhoClientesMouseExited
+
+    private void AtalhoFornecedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AtalhoFornecedoresMouseClicked
+        menuCadastroFornecedoresActionPerformed(null);
+    }//GEN-LAST:event_AtalhoFornecedoresMouseClicked
+
+    private void AtalhoFornecedoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AtalhoFornecedoresMouseEntered
+        AtalhoFornecedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fornecedores_s.png")));
+    }//GEN-LAST:event_AtalhoFornecedoresMouseEntered
+
+    private void AtalhoFornecedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AtalhoFornecedoresMouseExited
+        AtalhoFornecedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/fornecedores.png")));
+    }//GEN-LAST:event_AtalhoFornecedoresMouseExited
+
+    private void atalhoContasAPagarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoContasAPagarMouseClicked
+        JOptionPane.showMessageDialog(rootPane, "Esta nova funcionalidade será disponibilizada em breve!");
+    }//GEN-LAST:event_atalhoContasAPagarMouseClicked
+
+    private void atalhoContasAPagarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoContasAPagarMouseEntered
+        atalhoContasAPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/contasPagar_s.png")));
+    }//GEN-LAST:event_atalhoContasAPagarMouseEntered
+
+    private void atalhoContasAPagarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoContasAPagarMouseExited
+        atalhoContasAPagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/contasPagar.png")));
+    }//GEN-LAST:event_atalhoContasAPagarMouseExited
+
+    private void atalhoCalculadoraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoCalculadoraMouseClicked
+        menuUtilitariosCalculadoraActionPerformed(null);
+    }//GEN-LAST:event_atalhoCalculadoraMouseClicked
+
+    private void atalhoCalculadoraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoCalculadoraMouseEntered
+        atalhoCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/calculadora_s.png")));
+    }//GEN-LAST:event_atalhoCalculadoraMouseEntered
+
+    private void atalhoCalculadoraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atalhoCalculadoraMouseExited
+        atalhoCalculadora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/calculadora.png")));
+    }//GEN-LAST:event_atalhoCalculadoraMouseExited
+
+    private void menuCadastroMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuCadastroMenuSelected
+        menuCadastro.setBackground(new Color(255, 255, 255));
+        menuCadastro.setForeground(new Color(0, 0, 0));        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCadastroMenuSelected
+
+    private void menuCadastroMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuCadastroMenuDeselected
+        menuCadastro.setBackground(new Color(32, 75, 151));
+        menuCadastro.setForeground(new Color(255, 255, 255));        // TODO add your handling code here:
+    }//GEN-LAST:event_menuCadastroMenuDeselected
+
+    private void menuProcessosMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuProcessosMenuSelected
+        menuProcessos.setBackground(new Color(255, 255, 255));
+        menuProcessos.setForeground(new Color(0, 0, 0));
+    }//GEN-LAST:event_menuProcessosMenuSelected
+
+    private void menuProcessosMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuProcessosMenuDeselected
+        menuProcessos.setBackground(new Color(32, 75, 151));
+        menuProcessos.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_menuProcessosMenuDeselected
+
+    private void menuConsultasMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuConsultasMenuSelected
+        menuConsultas.setBackground(new Color(255, 255, 255));
+        menuConsultas.setForeground(new Color(0, 0, 0));
+    }//GEN-LAST:event_menuConsultasMenuSelected
+
+    private void menuConsultasMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuConsultasMenuDeselected
+        menuConsultas.setBackground(new Color(32, 75, 151));
+        menuConsultas.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_menuConsultasMenuDeselected
+
+    private void menuRelatoriosMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuRelatoriosMenuSelected
+        menuRelatorios.setBackground(new Color(255, 255, 255));
+        menuRelatorios.setForeground(new Color(0, 0, 0));
+    }//GEN-LAST:event_menuRelatoriosMenuSelected
+
+    private void menuRelatoriosMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuRelatoriosMenuDeselected
+        menuRelatorios.setBackground(new Color(32, 75, 151));
+        menuRelatorios.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_menuRelatoriosMenuDeselected
+
+    private void menuUtilitariosMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuUtilitariosMenuSelected
+        menuUtilitarios.setBackground(new Color(255, 255, 255));
+        menuUtilitarios.setForeground(new Color(0, 0, 0));
+    }//GEN-LAST:event_menuUtilitariosMenuSelected
+
+    private void menuUtilitariosMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuUtilitariosMenuDeselected
+        menuUtilitarios.setBackground(new Color(32, 75, 151));
+        menuUtilitarios.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_menuUtilitariosMenuDeselected
+
+    private void menuAjudaMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuAjudaMenuSelected
+        menuAjuda.setBackground(new Color(255, 255, 255));
+        menuAjuda.setForeground(new Color(0, 0, 0));
+    }//GEN-LAST:event_menuAjudaMenuSelected
+
+    private void menuAjudaMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuAjudaMenuDeselected
+        menuAjuda.setBackground(new Color(32, 75, 151));
+        menuAjuda.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_menuAjudaMenuDeselected
+
+    private void menuSairMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuSairMenuSelected
+        menuSair.setBackground(new Color(255, 255, 255));
+        menuSair.setForeground(new Color(0, 0, 0));
+    }//GEN-LAST:event_menuSairMenuSelected
+
+    private void menuSairMenuDeselected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menuSairMenuDeselected
+        menuSair.setBackground(new Color(32, 75, 151));
+        menuSair.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_menuSairMenuDeselected
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             try {
@@ -750,11 +1318,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AtalhoEmpresa;
+    private javax.swing.JLabel AtalhoFornecedores;
     private javax.swing.JMenuItem MenuProcessosLancamentos;
+    private javax.swing.JLabel areaLogo;
+    private javax.swing.JLabel atalhoCalculadora;
+    private javax.swing.JLabel atalhoClientes;
+    private javax.swing.JLabel atalhoContasAPagar;
+    private javax.swing.JLabel atalhoContasAReceber;
+    private javax.swing.JLabel atalhoLancamentoCaixa;
+    private javax.swing.JLabel atalhoRelatorioCaixa;
+    private javax.swing.JLabel atalhoSair;
     private javax.swing.JMenuItem clientesAniversariantes;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -762,7 +1342,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
-    private javax.swing.JLabel labelImagemLogo;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JMenu menuAcomp;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuItem menuAjudaSobre;
@@ -782,6 +1362,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuConsultasHistoricos;
     private javax.swing.JMenuItem menuConsultasLancamentos;
     private javax.swing.JMenuItem menuConsultasProdutos;
+    private javax.swing.JMenuItem menuContasAPagar;
+    private javax.swing.JMenuItem menuContasAReceber;
     private javax.swing.JMenuBar menuPrincipal;
     private javax.swing.JMenu menuProcessos;
     private javax.swing.JMenuItem menuProcessosCompras;
