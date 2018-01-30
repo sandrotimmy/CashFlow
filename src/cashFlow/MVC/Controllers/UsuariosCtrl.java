@@ -1,4 +1,3 @@
-
 package cashFlow.MVC.Controllers;
 
 import cashFlow.MVC.DAO.UsuariosDAO;
@@ -13,16 +12,16 @@ public class UsuariosCtrl {
         this.persistUsuarios = new UsuariosDAO();
     }
 
-    public boolean autenticar(String usuario, String senha) {
+    public Usuarios autenticar(String usuario, String senha) {
         List<Usuarios> listaUsuarios = persistUsuarios.getListaUsuarios();
-        boolean existe = false;
+////        boolean existe = false;
         for (int i = 0; i < listaUsuarios.size(); i++) {
-            String usuarioTemp = listaUsuarios.get(i).getNickUsuario();
+            String nomeTemp = listaUsuarios.get(i).getNickUsuario();
             String senhaTemp = listaUsuarios.get(i).getSenhaUsuario();
-            if (usuarioTemp.equalsIgnoreCase(usuario) && senhaTemp.equalsIgnoreCase(senha)) {
-                existe = true;
+            if (nomeTemp.equalsIgnoreCase(usuario) && senhaTemp.equalsIgnoreCase(senha)) {
+                return listaUsuarios.get(i);
             }
         }
-        return existe;
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package cashFlow.MVC.Views;
 
 import cashFlow.MVC.Controllers.UsuariosCtrl;
+import cashFlow.MVC.Models.Usuarios;
 import java.awt.AWTKeyStroke;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
@@ -33,10 +34,11 @@ public final class TelaLogin extends javax.swing.JFrame {
     }
 
     public void autenticar() throws IOException, SQLException {
-        if (!usuariosCtrl.autenticar(campoUsuario.getText(), campoSenha.getText())) {
+        Usuarios usuarioTemp = usuariosCtrl.autenticar(campoUsuario.getText(), campoSenha.getText());
+        if (usuarioTemp==null) {
             JOptionPane.showMessageDialog(null, "Login ou senha Inválidos!\n Tente Novamente!!");
         } else {
-            TelaPrincipal telaPrincipal = new TelaPrincipal();
+            TelaPrincipal telaPrincipal = new TelaPrincipal(usuarioTemp.getNomeUsuario());
             telaPrincipal.setVisible(true);
             telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
             this.dispose();

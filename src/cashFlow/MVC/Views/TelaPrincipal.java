@@ -25,11 +25,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public PassaCamposComEnter pc;
     public MetodosGerais mg;
 
-    public TelaPrincipal() throws SQLException, IOException {
+    public TelaPrincipal(String usuarioLogado) throws SQLException, IOException {
         mg = new MetodosGerais();
         initComponents();
         mg.customizeMenuBar(menuPrincipal);
-        setBotoes();
+        setBotoesUsuario(usuarioLogado);
         setIcon();
         setLogo();
 
@@ -46,7 +46,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private void setBotoes() {
+    private void setBotoesUsuario(String usuarioLogado) {
         menuCadastro.setBorderPainted(false);
         menuProcessos.setBorderPainted(false);
         menuConsultas.setBorderPainted(false);
@@ -54,6 +54,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuUtilitarios.setBorderPainted(false);
         menuAjuda.setBorderPainted(false);
         menuSair.setBorderPainted(false);
+        campoUsuarioLogado.setText(usuarioLogado);
 
     }
 
@@ -71,8 +72,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         painelPrincipal = new javax.swing.JPanel();
         areaLogo = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        painelStatus = new javax.swing.JPanel();
+        labelLogadoPor = new javax.swing.JLabel();
+        campoUsuarioLogado = new javax.swing.JTextField();
+        painelAtalhos = new javax.swing.JPanel();
         AtalhoEmpresa = new javax.swing.JLabel();
         atalhoRelatorioCaixa = new javax.swing.JLabel();
         atalhoLancamentoCaixa = new javax.swing.JLabel();
@@ -152,17 +155,35 @@ public class TelaPrincipal extends javax.swing.JFrame {
         areaLogo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         areaLogo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        jPanel3.setBackground(new java.awt.Color(32, 75, 151));
+        painelStatus.setBackground(new java.awt.Color(32, 75, 151));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        labelLogadoPor.setForeground(new java.awt.Color(255, 255, 255));
+        labelLogadoPor.setText("Logado por: ");
+
+        campoUsuarioLogado.setEditable(false);
+        campoUsuarioLogado.setBackground(new java.awt.Color(32, 75, 151));
+        campoUsuarioLogado.setForeground(new java.awt.Color(255, 255, 255));
+        campoUsuarioLogado.setBorder(null);
+        campoUsuarioLogado.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        campoUsuarioLogado.setEnabled(false);
+        campoUsuarioLogado.setFocusable(false);
+
+        javax.swing.GroupLayout painelStatusLayout = new javax.swing.GroupLayout(painelStatus);
+        painelStatus.setLayout(painelStatusLayout);
+        painelStatusLayout.setHorizontalGroup(
+            painelStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelStatusLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(labelLogadoPor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
+        painelStatusLayout.setVerticalGroup(
+            painelStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(labelLogadoPor, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                .addComponent(campoUsuarioLogado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout painelPrincipalLayout = new javax.swing.GroupLayout(painelPrincipal);
@@ -173,7 +194,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(areaLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
                 .addGap(24, 24, 24))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         painelPrincipalLayout.setVerticalGroup(
             painelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,10 +202,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(areaLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(painelStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(32, 75, 151));
+        painelAtalhos.setBackground(new java.awt.Color(32, 75, 151));
 
         AtalhoEmpresa.setBackground(new java.awt.Color(27, 63, 133));
         AtalhoEmpresa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/empresa.png"))); // NOI18N
@@ -357,11 +378,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout painelAtalhosLayout = new javax.swing.GroupLayout(painelAtalhos);
+        painelAtalhos.setLayout(painelAtalhosLayout);
+        painelAtalhosLayout.setHorizontalGroup(
+            painelAtalhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAtalhosLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(AtalhoEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -382,11 +403,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addComponent(atalhoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        painelAtalhosLayout.setVerticalGroup(
+            painelAtalhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelAtalhosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(painelAtalhosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(atalhoRelatorioCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(AtalhoEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(atalhoLancamentoCaixa, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
@@ -862,13 +883,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelAtalhos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(painelAtalhos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
@@ -1311,7 +1332,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             try {
-                new TelaPrincipal().setVisible(true);
+                new TelaPrincipal(null).setVisible(true);
             } catch (SQLException | IOException ex) {
                 Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1329,12 +1350,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel atalhoLancamentoCaixa;
     private javax.swing.JLabel atalhoRelatorioCaixa;
     private javax.swing.JLabel atalhoSair;
+    private javax.swing.JTextField campoUsuarioLogado;
     private javax.swing.JMenuItem clientesAniversariantes;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -1343,6 +1363,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JLabel labelLogadoPor;
     private javax.swing.JMenu menuAcomp;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenuItem menuAjudaSobre;
@@ -1377,7 +1398,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuUtilitarios;
     private javax.swing.JMenuItem menuUtilitariosCalculadora;
     private javax.swing.JMenuItem menuVendasConsutar;
+    private javax.swing.JPanel painelAtalhos;
     private javax.swing.JPanel painelPrincipal;
+    private javax.swing.JPanel painelStatus;
     private javax.swing.JMenuItem porCusto;
     private javax.swing.JMenu processosCompras;
     private javax.swing.JMenuItem processosComprasConsultar;
