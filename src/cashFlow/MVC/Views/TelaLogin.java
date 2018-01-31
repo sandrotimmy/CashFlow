@@ -3,6 +3,7 @@ package cashFlow.MVC.Views;
 import cashFlow.MVC.Controllers.UsuariosCtrl;
 import cashFlow.MVC.Models.Usuarios;
 import java.awt.AWTKeyStroke;
+import java.awt.HeadlessException;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -34,6 +35,8 @@ public final class TelaLogin extends javax.swing.JFrame {
     }
 
     public void autenticar() throws IOException, SQLException {
+        try{
+        
         Usuarios usuarioTemp = usuariosCtrl.autenticar(campoUsuario.getText(), campoSenha.getText());
         if (usuarioTemp==null) {
             JOptionPane.showMessageDialog(null, "Login ou senha Inválidos!\n Tente Novamente!!");
@@ -42,6 +45,9 @@ public final class TelaLogin extends javax.swing.JFrame {
             telaPrincipal.setVisible(true);
             telaPrincipal.setExtendedState(MAXIMIZED_BOTH);
             this.dispose();
+        }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(rootPane, e);
         }
     }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
